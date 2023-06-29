@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTucan", "OpenTucan\OpenTucan.csproj", "{FC0D0354-5800-47C2-802D-9297D8292201}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSLevelEditor", "FPSLevelEditor\FPSLevelEditor.csproj", "{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC0D0354-5800-47C2-802D-9297D8292201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC0D0354-5800-47C2-802D-9297D8292201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC0D0354-5800-47C2-802D-9297D8292201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC0D0354-5800-47C2-802D-9297D8292201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

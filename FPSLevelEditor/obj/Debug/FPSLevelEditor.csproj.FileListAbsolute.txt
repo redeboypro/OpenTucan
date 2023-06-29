@@ -1,0 +1,15 @@
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\FPSLevelEditor.exe
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\FPSLevelEditor.pdb
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\AssimpNet.dll
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\OpenTK.dll
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\OpenTucan.dll
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\OpenTucan.pdb
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\AssimpNet.xml
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\OpenTK.pdb
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\bin\Debug\OpenTK.xml
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\obj\Debug\FPSLevelEditor.csproj.AssemblyReference.cache
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\obj\Debug\FPSLevelEditor.csproj.SuggestedBindingRedirects.cache
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\obj\Debug\FPSLevelEditor.csproj.CoreCompileInputs.cache
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\obj\Debug\FPSLevelEditor.csproj.CopyComplete
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\obj\Debug\FPSLevelEditor.exe
+D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\FPSLevelEditor\obj\Debug\FPSLevelEditor.pdb
