@@ -33,17 +33,17 @@
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Common/Ortho.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIShader.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/Font.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Display/Display.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Input/Input.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIController.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" />
-        <option value="$PROJECT_DIR$/FPSLevelEditor/Program.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/Text.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/Image.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/GUI/Font.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/GUI/Text.cs" />
+        <option value="$PROJECT_DIR$/FPSLevelEditor/Program.cs" />
       </list>
     </option>
   </component>
@@ -88,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1687925129989</updated>
       <workItem from="1687925132844" duration="29139000" />
-      <workItem from="1688015929797" duration="19055000" />
+      <workItem from="1688015929797" duration="20591000" />
     </task>
     <servers />
   </component>
@@ -101,22 +101,22 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="264" key="GridCell.Tab.0.bottom" timestamp="1688055445498">
+    <state width="1877" height="264" key="GridCell.Tab.0.bottom" timestamp="1688057006733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1688055445498" />
-    <state width="1877" height="264" key="GridCell.Tab.0.center" timestamp="1688055445498">
+    <state width="1877" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1688057006733" />
+    <state width="1877" height="264" key="GridCell.Tab.0.center" timestamp="1688057006733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="264" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1688055445498" />
-    <state width="1877" height="264" key="GridCell.Tab.0.left" timestamp="1688055445498">
+    <state width="1877" height="264" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1688057006733" />
+    <state width="1877" height="264" key="GridCell.Tab.0.left" timestamp="1688057006733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="264" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1688055445498" />
-    <state width="1877" height="264" key="GridCell.Tab.0.right" timestamp="1688055445498">
+    <state width="1877" height="264" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1688057006733" />
+    <state width="1877" height="264" key="GridCell.Tab.0.right" timestamp="1688057006733">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="264" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1688055445498" />
+    <state width="1877" height="264" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1688057006733" />
     <state width="1066" height="353" key="GridCell.Tab.1.bottom" timestamp="1688049973166">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -17,16 +17,15 @@ namespace OpenTucan.GUI
                 var shader = controller.ShaderProgram;
                 
                 GL.ActiveTexture(TextureUnit.Texture0);
-                font.AtlasTexture.Bind();
+                GL.BindTexture(TextureTarget.Texture2D, font.AtlasTexture.Id);
 
                 var completelyScale = LocalSpaceScale;
                 
                 var charHalfWidth = completelyScale.X / text.Length;
                 
                 completelyScale.X = charHalfWidth;
-
-                var horizontalPos = LocalSpaceLocation.X;
-                horizontalPos -= LocalSpaceScale.X / 2 + charHalfWidth;
+                
+                var horizontalPos = LocalSpaceLocation.X - LocalSpaceScale.X + charHalfWidth;
                 
                 foreach (var c in text)
                 {

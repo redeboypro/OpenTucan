@@ -47,18 +47,18 @@ namespace OpenTucan.GUI
                 return charVAOs[Sheet.IndexOf(c)];
             }
         }
-
-        public bool Contains(char c)
-        {
-            return Sheet.Any(x => x == c);
-        }
-
+        
         public Texture AtlasTexture
         {
             get
             {
                 return fontAtlasTexture;
             }
+        }
+
+        public bool Contains(char c)
+        {
+            return Sheet.Any(x => x == c);
         }
 
         private const string Sheet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-=_+[]{}\\|;:'\".,<>/?`~ ";

@@ -33,7 +33,7 @@ namespace FPSLevelEditor
                 
                 var font = new Font(new Texture(new Bitmap("font.png")));
                 guiController = new GUIController(display);
-                guiController.Text("Top!", font, 0, 0, 0.5f, 0.5f);
+                guiController.Text("Xyecoc!", font, 0, 0, 1f, 1f);
             };
 
             display.UpdateFrame += (sender, eventArgs) =>
