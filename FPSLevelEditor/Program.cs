@@ -1,8 +1,13 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
+using OpenTucan.Entities;
 using OpenTucan.Graphics;
+using OpenTucan.Graphics.Samples;
 using OpenTucan.GUI;
 using OpenTucan.Input;
 using Font = OpenTucan.GUI.Font;
@@ -14,6 +19,14 @@ namespace FPSLevelEditor
         public static void Main(string[] args)
         {
             var input = new Input();
+            var physicsWorld = new List<Rigidbody>();
+
+            SampleShader shader = null;
+            Mesh mesh = null;
+            Texture texture = null;
+
+            Camera camera = null;
+            Rigidbody rb = null;
 
             var display = new GameWindow
             {
@@ -31,9 +44,21 @@ namespace FPSLevelEditor
                 
                 GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
                 
+                shader = new SampleShader();
+                
+                texture = new Texture(new Bitmap("ak47.png"));
+                mesh = Mesh.FromFile("ak47_view.obj");
+
+                camera = new Camera(display.Width, display.Height)
+                {
+                    WorldSpaceLocation = Vector3.UnitZ * -10
+                };
+
+                rb = new Rigidbody(physicsWorld, mesh.GetBoundsMinimum(), mesh.GetBoundsMaximum());
+                
                 var font = new Font(new Texture(new Bitmap("font.png")));
                 guiController = new GUIController(display);
-                guiController.Text("Xyecoc!", font, 0, 0, 1f, 1f);
+                guiController.Text("test", font, 0, 0, 0.5f, 0.5f);
             };
 
             display.UpdateFrame += (sender, eventArgs) =>
@@ -46,6 +71,22 @@ namespace FPSLevelEditor
                 GL.ClearColor(Color4.CornflowerBlue);
                 GL.Viewport(0, 0, display.Width, display.Height);
                 GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+                
+                shader.Start();
+                
+                shader.SetLightColor(Color4.White);
+                shader.SetLightPosition(Vector3.Zero);
+                shader.SetProjectionMatrix(camera.ProjectionMatrix);
+                shader.SetViewMatrix(camera.ViewMatrix);
+                shader.SetModelMatrix(rb.GetModelMatrix());
+                
+                GL.ActiveTexture(TextureUnit.Texture0);
+                texture.Bind();
+                
+                if(input.IsKeyDown(Key.Space))
+                    mesh.PrepareForRendering();
+                
+                shader.Stop();
                 
                 guiController.OnRenderFrame(eventArgs, display);
                 

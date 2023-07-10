@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenTucan", "OpenTucan\Open
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSLevelEditor", "FPSLevelEditor\FPSLevelEditor.csproj", "{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucanScript", "TucanScript\TucanScript.csproj", "{4167ACE3-CF1A-4633-A422-1E7550425B8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D72F7A4-8596-4015-BE42-A3DF88BC49DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4167ACE3-CF1A-4633-A422-1E7550425B8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4167ACE3-CF1A-4633-A422-1E7550425B8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4167ACE3-CF1A-4633-A422-1E7550425B8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4167ACE3-CF1A-4633-A422-1E7550425B8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -24,8 +24,9 @@ namespace OpenTucan.GUI
                 var charHalfWidth = completelyScale.X / text.Length;
                 
                 completelyScale.X = charHalfWidth;
-                
-                var horizontalPos = LocalSpaceLocation.X - LocalSpaceScale.X + charHalfWidth;
+
+                var horizontalPos = LocalSpaceLocation.X - LocalSpaceScale.X;
+                horizontalPos += charHalfWidth;
                 
                 foreach (var c in text)
                 {

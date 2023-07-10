@@ -33,6 +33,9 @@
         </e>
         <e p="Graphics" t="Include">
           <e p="Mesh.cs" t="Include" />
+          <e p="Samples" t="Include">
+            <e p="SampleShader.cs" t="Include" />
+          </e>
           <e p="Shader.cs" t="Include" />
           <e p="Texture.cs" t="Include" />
         </e>
@@ -56,6 +59,9 @@
       </e>
       <e p="OpenTucan.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="TucanScript" t="IncludeRecursive">
+        <e p="TucanScript.csproj" t="IncludeRecursive" />
+      </e>
     </e>
   </component>
 </project>

@@ -61,6 +61,7 @@ namespace OpenTucan.Graphics
                 {
                     VertexArrayObject.CreateVertexBufferObject(vertexArrayAttribLocation, 3, vertices);
                     verticesIsDirty = true;
+                    RecalculateBounds();
                     return;
                 }
                 
@@ -229,7 +230,7 @@ namespace OpenTucan.Graphics
             GL.EnableVertexAttribArray(normalsArrayAttribLocation);
             
             GL.CullFace(cullFaceMode);
-            GL.DrawElements(PrimitiveType.Triangles, vertices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
+            GL.DrawElements(PrimitiveType.Triangles, vertices.Length, DrawElementsType.UnsignedInt, indices);
 
             GL.DisableVertexAttribArray(vertexArrayAttribLocation);
             GL.DisableVertexAttribArray(uvArrayAttribLocation);
