@@ -74,8 +74,10 @@ namespace FPSLevelEditor
                 
                 shader.Start();
                 
+                shader.SetShininess(0.01f);
+                shader.SetReflectivity(0.01f);
                 shader.SetLightColor(Color4.White);
-                shader.SetLightPosition(Vector3.Zero);
+                shader.SetLightPosition(Vector3.One * 9999);
                 shader.SetProjectionMatrix(camera.ProjectionMatrix);
                 shader.SetViewMatrix(camera.ViewMatrix);
                 shader.SetModelMatrix(rb.GetModelMatrix());
@@ -83,8 +85,7 @@ namespace FPSLevelEditor
                 GL.ActiveTexture(TextureUnit.Texture0);
                 texture.Bind();
                 
-                if(input.IsKeyDown(Key.Space))
-                    mesh.PrepareForRendering();
+                mesh.PrepareForRendering();
                 
                 shader.Stop();
                 

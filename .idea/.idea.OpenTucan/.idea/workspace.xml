@@ -15,7 +15,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/TucanScript/Shell.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/IDE/JetBrains Rider 2020.2.3/projects/OpenTucan/OpenTucan/Graphics/Mesh.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TucanScript/Evaluator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/IDE/JetBrains Rider 2020.2.3/projects/OpenTucan/OpenTucan/Graphics/Mesh.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/IDE/JetBrains Rider 2020.2.3/projects/OpenTucan/OpenTucan/Graphics/Mesh.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/IDE/JetBrains Rider 2020.2.3/projects/OpenTucan/OpenTucan/Graphics/Mesh.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/IDE/JetBrains Rider 2020.2.3/projects/OpenTucan/OpenTucan/Graphics/Mesh.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TucanScript/Lexer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TucanScript/Invokable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TucanScript/IInvokable.cs" root0="SKIP_HIGHLIGHTING" />
@@ -26,11 +31,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/OpenTucan/Bridges/EBO.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Bridges/IBO.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Bridges/VAO.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Common/ConversionHelper.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Bridges/VBO.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/ShaderWrapper.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Shader.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Common/Pool.cs" />
@@ -48,12 +50,10 @@
         <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIShader.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Display/Display.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Input/Input.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIController.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/Image.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/Font.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/Text.cs" />
         <option value="$PROJECT_DIR$/TucanScript/IInvokable.cs" />
         <option value="$PROJECT_DIR$/TucanScript/Blocks/If.cs" />
@@ -63,9 +63,14 @@
         <option value="$PROJECT_DIR$/TucanScript/Engine.cs" />
         <option value="$PROJECT_DIR$/TucanScript/Shell.cs" />
         <option value="$PROJECT_DIR$/TucanScript/Evaluator.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleShader.cs" />
-        <option value="$PROJECT_DIR$/FPSLevelEditor/Program.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Bridges/VBO.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Bridges/EBO.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Bridges/VAO.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/GUI/Font.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIController.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
+        <option value="$PROJECT_DIR$/FPSLevelEditor/Program.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleShader.cs" />
       </list>
     </option>
   </component>
@@ -113,6 +118,8 @@
       <workItem from="1688015929797" duration="20869000" />
       <workItem from="1688347760998" duration="4515000" />
       <workItem from="1688704831744" duration="6396000" />
+      <workItem from="1688996869335" duration="1990000" />
+      <workItem from="1689052656382" duration="5670000" />
     </task>
     <servers />
   </component>
@@ -125,22 +132,22 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1877" height="374" key="GridCell.Tab.0.bottom" timestamp="1688711237241">
+    <state width="1877" height="264" key="GridCell.Tab.0.bottom" timestamp="1689057762586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1688711237241" />
-    <state width="1877" height="374" key="GridCell.Tab.0.center" timestamp="1688711237241">
+    <state width="1877" height="264" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1689057762586" />
+    <state width="1877" height="264" key="GridCell.Tab.0.center" timestamp="1689057762586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1688711237241" />
-    <state width="1877" height="374" key="GridCell.Tab.0.left" timestamp="1688711237241">
+    <state width="1877" height="264" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1689057762586" />
+    <state width="1877" height="264" key="GridCell.Tab.0.left" timestamp="1689057762586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1688711237241" />
-    <state width="1877" height="374" key="GridCell.Tab.0.right" timestamp="1688711237241">
+    <state width="1877" height="264" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1689057762586" />
+    <state width="1877" height="264" key="GridCell.Tab.0.right" timestamp="1689057762586">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="374" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1688711237241" />
+    <state width="1877" height="264" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1689057762586" />
     <state width="1877" height="374" key="GridCell.Tab.1.bottom" timestamp="1688711237241">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -213,6 +220,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="314" y="223" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1688042858776" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1689057513205">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1689057513205" />
     <state x="288" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1688045347146">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

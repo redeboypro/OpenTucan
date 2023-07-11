@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using Assimp;
 using Assimp.Configs;
@@ -230,7 +230,7 @@ namespace OpenTucan.Graphics
             GL.EnableVertexAttribArray(normalsArrayAttribLocation);
             
             GL.CullFace(cullFaceMode);
-            GL.DrawElements(PrimitiveType.Triangles, vertices.Length, DrawElementsType.UnsignedInt, indices);
+            GL.DrawElements(PrimitiveType.Triangles, vertices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
 
             GL.DisableVertexAttribArray(vertexArrayAttribLocation);
             GL.DisableVertexAttribArray(uvArrayAttribLocation);
@@ -270,10 +270,10 @@ namespace OpenTucan.Graphics
                 }
             }
 
+            mesh.Indices = indices.ToArray();
             mesh.Vertices = vertices.ToArray();
             mesh.UV = textureCoordinates.ToArray();
             mesh.Normals = normals.ToArray();
-            mesh.Indices = indices.ToArray();
 
             return mesh;
         }

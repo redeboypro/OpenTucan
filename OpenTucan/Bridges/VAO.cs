@@ -20,7 +20,6 @@ namespace OpenTucan.Bridges
         
         public EBO ElementBufferObject { get; }
         
-
         public void CreateElementBufferObject<T>(T[] data) where T : struct
         {
             GL.BindVertexArray(Id);

@@ -46,7 +46,7 @@ out vec4 outColor;
 
 uniform float reflectivity;
 uniform float shininess;
-uniform vec4 lightColor;
+uniform vec3 lightColor;
 uniform sampler2D imgTexture;
 
 void main(void) 
@@ -56,7 +56,7 @@ void main(void)
 
     float normalLightAngle = dot(unitNormal, lightDirection);
     float brightness = max(normalLightAngle, 0.2);
-    vec3 diffuse = brightness * lightColor.rgb;
+    vec3 diffuse = brightness * lightColor;
     
     vec3 cameraDirection = normalize(vertexRelativeCamera);
     lightDirection = -lightDirection;
@@ -65,7 +65,7 @@ void main(void)
     float specularFactor = dot(reflectedLightDirection, cameraDirection);
     specularFactor = max(specularFactor, 0.0);
     float dampedFactor = pow(specularFactor, shininess);
-	vec3 resultSpecular = dampedFactor * reflectivity * lightColor.rgb;
+	vec3 resultSpecular = dampedFactor * reflectivity * lightColor;
 
 	outColor = vec4(diffuse, 1.0) * texture(imgTexture, fragUV) * vec4(resultSpecular, 1.0);
 }
