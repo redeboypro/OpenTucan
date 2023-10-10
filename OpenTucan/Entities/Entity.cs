@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Reflection;
 using Assimp;
 using OpenTK;
 using OpenTucan.Common;
+using OpenTucan.Components;
 using Quaternion = OpenTK.Quaternion;
 
 namespace OpenTucan.Entities
@@ -16,23 +19,29 @@ namespace OpenTucan.Entities
 
     public abstract class Entity
     {
-        private readonly List<Entity> children;
-        private Entity parent;
+        private readonly List<Behaviour> _behaviours;
+        private readonly List<Entity> _children;
+        private Entity _parent;
 
-        private Vector3 globalLocation = Vector3.Zero;
-        private Quaternion globalRotation = Quaternion.Identity;
-        private Vector3 globalScale = Vector3.One;
+        private Vector3 _globalLocation;
+        private Quaternion _globalRotation;
+        private Vector3 _globalScale;
 
-        private Vector3 localLocation = Vector3.Zero;
-        private Quaternion localRotation = Quaternion.Identity;
-        private Vector3 localScale = Vector3.One;
+        private Vector3 _localLocation;
+        private Quaternion _localRotation;
+        private Vector3 _localScale;
 
-        private Matrix4 modelMatrix = Matrix4.Identity;
-        
+        private Matrix4 _modelMatrix;
+
         protected Entity()
-        {
-            children = new List<Entity>();
-            TransformMatrices(Space.Local);
+        { 
+            _globalLocation = _localLocation = Vector3.Zero; 
+            _globalRotation = _localRotation = Quaternion.Identity; 
+            _globalScale = _localScale = Vector3.One;
+            _modelMatrix = Matrix4.Identity;
+            _behaviours = new List<Behaviour>();
+            _children = new List<Entity>();
+            TransformMatrix(Space.Local);
         }
 
         /// <summary>
@@ -42,12 +51,12 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return globalLocation;
+                return _globalLocation;
             }
             set
             {
-                globalLocation = value;
-                TransformMatrices(Space.Global);
+                _globalLocation = value;
+                TransformMatrix(Space.Global);
             }
         }
 
@@ -58,12 +67,12 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return globalRotation;
+                return _globalRotation;
             }
             set
             {
-                globalRotation = value;
-                TransformMatrices(Space.Global);
+                _globalRotation = value;
+                TransformMatrix(Space.Global);
             }
         }
 
@@ -74,12 +83,12 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return globalRotation.ToEulerAngles();
+                return _globalRotation.ToEulerAngles();
             }
             set
             {
                 WorldSpaceRotation = Quaternion.FromEulerAngles(value);
-                TransformMatrices(Space.Local);
+                TransformMatrix(Space.Local);
             }
         }
 
@@ -90,12 +99,12 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return globalScale;
+                return _globalScale;
             }
             set
             {
-                globalScale = value;
-                TransformMatrices(Space.Global);
+                _globalScale = value;
+                TransformMatrix(Space.Global);
             }
         }
 
@@ -106,12 +115,12 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return localLocation;
+                return _localLocation;
             }
             set
             {
-                localLocation = value;
-                TransformMatrices(Space.Local);
+                _localLocation = value;
+                TransformMatrix(Space.Local);
             }
         }
 
@@ -122,12 +131,12 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return localRotation;
+                return _localRotation;
             }
             set
             {
-                localRotation = value.Normalized();
-                TransformMatrices(Space.Local);
+                _localRotation = value.Normalized();
+                TransformMatrix(Space.Local);
             }
         }
 
@@ -138,12 +147,12 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return localRotation.ToEulerAngles();
+                return _localRotation.ToEulerAngles();
             }
             set
             {
-                localRotation = Quaternion.FromEulerAngles(value);
-                TransformMatrices(Space.Local);
+                _localRotation = Quaternion.FromEulerAngles(value);
+                TransformMatrix(Space.Local);
             }
         }
 
@@ -154,21 +163,60 @@ namespace OpenTucan.Entities
         {
             get
             {
-                return localScale;
+                return _localScale;
             }
             set
             {
-                localScale = value;
-                TransformMatrices(Space.Local);
+                _localScale = value;
+                TransformMatrix(Space.Local);
             }
         }
 
+        public IReadOnlyList<Behaviour> GetBehaviours()
+        {
+            return _behaviours;
+        }
+        
+        public T GetBehaviour<T>() where T : Behaviour
+        {
+            return (T) _behaviours.FirstOrDefault(behaviour => behaviour.GetType().IsAssignableFrom(typeof(T)));
+        }
+        
+        public Behaviour GetBehaviour(Type behaviourType)
+        {
+            if (!behaviourType.BaseType.IsAssignableFrom(typeof(Behaviour)))
+            {
+                throw new Exception("Input behaviour base type should be assignable from \"OpenTucan.Components.Behaviour\"");
+            }
+
+            return _behaviours.FirstOrDefault(behaviour => behaviour.GetType().IsAssignableFrom(behaviourType));
+        }
+
+        public void AddComponent<T>() where T : Behaviour
+        {
+            AddComponent(typeof(T));
+        }
+        
+        public void AddComponent(Type behaviourType)
+        {
+            if (!behaviourType.BaseType.IsAssignableFrom(typeof(Behaviour)))
+            {
+                throw new Exception("Input behaviour base type should be assignable from \"OpenTucan.Components.Behaviour\"");
+            }
+            
+            var behaviour = (Behaviour) Activator.CreateInstance(behaviourType);
+            var holder = typeof(Behaviour).GetField(nameof(Entity), BindingFlags.Instance | BindingFlags.Public);
+            holder.SetValue(behaviour, this);
+            
+            _behaviours.Add(behaviour);
+        }
+
         /// <summary>
-        /// Gives the amount of children
+        /// Gives the amount of _children
         /// </summary>
         public int GetChildrenAmount()
         {
-            return children.Count;
+            return _children.Count;
         }
 
         /// <summary>
@@ -176,7 +224,7 @@ namespace OpenTucan.Entities
         /// </summary>
         public Entity GetChild(int index)
         {
-            return children[index];
+            return _children[index];
         }
         
         /// <summary>
@@ -184,12 +232,12 @@ namespace OpenTucan.Entities
         /// </summary>
         public void AddChild(Entity child)
         {
-            if (children.Contains(child))
+            if (_children.Contains(child))
             {
                 return;
             }
 
-            children.Add(child);
+            _children.Add(child);
             child.SetParent(this);
         }
 
@@ -198,46 +246,54 @@ namespace OpenTucan.Entities
         /// </summary>
         public void RemoveChild(Entity child)
         {
-            if (children.Contains(child))
+            if (_children.Contains(child))
             {
-                children.Remove(child);
+                _children.Remove(child);
             }
         }
 
         /// <summary>
-        /// Assigns an entity as a parent
+        /// Performs the specified action on each child
+        /// </summary>
+        public void ChildrenForEach(Action<Entity> forEachEvent)
+        {
+            _children.ForEach(forEachEvent);
+        }
+
+        /// <summary>
+        /// Assigns an entity as a _parent
         /// </summary>
         public void SetParent(Entity assignableEntity, bool freezeComponents = true)
         {
-            if (parent != assignableEntity)
+            if (_parent != assignableEntity)
             {
-                parent?.RemoveChild(this);
+                _parent?.RemoveChild(this);
             }
 
-            var location = globalLocation;
-            var rotation = globalRotation;
-            var scale = globalScale; 
+            var location = _globalLocation;
+            var rotation = _globalRotation;
+            var scale = _globalScale; 
             
-            parent = assignableEntity;
-            TransformMatrices(Space.Local);
+            _parent = assignableEntity;
+            TransformMatrix(Space.Local);
 
             if (!freezeComponents)
             {
-                globalLocation = location;
-                globalRotation = rotation;
-                globalScale = scale;
-                TransformMatrices(Space.Global);
+                _globalLocation = location;
+                _globalRotation = rotation;
+                _globalScale = scale;
+                TransformMatrix(Space.Global);
             }
 
-            parent?.AddChild(this);
+            _parent?.AddChild(this);
         }
 
         /// <summary>
-        /// Gives assigned parent
+        /// Gives assigned _parent
         /// </summary>
         public Entity GetParent()
         {
-            return parent;
+            return _parent;
         }
 
         /// <summary>
@@ -245,22 +301,22 @@ namespace OpenTucan.Entities
         /// </summary>
         public Matrix4 GetModelMatrix()
         {
-            return modelMatrix;
+            return _modelMatrix;
         }
 
         /// <summary>
-        /// Gives parent model matrix
+        /// Gives _parent model matrix
         /// </summary>
         public Matrix4 GetParentMatrix()
         {
-            switch (parent)
+            switch (_parent)
             {
                 case null:
                     return Matrix4.Identity;
                 case Camera camera:
                     return camera.ViewMatrix.Inverted();
                 default:
-                    return parent.GetModelMatrix();
+                    return _parent.GetModelMatrix();
             }
         }
 
@@ -309,40 +365,41 @@ namespace OpenTucan.Entities
             }
         }
         
-        private void TransformMatrices(Space space)
+        /// <summary>
+        /// Recalculates 
+        /// </summary>
+        private void TransformMatrix(Space space)
         {
             var parentMatrix = GetParentMatrix();
             
-            switch (space)
+            if (space is Space.Local)
             {
-                case Space.Local:
-                    modelMatrix = Matrix4.CreateScale(localScale)
-                                  * Matrix4.CreateFromQuaternion(localRotation)
-                                  * Matrix4.CreateTranslation(localLocation) * parentMatrix;
+                _modelMatrix = Matrix4.CreateScale(_localScale)
+                               * Matrix4.CreateFromQuaternion(_localRotation)
+                               * Matrix4.CreateTranslation(_localLocation) * parentMatrix;
 
-                    globalLocation = modelMatrix.ExtractTranslation();
-                    globalRotation = modelMatrix.ExtractRotation().Normalized();
-                    globalScale = modelMatrix.ExtractScale();
-                    break;
-                case Space.Global:
-                    var localMatrix = Matrix4.CreateScale(globalScale)
-                                      * Matrix4.CreateFromQuaternion(globalRotation)
-                                      * Matrix4.CreateTranslation(globalLocation) * parentMatrix.Inverted();
-
-                    localLocation = localMatrix.ExtractTranslation();
-                    localRotation = localMatrix.ExtractRotation();
-                    localRotation.Normalize();
-                    localScale = localMatrix.ExtractScale();
-                    TransformMatrices(Space.Local);
-                    break;
-            }
-
-            foreach (var child in children)
-            {
-                child.TransformMatrices(Space.Local);
+                _globalLocation = _modelMatrix.ExtractTranslation();
+                _globalRotation = _modelMatrix.ExtractRotation().Normalized();
+                _globalScale = _modelMatrix.ExtractScale();
+                
+                foreach (var child in _children)
+                {
+                    child.TransformMatrix(Space.Local);
+                }
+            
+                OnTransformMatrices();
+                return;
             }
             
-            OnTransformMatrices();
+            var localMatrix = Matrix4.CreateScale(_globalScale)
+                              * Matrix4.CreateFromQuaternion(_globalRotation)
+                              * Matrix4.CreateTranslation(_globalLocation) * parentMatrix.Inverted();
+
+            _localLocation = localMatrix.ExtractTranslation();
+            _localRotation = localMatrix.ExtractRotation();
+            _localRotation.Normalize();
+            _localScale = localMatrix.ExtractScale();
+            TransformMatrix(Space.Local);
         }
 
         /// <summary>
@@ -366,10 +423,10 @@ namespace OpenTucan.Entities
             switch (space)
             {
                 case Space.Global:
-                    WorldSpaceRotation = rotation * globalRotation;
+                    WorldSpaceRotation = rotation * _globalRotation;
                     break;
                 case Space.Local:
-                    LocalSpaceRotation = rotation * localRotation;
+                    LocalSpaceRotation = rotation * _localRotation;
                     break;
             }
         }

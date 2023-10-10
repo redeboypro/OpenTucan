@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\redeb\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\redeb\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_OpenTucan.-426206283.00" t="ExcludeRecursive" />
-    <e p="D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan" t="IncludeFlat">
-      <e p="FPSLevelEditor" t="IncludeRecursive">
+    <e p="C:\Users\redeb\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_OpenTucan.-768039592.00" t="ExcludeRecursive" />
+    <e p="D:\IDE\projects\OpenTucan" t="IncludeFlat">
+      <e p="Editor" t="IncludeRecursive">
+        <e p="AssetManager.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
-        <e p="FPSLevelEditor.csproj" t="IncludeRecursive" />
+        <e p="Editor.csproj" t="IncludeRecursive" />
+        <e p="EditorController.cs" t="Include" />
+        <e p="EditorGUI.cs" t="Include" />
+        <e p="EditorWindow.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -26,10 +30,14 @@
           <e p="MathTools.cs" t="Include" />
           <e p="Ortho.cs" t="Include" />
         </e>
+        <e p="Components" t="Include">
+          <e p="Behaviour.cs" t="Include" />
+        </e>
         <e p="Entities" t="Include">
           <e p="Camera.cs" t="Include" />
           <e p="Entity.cs" t="Include" />
           <e p="Rigidbody.cs" t="Include" />
+          <e p="TransformGizmo.cs" t="Include" />
         </e>
         <e p="Graphics" t="Include">
           <e p="Mesh.cs" t="Include" />
@@ -40,10 +48,16 @@
           <e p="Texture.cs" t="Include" />
         </e>
         <e p="GUI" t="Include">
+          <e p="Advanced" t="Include">
+            <e p="GUIXml.cs" t="Include" />
+          </e>
+          <e p="Checkbox.cs" t="Include" />
           <e p="Font.cs" t="Include" />
           <e p="GUIControl.cs" t="Include" />
           <e p="GUIController.cs" t="Include" />
           <e p="Image.cs" t="Include" />
+          <e p="InputField.cs" t="Include" />
+          <e p="ListView.cs" t="Include" />
           <e p="Text.cs" t="Include" />
         </e>
         <e p="Input" t="Include">
@@ -59,9 +73,6 @@
       </e>
       <e p="OpenTucan.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
-      <e p="TucanScript" t="IncludeRecursive">
-        <e p="TucanScript.csproj" t="IncludeRecursive" />
-      </e>
     </e>
   </component>
 </project>

@@ -1,34 +1,33 @@
 ﻿using OpenTK;
+using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 
 namespace OpenTucan.GUI
 {
     public class Text : GUIControl
     {
-        private string text;
-        private Font font;
-
         public Text(string text, Font font, GUIController controller)
         {
-            this.text = text;
-            this.font = font;
+            Color = Color4.White;
+            Content = text;
             Render += args =>
             {
-                var shader = controller.ShaderProgram;
+                var shader = (GUIController.GUIShader) controller.ShaderProgram;
+                shader.SetColor(Color);
                 
                 GL.ActiveTexture(TextureUnit.Texture0);
                 GL.BindTexture(TextureTarget.Texture2D, font.AtlasTexture.Id);
 
-                var completelyScale = LocalSpaceScale;
+                var completelyScale = Vector3.One;
                 
                 var charHalfWidth = completelyScale.X / text.Length;
                 
                 completelyScale.X = charHalfWidth;
 
-                var horizontalPos = LocalSpaceLocation.X - LocalSpaceScale.X;
+                var horizontalPos = -1f;
                 horizontalPos += charHalfWidth;
                 
-                foreach (var c in text)
+                foreach (var c in Content)
                 {
                     if (!font.Contains(c)) 
                     {
@@ -59,5 +58,7 @@ namespace OpenTucan.GUI
                 GL.BindVertexArray(0);
             };
         }
+
+        public string Content { get; set; }
     }
 }

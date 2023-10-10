@@ -1,0 +1,15 @@
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\Editor.exe
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\Editor.pdb
+D:\IDE\projects\OpenTucan\Editor\obj\Debug\Editor.csproj.AssemblyReference.cache
+D:\IDE\projects\OpenTucan\Editor\obj\Debug\Editor.csproj.SuggestedBindingRedirects.cache
+D:\IDE\projects\OpenTucan\Editor\obj\Debug\Editor.csproj.CoreCompileInputs.cache
+D:\IDE\projects\OpenTucan\Editor\obj\Debug\Editor.exe
+D:\IDE\projects\OpenTucan\Editor\obj\Debug\Editor.pdb
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\OpenTK.dll
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\OpenTucan.dll
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\AssimpNet.dll
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\OpenTucan.pdb
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\OpenTK.pdb
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\OpenTK.xml
+D:\IDE\projects\OpenTucan\Editor\bin\Debug\AssimpNet.xml
+D:\IDE\projects\OpenTucan\Editor\obj\Debug\Editor.csproj.CopyComplete

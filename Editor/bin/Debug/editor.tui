@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GUIRoot>
+    <GUIList>
+        <GUIIsMasked>True</GUIIsMasked>
+        <GUIIdentifier>Inspector</GUIIdentifier>
+        <GUIPosition>0,75 0,75</GUIPosition>
+        <GUIScale>0,25 0,25</GUIScale>
+        <GUICornerRadius>0,06</GUICornerRadius>
+        <GUIInputField>
+            <GUITextContent>Name...</GUITextContent>
+            <GUICornerRadius>0,035</GUICornerRadius>
+            <GUIColor>1 0 0</GUIColor>
+            <GUIColor>0,7 0 0</GUIColor>
+            <GUIScale>0,74 0,1</GUIScale>
+        </GUIInputField>
+    </GUIList>
+    <GUIList>
+        <GUIIsMasked>True</GUIIsMasked>
+        <GUIIdentifier>Hierarchy</GUIIdentifier>
+        <GUIPosition>-0,75 0,75</GUIPosition>
+        <GUIScale>0,25 0,25</GUIScale>
+        <GUICornerRadius>0,05</GUICornerRadius>
+    </GUIList>
+    <GUIList>
+        <GUIIsMasked>True</GUIIsMasked>
+        <GUIIdentifier>Project</GUIIdentifier>
+        <GUIPosition>-0,75 -0,75</GUIPosition>
+        <GUIScale>0,25 0,25</GUIScale>
+        <GUICornerRadius>0,06</GUICornerRadius>
+    </GUIList>
+</GUIRoot>

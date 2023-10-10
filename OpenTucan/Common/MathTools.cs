@@ -1,4 +1,7 @@
-﻿using OpenTK;
+﻿using System;
+using System.Drawing;
+using OpenTK;
+using OpenTK.Graphics;
 
 namespace OpenTucan.Common
 {
@@ -183,7 +186,45 @@ namespace OpenTucan.Common
         /// </summary>
         public static float Min(float a, float b, float c)
         {
-            return System.Math.Min(System.Math.Min(a, b), c);
+            return Math.Min(Math.Min(a, b), c);
+        }
+        
+        /// <summary>
+        /// Gives color contrast on other
+        /// </summary>
+        public static Color4 GetContrastColor(Color4 background, Color4 black, Color4 white)
+        {
+            return GetContrastRatio(background, black) > GetContrastRatio(background, white) ? black : white;
+        }
+
+        /// <summary>
+        /// Gives contrast ratio between two colors
+        /// </summary>
+        private static float GetContrastRatio(Color4 background, Color4 color)
+        {
+            var luminance1 = GetLuminance(background);
+            var luminance2 = GetLuminance(color);
+            
+            return (Math.Max(luminance1, luminance2) + 0.05f) / (Math.Min(luminance1, luminance2) + 0.05f);
+        }
+
+        /// <summary>
+        /// Gives RGB luminance
+        /// </summary>
+        private static float GetLuminance(Color4 color)
+        {
+            var r = GetLocalLuminance(color.R);
+            var g = GetLocalLuminance(color.G);
+            var b = GetLocalLuminance(color.B);
+            return 0.2126f * r + 0.7152f * g + 0.0722f * b;
+        }
+
+        /// <summary>
+        /// Gives channel luminance
+        /// </summary>
+        private static float GetLocalLuminance(float channel)
+        {
+            return (float) (channel > 0.03928f ? Math.Pow((channel + 0.055f) / 1.055f, 2.4f) : channel / 12.92f);
         }
     }
 }

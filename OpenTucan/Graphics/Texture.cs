@@ -7,17 +7,17 @@ using PixelFormat = OpenTK.Graphics.OpenGL.PixelFormat;
 
 namespace OpenTucan.Graphics
 {
-    public delegate void Img_LockIntoSysMemory(BitmapData data);
+    public delegate void LockIntoSysMemoryEvent(BitmapData data);
     
     public class Texture
     {
         private const int ColorLimit = 0xFF;
         
-        private readonly Bitmap bitmap;
+        private readonly Bitmap _bitmap;
         
         public Texture(Bitmap bitmap)
         {
-            this.bitmap = bitmap;
+            _bitmap = bitmap;
             
             GL.Hint(HintTarget.PerspectiveCorrectionHint, HintMode.Nicest);
             GL.GenTextures(1, out int id);
@@ -47,7 +47,7 @@ namespace OpenTucan.Graphics
 
         public void SetPixel(int x, int y, Color4 color)
         {
-            bitmap.SetPixel(x, y, Color.FromArgb(
+            _bitmap.SetPixel(x, y, Color.FromArgb(
                 (int) (color.A * ColorLimit),
                 (int) (color.R * ColorLimit),
                 (int) (color.G * ColorLimit),
@@ -57,7 +57,7 @@ namespace OpenTucan.Graphics
 
         public Color4 GetPixel(int x, int y)
         {
-            var pixel = bitmap.GetPixel(x, y);
+            var pixel = _bitmap.GetPixel(x, y);
             return new Color4
             {
                 A = (float) pixel.A / ColorLimit,
@@ -83,14 +83,14 @@ namespace OpenTucan.Graphics
             GL.DeleteTexture(Id);
         }
 
-        private void LockIntoSystemMemory(Img_LockIntoSysMemory e)
+        private void LockIntoSystemMemory(LockIntoSysMemoryEvent e)
         {
-            var safeData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+            var safeData = _bitmap.LockBits(new Rectangle(0, 0, _bitmap.Width, _bitmap.Height),
                 ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
             
             e.Invoke(safeData);
             
-            bitmap.UnlockBits(safeData);
+            _bitmap.UnlockBits(safeData);
         }
     }
 }

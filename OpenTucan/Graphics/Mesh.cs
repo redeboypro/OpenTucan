@@ -16,22 +16,22 @@ namespace OpenTucan.Graphics
         public const int DefaultUVArrayAttribLocation = 1;
         public const int DefaultNormalsArrayAttribLocation = 2;
         
-        private readonly int vertexArrayAttribLocation;
-        private readonly int uvArrayAttribLocation;
-        private readonly int normalsArrayAttribLocation;
+        private readonly int _vertexArrayAttribLocation;
+        private readonly int _uvArrayAttribLocation;
+        private readonly int _normalsArrayAttribLocation;
         
-        private Vector3[] vertices;
-        private Vector2[] uv;
-        private Vector3[] normals;
-        private int[] indices;
+        private Vector3[] _vertices;
+        private Vector2[] _uv;
+        private Vector3[] _normals;
+        private int[] _indices;
 
-        private bool verticesIsDirty;
-        private bool uvIsDirty;
-        private bool normalsIsDirty;
-        private bool indicesIsDirty;
+        private bool _verticesIsDirty;
+        private bool _uvIsDirty;
+        private bool _normalsIsDirty;
+        private bool _indicesIsDirty;
 
-        private Vector3 boundsMinimum;
-        private Vector3 boundsMaximum;
+        private Vector3 _boundsMinimum;
+        private Vector3 _boundsMaximum;
 
         public Mesh(
             int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
@@ -40,9 +40,9 @@ namespace OpenTucan.Graphics
         {
             VertexArrayObject = new VAO();
 
-            this.vertexArrayAttribLocation = vertexArrayAttribLocation;
-            this.uvArrayAttribLocation = uvArrayAttribLocation;
-            this.normalsArrayAttribLocation = normalsArrayAttribLocation;
+            _vertexArrayAttribLocation = vertexArrayAttribLocation;
+            _uvArrayAttribLocation = uvArrayAttribLocation;
+            _normalsArrayAttribLocation = normalsArrayAttribLocation;
         }
         
         public VAO VertexArrayObject { get; }
@@ -51,21 +51,21 @@ namespace OpenTucan.Graphics
         {
             get
             {
-                return vertices;
+                return _vertices;
             }
             set
             {
-                vertices = value;
+                _vertices = value;
 
-                if (!verticesIsDirty)
+                if (!_verticesIsDirty)
                 {
-                    VertexArrayObject.CreateVertexBufferObject(vertexArrayAttribLocation, 3, vertices);
-                    verticesIsDirty = true;
+                    VertexArrayObject.CreateVertexBufferObject(_vertexArrayAttribLocation, 3, _vertices);
+                    _verticesIsDirty = true;
                     RecalculateBounds();
                     return;
                 }
                 
-                VertexArrayObject.UpdateVertexBufferObject(vertexArrayAttribLocation, vertices);
+                VertexArrayObject.UpdateVertexBufferObject(_vertexArrayAttribLocation, _vertices);
                 
                 RecalculateBounds();
             }
@@ -75,20 +75,20 @@ namespace OpenTucan.Graphics
         {
             get
             {
-                return uv;
+                return _uv;
             }
             set
             {
-                uv = value;
+                _uv = value;
 
-                if (!uvIsDirty)
+                if (!_uvIsDirty)
                 {
-                    VertexArrayObject.CreateVertexBufferObject(uvArrayAttribLocation, 2, uv);
-                    uvIsDirty = true;
+                    VertexArrayObject.CreateVertexBufferObject(_uvArrayAttribLocation, 2, _uv);
+                    _uvIsDirty = true;
                     return;
                 }
                 
-                VertexArrayObject.UpdateVertexBufferObject(uvArrayAttribLocation, uv);
+                VertexArrayObject.UpdateVertexBufferObject(_uvArrayAttribLocation, _uv);
             }
         }
         
@@ -96,20 +96,20 @@ namespace OpenTucan.Graphics
         {
             get
             {
-                return normals;
+                return _normals;
             }
             set
             {
-                normals = value;
+                _normals = value;
 
-                if (!normalsIsDirty)
+                if (!_normalsIsDirty)
                 {
-                    VertexArrayObject.CreateVertexBufferObject(normalsArrayAttribLocation, 3, normals);
-                    normalsIsDirty = true;
+                    VertexArrayObject.CreateVertexBufferObject(_normalsArrayAttribLocation, 3, _normals);
+                    _normalsIsDirty = true;
                     return;
                 }
                 
-                VertexArrayObject.UpdateVertexBufferObject(normalsArrayAttribLocation, normals);
+                VertexArrayObject.UpdateVertexBufferObject(_normalsArrayAttribLocation, _normals);
             }
         }
         
@@ -117,40 +117,40 @@ namespace OpenTucan.Graphics
         {
             get
             {
-                return indices;
+                return _indices;
             }
             set
             {
-                indices = value;
+                _indices = value;
 
-                if (!indicesIsDirty)
+                if (!_indicesIsDirty)
                 {
-                    VertexArrayObject.CreateElementBufferObject(indices);
-                    indicesIsDirty = true;
+                    VertexArrayObject.CreateElementBufferObject(_indices);
+                    _indicesIsDirty = true;
                     return;
                 }
                 
-                VertexArrayObject.UpdateElementBufferObject(indices);
+                VertexArrayObject.UpdateElementBufferObject(_indices);
             }
         }
 
         public Vector3 GetBoundsMinimum()
         {
-            return boundsMinimum;
+            return _boundsMinimum;
         }
         
         public Vector3 GetBoundsMaximum()
         {
-            return boundsMaximum;
+            return _boundsMaximum;
         }
         
         public void RecalculateNormals()
         {
-            var resultNormals = new Vector3[vertices.Length];
+            var resultNormals = new Vector3[_vertices.Length];
             
             var face = new int[3];
             var vertexId = 0;
-            foreach (var index in indices)
+            foreach (var index in _indices)
             {
                 face[vertexId] = index;
 
@@ -161,9 +161,9 @@ namespace OpenTucan.Graphics
                     var inx2 = face[1];
                     var inx3 = face[2];
                     
-                    var a = vertices[inx1];
-                    var b = vertices[inx2];
-                    var c = vertices[inx3];
+                    var a = _vertices[inx1];
+                    var b = _vertices[inx2];
+                    var c = _vertices[inx3];
                     
                     var normal = Vector3.Cross(b - a, c - a).Normalized();
 
@@ -180,44 +180,44 @@ namespace OpenTucan.Graphics
 
         private void RecalculateBounds()
         {
-            boundsMinimum.X = float.PositiveInfinity;
-            boundsMinimum.Y = float.PositiveInfinity;
-            boundsMinimum.Z = float.PositiveInfinity;
+            _boundsMinimum.X = float.PositiveInfinity;
+            _boundsMinimum.Y = float.PositiveInfinity;
+            _boundsMinimum.Z = float.PositiveInfinity;
             
-            boundsMaximum.X = float.NegativeInfinity;
-            boundsMaximum.Y = float.NegativeInfinity;
-            boundsMaximum.Z = float.NegativeInfinity;
+            _boundsMaximum.X = float.NegativeInfinity;
+            _boundsMaximum.Y = float.NegativeInfinity;
+            _boundsMaximum.Z = float.NegativeInfinity;
 
-            foreach (var vertex in vertices)
+            foreach (var vertex in _vertices)
             {
-                if (vertex.X < boundsMinimum.X)
+                if (vertex.X < _boundsMinimum.X)
                 {
-                    boundsMinimum.X = vertex.X;
+                    _boundsMinimum.X = vertex.X;
                 }
                 
-                if (vertex.Y < boundsMinimum.Y)
+                if (vertex.Y < _boundsMinimum.Y)
                 {
-                    boundsMinimum.Y = vertex.Y;
+                    _boundsMinimum.Y = vertex.Y;
                 }
                 
-                if (vertex.Z < boundsMinimum.Z)
+                if (vertex.Z < _boundsMinimum.Z)
                 {
-                    boundsMinimum.Z = vertex.Z;
+                    _boundsMinimum.Z = vertex.Z;
                 }
                 
-                if (vertex.X > boundsMaximum.X)
+                if (vertex.X > _boundsMaximum.X)
                 {
-                    boundsMaximum.X = vertex.X;
+                    _boundsMaximum.X = vertex.X;
                 }
                 
-                if (vertex.Y > boundsMaximum.Y)
+                if (vertex.Y > _boundsMaximum.Y)
                 {
-                    boundsMaximum.Y = vertex.Y;
+                    _boundsMaximum.Y = vertex.Y;
                 }
                 
-                if (vertex.Z > boundsMaximum.Z)
+                if (vertex.Z > _boundsMaximum.Z)
                 {
-                    boundsMaximum.Z = vertex.Z;
+                    _boundsMaximum.Z = vertex.Z;
                 }
             }
         }
@@ -225,16 +225,16 @@ namespace OpenTucan.Graphics
         public void PrepareForRendering(CullFaceMode cullFaceMode = CullFaceMode.Back)
         {
             GL.BindVertexArray(VertexArrayObject.Id);
-            GL.EnableVertexAttribArray(vertexArrayAttribLocation);
-            GL.EnableVertexAttribArray(uvArrayAttribLocation);
-            GL.EnableVertexAttribArray(normalsArrayAttribLocation);
+            GL.EnableVertexAttribArray(_vertexArrayAttribLocation);
+            GL.EnableVertexAttribArray(_uvArrayAttribLocation);
+            GL.EnableVertexAttribArray(_normalsArrayAttribLocation);
             
             GL.CullFace(cullFaceMode);
-            GL.DrawElements(PrimitiveType.Triangles, vertices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
+            GL.DrawElements(PrimitiveType.Triangles, _vertices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
 
-            GL.DisableVertexAttribArray(vertexArrayAttribLocation);
-            GL.DisableVertexAttribArray(uvArrayAttribLocation);
-            GL.DisableVertexAttribArray(normalsArrayAttribLocation);
+            GL.DisableVertexAttribArray(_vertexArrayAttribLocation);
+            GL.DisableVertexAttribArray(_uvArrayAttribLocation);
+            GL.DisableVertexAttribArray(_normalsArrayAttribLocation);
             GL.BindVertexArray(0);
         }
 

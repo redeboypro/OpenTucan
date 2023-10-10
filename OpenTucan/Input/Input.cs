@@ -6,93 +6,103 @@ namespace OpenTucan.Input
 {
     public class Input
     {
-        private KeyboardState keyboardState;
-        private MouseState mouseState;
+        private KeyboardState _keyboardState;
+        private MouseState _mouseState;
 
-        private KeyboardState previousKeyboardState;
-        private MouseState previousMouseState;
+        private KeyboardState _previousKeyboardState;
+        private MouseState _previousMouseState;
 
-        private float mouseDeltaX;
-        private float mouseDeltaY;
+        private int _mouseDeltaX;
+        private int _mouseDeltaY;
 
         public Input()
         {
-            keyboardState = Keyboard.GetState();
-            mouseState = Mouse.GetState();
-            previousKeyboardState = keyboardState;
-            previousMouseState = mouseState;
+            _keyboardState = Keyboard.GetState();
+            _mouseState = Mouse.GetState();
+            _previousKeyboardState = _keyboardState;
+            _previousMouseState = _mouseState;
         }
 
         public bool IsKeyDown(Key key)
         {
-            return keyboardState.IsKeyDown(key);
+            return _keyboardState.IsKeyDown(key);
         }
 
         public bool IsKeyUp(Key key)
         {
-            return keyboardState.IsKeyUp(key);
+            return _keyboardState.IsKeyUp(key);
         }
 
         public bool IsKeyPressed(Key key)
         {
-            return keyboardState != previousKeyboardState && keyboardState[key];
+            return _keyboardState != _previousKeyboardState && _keyboardState[key];
         }
 
         public bool IsKeyReleased(Key key)
         {
-            return keyboardState != previousKeyboardState && !keyboardState[key];
+            return _keyboardState != _previousKeyboardState && !_keyboardState[key];
         }
 
         public bool IsMouseButtonDown(MouseButton button)
         {
-            return mouseState.IsButtonDown(button);
+            return _mouseState.IsButtonDown(button);
         }
 
         public bool IsMouseButtonUp(MouseButton button)
         {
-            return mouseState.IsButtonUp(button);
+            return _mouseState.IsButtonUp(button);
         }
 
         public bool IsMouseButtonPressed(MouseButton button)
         {
-            return mouseState != previousMouseState && mouseState[button];
+            return _mouseState != _previousMouseState && _mouseState[button];
         }
 
         public bool IsMouseButtonReleased(MouseButton button)
         {
-            return mouseState != previousMouseState && !mouseState[button];
+            return _mouseState != _previousMouseState && !_mouseState[button];
         }
 
         public bool IsAnyKeyDown()
         {
-            return keyboardState.IsAnyKeyDown;
+            return _keyboardState.IsAnyKeyDown;
         }
 
         public bool IsAnyMouseButtonDown()
         {
-            return mouseState.IsAnyButtonDown;
+            return _mouseState.IsAnyButtonDown;
         }
 
-        public float GetMouseDX()
+        public int GetMouseDX()
         {
-            return mouseDeltaX;
+            return _mouseDeltaX;
         }
 
-        public float GetMouseDY()
+        public int GetMouseDY()
         {
-            return mouseDeltaY;
+            return _mouseDeltaY;
+        }
+        
+        public int GetMouseX()
+        {
+            return _mouseState.X;
+        }
+
+        public int GetMouseY()
+        {
+            return _mouseState.Y;
         }
 
         public void OnUpdateFrame()
         {
-            keyboardState = Keyboard.GetState();
-            mouseState = Mouse.GetState();
+            _keyboardState = Keyboard.GetState();
+            _mouseState = Mouse.GetState();
             
-            mouseDeltaX = mouseState.X - previousMouseState.X;
-            mouseDeltaY = mouseState.Y - previousMouseState.Y;
+            _mouseDeltaX = _mouseState.X - _previousMouseState.X;
+            _mouseDeltaY = _mouseState.Y - _previousMouseState.Y;
             
-            previousKeyboardState = keyboardState;
-            previousMouseState = mouseState;
+            _previousKeyboardState = _keyboardState;
+            _previousMouseState = _mouseState;
         }
     }
 }

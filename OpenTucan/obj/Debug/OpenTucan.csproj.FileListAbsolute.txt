@@ -10,3 +10,15 @@ D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan
 D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.csproj.CopyComplete
 D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.dll
 D:\IDE\JetBrains Rider 2020.2.3\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.pdb
+D:\IDE\projects\OpenTucan\OpenTucan\bin\Debug\OpenTucan.dll
+D:\IDE\projects\OpenTucan\OpenTucan\bin\Debug\OpenTucan.pdb
+D:\IDE\projects\OpenTucan\OpenTucan\bin\Debug\AssimpNet.dll
+D:\IDE\projects\OpenTucan\OpenTucan\bin\Debug\OpenTK.dll
+D:\IDE\projects\OpenTucan\OpenTucan\bin\Debug\AssimpNet.xml
+D:\IDE\projects\OpenTucan\OpenTucan\bin\Debug\OpenTK.pdb
+D:\IDE\projects\OpenTucan\OpenTucan\bin\Debug\OpenTK.xml
+D:\IDE\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.csproj.AssemblyReference.cache
+D:\IDE\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.csproj.CoreCompileInputs.cache
+D:\IDE\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.csproj.CopyComplete
+D:\IDE\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.dll
+D:\IDE\projects\OpenTucan\OpenTucan\obj\Debug\OpenTucan.pdb

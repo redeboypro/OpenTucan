@@ -39,17 +39,23 @@
       <Compile Include="Common\ConversionHelper.cs" />
       <Compile Include="Common\MathTools.cs" />
       <Compile Include="Common\Ortho.cs" />
+      <Compile Include="Components\Behaviour.cs" />
       <Compile Include="Entities\Camera.cs" />
       <Compile Include="Entities\Entity.cs" />
       <Compile Include="Entities\Rigidbody.cs" />
+      <Compile Include="Entities\TransformGizmo.cs" />
       <Compile Include="Graphics\Mesh.cs" />
       <Compile Include="Graphics\Samples\SampleShader.cs" />
       <Compile Include="Graphics\Shader.cs" />
       <Compile Include="Graphics\Texture.cs" />
+      <Compile Include="GUI\Advanced\GUIXml.cs" />
+      <Compile Include="GUI\Checkbox.cs" />
       <Compile Include="GUI\Font.cs" />
       <Compile Include="GUI\GUIControl.cs" />
       <Compile Include="GUI\GUIController.cs" />
       <Compile Include="GUI\Image.cs" />
+      <Compile Include="GUI\InputField.cs" />
+      <Compile Include="GUI\ListView.cs" />
       <Compile Include="GUI\Text.cs" />
       <Compile Include="Input\Input.cs" />
       <Compile Include="Physics\AABB.cs" />
@@ -64,6 +70,7 @@
         <Private>True</Private>
       </Reference>
       <Reference Include="System.Drawing" />
+      <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
       <None Include="OpenTK.dll.config" />

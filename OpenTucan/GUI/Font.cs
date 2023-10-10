@@ -8,13 +8,13 @@ namespace OpenTucan.GUI
 {
     public class Font
     {
-        private readonly Texture fontAtlasTexture;
-        private readonly List<VAO> charVAOs;
+        private readonly Texture _fontAtlasTexture;
+        private readonly List<VAO> _charVAOs;
 
         public Font(Texture fontAtlasTexture)
         {
-            this.fontAtlasTexture = fontAtlasTexture;
-            charVAOs = new List<VAO>();
+            _fontAtlasTexture = fontAtlasTexture;
+            _charVAOs = new List<VAO>();
             var uv = new float[8];
             
             foreach (var c in Sheet)
@@ -36,7 +36,7 @@ namespace OpenTucan.GUI
                 var vao = new VAO();
                 vao.CreateVertexBufferObject(0, 2, GUIController.SimpleVertices);
                 vao.CreateVertexBufferObject(1, 2, uv);
-                charVAOs.Add(vao);
+                _charVAOs.Add(vao);
             }
         }
 
@@ -44,7 +44,7 @@ namespace OpenTucan.GUI
         {
             get
             {
-                return charVAOs[Sheet.IndexOf(c)];
+                return _charVAOs[Sheet.IndexOf(c)];
             }
         }
         
@@ -52,7 +52,7 @@ namespace OpenTucan.GUI
         {
             get
             {
-                return fontAtlasTexture;
+                return _fontAtlasTexture;
             }
         }
 

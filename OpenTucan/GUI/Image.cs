@@ -1,23 +1,29 @@
-﻿using OpenTK.Graphics.OpenGL;
+﻿using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 using OpenTucan.Graphics;
 
 namespace OpenTucan.GUI
 {
     public class Image : GUIControl
     {
-        private Texture texture;
+        private float _cornerRadius;
 
         public Image(Texture texture, GUIController controller)
         {
-            this.texture = texture;
+            _cornerRadius = 0;
+            Texture = texture;
+            Color = Color4.White;
             Render += args =>
             {
-                var shader = controller.ShaderProgram;
+                var shader = (GUIController.GUIShader) controller.ShaderProgram;
 
                 GL.ActiveTexture(TextureUnit.Texture0);
                 texture.Bind();
 
                 shader.SetUniform("modelMatrix", GetModelMatrix());
+                shader.SetRadius(_cornerRadius);
+                shader.SetExtents(WorldSpaceScale.X * 2, WorldSpaceScale.Y * 2);
+                shader.SetColor(Color);
 
                 GL.BindVertexArray(controller.SimpleVAO.Id);
                 GL.EnableVertexAttribArray(0);
@@ -30,5 +36,17 @@ namespace OpenTucan.GUI
                 GL.BindVertexArray(0);
             };
         }
+        
+        public float GetCornerRadius()
+        {
+            return _cornerRadius;
+        }
+
+        public void SetCornerRadius(float radius)
+        {
+            _cornerRadius = radius;
+        }
+
+        public Texture Texture { get; }
     }
 }

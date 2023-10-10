@@ -8,21 +8,22 @@ namespace OpenTucan.Entities
     
     public class Rigidbody : Entity
     {
-        private float fallingSpeed;
+        private readonly ICollection<Rigidbody> _rigidbodies;
+        private float _fallingSpeed;
         
-        private Rigidbody previousContact;
-        private bool previousCollide;
-        private Normal previousCollisionNormal;
-        
-        public Rigidbody(List<Rigidbody> physicsWorld, Vector3 min, Vector3 max)
+        private Rigidbody _previousContact;
+        private bool _previousCollide;
+        private Normal _previousCollisionNormal;
+
+        public Rigidbody(ICollection<Rigidbody> rigidbodies, Vector3 min, Vector3 max)
         {
-            previousCollide = false;
-            previousCollisionNormal = Normal.None;
+            _previousCollide = false;
+            _previousCollisionNormal = Normal.None;
+            _rigidbodies = rigidbodies;
             
-            PhysicsWorld = physicsWorld;
             CollisionShape = new AABB(min, max);
             
-            physicsWorld.Add(this);
+            rigidbodies.Add(this);
         }
 
         public CollisionCallback CollisionEnter { get; set; }
@@ -30,8 +31,6 @@ namespace OpenTucan.Entities
         public CollisionCallback CollisionExit { get; set; }
 
         public AABB CollisionShape { get; }
-
-        public List<Rigidbody> PhysicsWorld { get; set; }
 
         public float Gravity { get; set; } = -80.0f;
         
@@ -43,7 +42,7 @@ namespace OpenTucan.Entities
         {
             if (UseGravity)
             {
-                fallingSpeed = force;
+                _fallingSpeed = force;
             }
         }
 
@@ -58,10 +57,10 @@ namespace OpenTucan.Entities
 
             if (UseGravity)
             {
-                fallingSpeed += Gravity * interpolation;
+                _fallingSpeed += Gravity * interpolation;
                 WorldSpaceLocation += new Vector3
                 {
-                    Y = fallingSpeed * interpolation
+                    Y = _fallingSpeed * interpolation
                 };
             }
 
@@ -69,7 +68,7 @@ namespace OpenTucan.Entities
             var collide = false;
             var collisionNormal = Normal.None;
             
-            foreach (var rigidbody in PhysicsWorld)
+            foreach (var rigidbody in _rigidbodies)
             {
                 if (rigidbody == this) 
                 {
@@ -82,10 +81,10 @@ namespace OpenTucan.Entities
 
                     if (normal is Normal.Up)
                     {
-                        fallingSpeed = 0.0f;
+                        _fallingSpeed = 0.0f;
                     }
 
-                    if (!previousCollide)
+                    if (!_previousCollide)
                     {
                         CollisionEnter?.Invoke(rigidbody, normal);
                     }
@@ -96,14 +95,14 @@ namespace OpenTucan.Entities
                 }
             }
             
-            if (!collide && previousCollide)
+            if (!collide && _previousCollide)
             {
-                CollisionExit?.Invoke(previousContact, previousCollisionNormal);
+                CollisionExit?.Invoke(_previousContact, _previousCollisionNormal);
             }
 
-            previousContact = contact;
-            previousCollide = collide;
-            previousCollisionNormal = collisionNormal;
+            _previousContact = contact;
+            _previousCollide = collide;
+            _previousCollisionNormal = collisionNormal;
         }
 
         protected override void OnTransformMatrices()

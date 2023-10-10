@@ -38,21 +38,21 @@ namespace OpenTucan.Physics
     {
         public const int VertexCount = 8;
 
-        private readonly Vector3[] vertices;
-        private readonly Vector3[] sharedVertices;
+        private readonly Vector3[] _vertices;
+        private readonly Vector3[] _sharedVertices;
         
-        private Vector3 center;
-        private Vector3 min;
-        private Vector3 max;
+        private Vector3 _center;
+        private Vector3 _min;
+        private Vector3 _max;
         
-        private Vector3 sharedCenter;
-        private Vector3 sharedMin;
-        private Vector3 sharedMax;
+        private Vector3 _sharedCenter;
+        private Vector3 _sharedMin;
+        private Vector3 _sharedMax;
 
         public AABB(Vector3 min, Vector3 max)
         {
-            vertices = new Vector3[VertexCount];
-            sharedVertices = new Vector3[VertexCount];
+            _vertices = new Vector3[VertexCount];
+            _sharedVertices = new Vector3[VertexCount];
             SetBounds(min, max);
         }
         
@@ -60,7 +60,7 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return vertices;
+                return _vertices;
             }
         }
         
@@ -68,7 +68,7 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return sharedVertices;
+                return _sharedVertices;
             }
         }
 
@@ -76,7 +76,7 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return min;
+                return _min;
             }
         }
 
@@ -84,7 +84,7 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return max;
+                return _max;
             }
         }
         
@@ -92,7 +92,7 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return sharedMin;
+                return _sharedMin;
             }
         }
 
@@ -100,7 +100,7 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return sharedMax;
+                return _sharedMax;
             }
         }
 
@@ -108,7 +108,7 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return center;
+                return _center;
             }
         }
         
@@ -116,15 +116,15 @@ namespace OpenTucan.Physics
         {
             get
             {
-                return sharedCenter;
+                return _sharedCenter;
             }
         }
 
         public void SetBounds(Vector3 newMin, Vector3 newMax)
         {
-            min = sharedMin = newMin;
-            max = sharedMax = newMax;
-            center = sharedCenter = (newMax + newMin) * 0.5f;
+            _min = _sharedMin = newMin;
+            _max = _sharedMax = newMax;
+            _center = _sharedCenter = (newMax + newMin) * 0.5f;
             Reset();
         }
 
@@ -135,14 +135,14 @@ namespace OpenTucan.Physics
 
         public void Reset()
         {
-            vertices[0] = min;
-            vertices[1] = new Vector3(min.X, min.Y, max.Z);
-            vertices[2] = new Vector3(min.X, max.Y, min.Z);
-            vertices[3] = new Vector3(max.X, min.Y, min.Z);
-            vertices[4] = new Vector3(min.X, max.Y, max.Z);
-            vertices[5] = new Vector3(max.X, min.Y, max.Z);
-            vertices[6] = new Vector3(max.X, max.Y, min.Z);
-            vertices[7] = max;
+            _vertices[0] = _min;
+            _vertices[1] = new Vector3(_min.X, _min.Y, _max.Z);
+            _vertices[2] = new Vector3(_min.X, _max.Y, _min.Z);
+            _vertices[3] = new Vector3(_max.X, _min.Y, _min.Z);
+            _vertices[4] = new Vector3(_min.X, _max.Y, _max.Z);
+            _vertices[5] = new Vector3(_max.X, _min.Y, _max.Z);
+            _vertices[6] = new Vector3(_max.X, _max.Y, _min.Z);
+            _vertices[7] = _max;
         }
 
         public void Transform(Entity transform, params IgnoreParameter[] ignoreParameters)
@@ -157,12 +157,12 @@ namespace OpenTucan.Physics
             var entityRotation = transform.WorldSpaceRotation;
             var entityScale = transform.WorldSpaceScale;
 
-            sharedMin = Vector3.One * float.PositiveInfinity;
-            sharedMax = Vector3.One * float.NegativeInfinity;
+            _sharedMin = Vector3.One * float.PositiveInfinity;
+            _sharedMax = Vector3.One * float.NegativeInfinity;
 
             for (var i = 0; i < VertexCount; i++)
             {
-                var vertex = vertices[i];
+                var vertex = _vertices[i];
                 
                 if (assignsScale)
                 {
@@ -179,13 +179,13 @@ namespace OpenTucan.Physics
                     vertex += entityCenter;
                 }
 
-                sharedVertices[i] = vertex;
+                _sharedVertices[i] = vertex;
             }
 
-            foreach (var modifiedVertex in sharedVertices)
+            foreach (var modifiedVertex in _sharedVertices)
             {
-                var resultMin = sharedMin;
-                var resultMax = sharedMax;
+                var resultMin = _sharedMin;
+                var resultMax = _sharedMax;
 
                 for (var axisIndex = 0; axisIndex < 3; axisIndex++)
                 {
@@ -200,17 +200,17 @@ namespace OpenTucan.Physics
                     }
                 }
 
-                sharedMin = resultMin;
-                sharedMax = resultMax;
+                _sharedMin = resultMin;
+                _sharedMax = resultMax;
             }
             
-            sharedCenter = (sharedMax + sharedMin) * 0.5f;
+            _sharedCenter = (_sharedMax + _sharedMin) * 0.5f;
         }
 
         public bool Collide(AABB other, out Vector3 mtv, out Normal normal)
         {
-            var otherCenter = other.sharedCenter;
-            var distance = otherCenter - sharedCenter;
+            var otherCenter = other._sharedCenter;
+            var distance = otherCenter - _sharedCenter;
 
             mtv = Vector3.Zero;
 
@@ -218,15 +218,15 @@ namespace OpenTucan.Physics
             distance.Y = Math.Abs(distance.Y);
             distance.Z = Math.Abs(distance.Z);
 
-            var mHalfExtent = sharedMax - sharedCenter;
-            var oHalfExtent = other.sharedMax - otherCenter;
+            var mHalfExtent = _sharedMax - _sharedCenter;
+            var oHalfExtent = other._sharedMax - otherCenter;
             
             distance -= mHalfExtent + oHalfExtent;
             normal = Normal.None;
 
             if (distance.X < 0 && distance.Y < 0 && distance.Z < 0)
             {
-                var correctionDistance = otherCenter - sharedCenter;
+                var correctionDistance = otherCenter - _sharedCenter;
 
                 if (distance.X > distance.Y && distance.X > distance.Z)
                 {
@@ -264,14 +264,14 @@ namespace OpenTucan.Physics
             fracDirection.Y = 1.0f / direction.Y;
             fracDirection.Z = 1.0f / direction.Z;
 
-            var distanceToMinX = (sharedMin.X - start.X) * fracDirection.X;
-            var distanceToMaxX = (sharedMax.X - start.X) * fracDirection.X;
+            var distanceToMinX = (_sharedMin.X - start.X) * fracDirection.X;
+            var distanceToMaxX = (_sharedMax.X - start.X) * fracDirection.X;
 
-            var distanceToMinY = (sharedMin.Y - start.Y) * fracDirection.Y;
-            var distanceToMaxY = (sharedMax.Y - start.Y) * fracDirection.Y;
+            var distanceToMinY = (_sharedMin.Y - start.Y) * fracDirection.Y;
+            var distanceToMaxY = (_sharedMax.Y - start.Y) * fracDirection.Y;
 
-            var distanceToMinZ = (sharedMin.Z - start.Z) * fracDirection.Z;
-            var distanceToMaxZ = (sharedMax.Z - start.Z) * fracDirection.Z;
+            var distanceToMinZ = (_sharedMin.Z - start.Z) * fracDirection.Z;
+            var distanceToMaxZ = (_sharedMax.Z - start.Z) * fracDirection.Z;
 
             var distanceToMin = Math.Max(Math.Max(
                     Math.Min(distanceToMinX, distanceToMaxX),

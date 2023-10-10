@@ -8,30 +8,30 @@ namespace OpenTucan.Graphics
 {
     public abstract class Shader
     {
-        private readonly int programId;
-        private readonly int vertexShaderId, fragmentShaderId;
-        private readonly Dictionary<string, int> uniforms;
+        private readonly int _programId;
+        private readonly int _vertexShaderId, _fragmentShaderId;
+        private readonly Dictionary<string, int> _uniforms;
 
         protected Shader(string vertexShader, string fragmentShader)
         {
-            uniforms = new Dictionary<string, int>();
+            _uniforms = new Dictionary<string, int>();
                 
-            vertexShaderId = LoadShaderFromSource(vertexShader, ShaderType.VertexShader);
-            fragmentShaderId = LoadShaderFromSource(fragmentShader, ShaderType.FragmentShader);
-            programId = GL.CreateProgram();
+            _vertexShaderId = LoadShaderFromSource(vertexShader, ShaderType.VertexShader);
+            _fragmentShaderId = LoadShaderFromSource(fragmentShader, ShaderType.FragmentShader);
+            _programId = GL.CreateProgram();
             
-            GL.AttachShader(programId, vertexShaderId);
-            GL.AttachShader(programId, fragmentShaderId);
+            GL.AttachShader(_programId, _vertexShaderId);
+            GL.AttachShader(_programId, _fragmentShaderId);
             
             BindAttributes();
             
-            GL.LinkProgram(programId);
-            GL.ValidateProgram(programId);
+            GL.LinkProgram(_programId);
+            GL.ValidateProgram(_programId);
         }
 
         public void Start() 
         {
-            GL.UseProgram(programId);
+            GL.UseProgram(_programId);
         }
         
         public void Stop() 
@@ -42,96 +42,96 @@ namespace OpenTucan.Graphics
         public void Clear() 
         {
             GL.UseProgram(0);
-            GL.DetachShader(programId, vertexShaderId);
-            GL.DetachShader(programId, fragmentShaderId);
-            GL.DeleteShader(vertexShaderId);
-            GL.DeleteShader(fragmentShaderId);
-            GL.DeleteProgram(programId);
+            GL.DetachShader(_programId, _vertexShaderId);
+            GL.DetachShader(_programId, _fragmentShaderId);
+            GL.DeleteShader(_vertexShaderId);
+            GL.DeleteShader(_fragmentShaderId);
+            GL.DeleteProgram(_programId);
         }
 
         protected abstract void BindAttributes();
 
         protected void BindAttribute(int attribute, string variableName)
         {
-            GL.BindAttribLocation(programId, attribute, variableName);
+            GL.BindAttribLocation(_programId, attribute, variableName);
         }
 
         public void SetUniform(string uniformName, float value) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform1(uniforms[uniformName], value);
+            GL.Uniform1(_uniforms[uniformName], value);
         }
         
         public void SetUniform(string uniformName, int value) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform1(uniforms[uniformName], value);
+            GL.Uniform1(_uniforms[uniformName], value);
         }
 
         public void SetUniform(string uniformName, Vector2 value) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform2(uniforms[uniformName], value);
+            GL.Uniform2(_uniforms[uniformName], value);
         }
         
         public void SetUniform(string uniformName, float x, float y) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform2(uniforms[uniformName], x, y);
+            GL.Uniform2(_uniforms[uniformName], x, y);
         }
         
         public void SetUniform(string uniformName, Vector3 value) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform3(uniforms[uniformName], value);
+            GL.Uniform3(_uniforms[uniformName], value);
         }
         
         public void SetUniform(string uniformName, float x, float y, float z) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform3(uniforms[uniformName], x, y, z);
+            GL.Uniform3(_uniforms[uniformName], x, y, z);
         }
         
         public void SetUniform(string uniformName, Vector4 value) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform4(uniforms[uniformName], value);
+            GL.Uniform4(_uniforms[uniformName], value);
         }
         
         public void SetUniform(string uniformName, float x, float y, float z, float w) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform4(uniforms[uniformName], x, y, z, w);
+            GL.Uniform4(_uniforms[uniformName], x, y, z, w);
         }
 
         public void SetUniform(string uniformName, Color4 value) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform4(uniforms[uniformName], value);
+            GL.Uniform4(_uniforms[uniformName], value);
         }
         
         public void SetUniform(string uniformName, Matrix4 value)
         {
             CheckUniformLocation(uniformName);
-            GL.UniformMatrix4(uniforms[uniformName], false, ref value);
+            GL.UniformMatrix4(_uniforms[uniformName], false, ref value);
         }
 
         public void SetUniform(string uniformName, bool value) 
         {
             CheckUniformLocation(uniformName);
-            GL.Uniform1(uniforms[uniformName], Convert.ToInt32(value));
+            GL.Uniform1(_uniforms[uniformName], Convert.ToInt32(value));
         }
         
         private int GetUniformLocation(string uniformName)
         {
-            return GL.GetUniformLocation(programId, uniformName);
+            return GL.GetUniformLocation(_programId, uniformName);
         }
 
         private void CheckUniformLocation(string uniformName)
         {
-            if (!uniforms.ContainsKey(uniformName))
+            if (!_uniforms.ContainsKey(uniformName))
             {
-                uniforms.Add(uniformName, GetUniformLocation(uniformName));
+                _uniforms.Add(uniformName, GetUniformLocation(uniformName));
             }
         }
 
