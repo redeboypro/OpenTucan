@@ -30,6 +30,8 @@ namespace OpenTucan.Entities
         
         public void Update(FrameEventArgs eventArgs)
         {
+            var deltaTime = (float) eventArgs.Time;
+            
             for (var index1 = 0; index1 < _rigidbodies.Count; index1++)
             {
                 var rigidbody1 = _rigidbodies[index1];
@@ -39,7 +41,14 @@ namespace OpenTucan.Entities
                     continue;
                 }
                 
+                rigidbody1.Accelerate(deltaTime);
+                rigidbody1.LocalSpaceLocation += new Vector3
+                {
+                    Y = rigidbody1.FallingVelocity * deltaTime
+                };
+                
                 var triggers = new List<Rigidbody>();
+                var responses = new Dictionary<Rigidbody, CollisionInfo>();
                 
                 for (var index2 = 0; index2 < _rigidbodies.Count; index2++)
                 {
@@ -50,10 +59,11 @@ namespace OpenTucan.Entities
                         continue;
                     }
                     
-                    rigidbody1.ResolveCollision(rigidbody2, triggers);
+                    rigidbody1.ResolveCollision(rigidbody2, triggers, responses);
                 }
                 
                 rigidbody1.RefreshTriggers(triggers);
+                rigidbody1.RefreshResponses(responses);
             }
 
             CallFromBehaviourForEach(behaviour =>

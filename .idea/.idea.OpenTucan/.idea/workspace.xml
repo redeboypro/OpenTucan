@@ -25,22 +25,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5a6a08-f3bf-466c-a5c7-d10e503aa099" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/CollisionInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/Normal.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/AABB.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,14 +93,14 @@
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/Collider.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/CollisionInfo.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/Normal.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/CollisionInfo.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/World.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" />
       </list>
@@ -242,7 +230,7 @@
       <workItem from="1697031747598" duration="667000" />
       <workItem from="1697034751349" duration="552000" />
       <workItem from="1697294097399" duration="1732000" />
-      <workItem from="1697341294842" duration="15037000" />
+      <workItem from="1697341294842" duration="25975000" />
     </task>
     <servers />
   </component>

@@ -7,6 +7,8 @@ namespace OpenTucan.Physics
 {
     public class EPA
     {
+        public static float Epsilon { get; set; } = 0.001f;
+        
         public static CollisionInfo GetResponse(ref (Rigidbody rigidbody, ConvexShape shape) a, ref (Rigidbody rigidbody, ConvexShape shape) b, Simplex simplex)
         {
             var polytope = new List<Vector3>(simplex.Begin());
@@ -99,7 +101,7 @@ namespace OpenTucan.Physics
                 }
             }
             
-            return new CollisionInfo(minNormal, minDistance + 0.001f);
+            return new CollisionInfo(minNormal, minDistance + Epsilon);
         }
 
         private static void GetFaceNormals(

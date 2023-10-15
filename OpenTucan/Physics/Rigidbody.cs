@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using OpenTK;
 using OpenTucan.Components;
 using OpenTucan.Entities;
 
@@ -11,20 +12,20 @@ namespace OpenTucan.Physics
     {
         private IReadOnlyList<ConvexShape> _convexShapes;
         private IReadOnlyList<Rigidbody> _triggerContacts;
-        private bool _isKinematic;
-        private bool _isTrigger;
-        private float _gravity;
-        private float _fallingSpeed;
+        private float _flatAngle;
 
         public Rigidbody()
         {
-            _gravity = -80.0f;
+            FlatAngle = 30f;
+            FallingAcceleration = -80.0f;
             _convexShapes = new ConvexShape[0];
+            Responses = new Dictionary<Rigidbody, CollisionInfo>();
+            _triggerContacts = new Rigidbody[0];
         }
-        
+
         public void TossUp(float force)
         {
-            _fallingSpeed = force;
+            FallingVelocity = force;
         }
 
         public void SetConvexShapes(IReadOnlyList<ConvexShape> convexShapes)
@@ -48,34 +49,46 @@ namespace OpenTucan.Physics
             }
         }
 
-        public bool IsKinematic
+        public IDictionary<Rigidbody, CollisionInfo> Responses { get; private set; }
+
+        public float FallingVelocity { get; private set; }
+
+        public float FallingAcceleration { get; set; }
+        
+        public bool IsGrounded { get; private set; }
+
+        public float FlatAngle
         {
             get
             {
-                return _isKinematic;
+                return _flatAngle * 90f;
+            }
+            set
+            {
+                _flatAngle = value / 90f;
             }
         }
 
+        public bool IsKinematic { get; private set; }
+
+        public bool IsTrigger { get; private set; }
+
         public void SetKinematic(bool kinematicState)
         {
-            _isKinematic = kinematicState;
-        }
-        
-        public bool IsTrigger
-        {
-            get
-            {
-                return _isTrigger;
-            }
+            IsKinematic = kinematicState;
         }
 
         public void SetTrigger(bool triggerState)
         {
-            _isTrigger = triggerState;
+            IsTrigger = triggerState;
         }
 
-        public Action<CollisionInfo> CollisionResolution { get; set; }
+        public Action<Rigidbody, CollisionInfo> CollisionEnter { get; set; }
+        
+        public Action<Rigidbody, CollisionInfo> CollisionExit { get; set; }
+        
         public Action<Rigidbody> TriggerEnter { get; set; }
+        
         public Action<Rigidbody> TriggerExit { get; set; }
 
         public Rigidbody Clone()
@@ -98,7 +111,12 @@ namespace OpenTucan.Physics
             return instance;
         }
 
-        public void ResolveCollision(Rigidbody other, List<Rigidbody> triggers)
+        public void Accelerate(float deltaTime)
+        {
+            FallingVelocity += FallingAcceleration * deltaTime;
+        }
+
+        public void ResolveCollision(Rigidbody other, List<Rigidbody> triggers, IDictionary<Rigidbody, CollisionInfo> responses)
         {
             foreach (var shape1 in _convexShapes)
             {
@@ -119,19 +137,35 @@ namespace OpenTucan.Physics
                     
                     if (GJK.Intersects(ref a, ref b, out var simplex))
                     {
-                        if (other._isTrigger)
+                        if (other.IsTrigger)
                         {
                             triggers.Add(other);
                         }
                         else
                         {
-                            var collisionResponse = EPA.GetResponse(ref a, ref b, simplex);
-                            LocalSpaceLocation += collisionResponse.Normal * collisionResponse.PenetrationDepth;
-                            CollisionResolution?.Invoke(collisionResponse);
+                            var collisionInfo = EPA.GetResponse(ref a, ref b, simplex);
+                            LocalSpaceLocation += collisionInfo.Normal * collisionInfo.PenetrationDepth;
+
+                            if (PlaneIsFlat(collisionInfo.Normal))
+                            {
+                                FallingVelocity = 0f;
+                                IsGrounded = true;
+                            }
+                            
+                            if (!Responses.ContainsKey(other))
+                            {
+                                CollisionEnter?.Invoke(other, collisionInfo);
+                                responses.Add(other, collisionInfo);
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private bool PlaneIsFlat(Vector3 normal)
+        {
+            return normal.Y >= _flatAngle;
         }
         
         public void RefreshTriggers(IReadOnlyList<Rigidbody> others)
@@ -153,6 +187,31 @@ namespace OpenTucan.Physics
             }
 
             _triggerContacts = others;
+        }
+        
+        public void RefreshResponses(IDictionary<Rigidbody, CollisionInfo> responses)
+        {
+            foreach (var response in Responses)
+            {
+                var rigidbody = response.Key;
+                if (!responses.ContainsKey(rigidbody))
+                {
+                    CollisionExit?.Invoke(rigidbody, response.Value);
+                }
+            }
+            
+            var isGrounded = false;
+            foreach (var response in responses)
+            {
+                var collisionInfo = response.Value;
+                if (PlaneIsFlat(collisionInfo.Normal))
+                {
+                    isGrounded = true;
+                }
+            }
+
+            IsGrounded = isGrounded;
+            Responses = responses;
         }
 
         protected override void OnTransformMatrices()
