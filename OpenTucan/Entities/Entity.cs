@@ -33,6 +33,9 @@ namespace OpenTucan.Entities
 
         private Matrix4 _modelMatrix;
 
+        private bool _isStatic;
+        private bool _isActive;
+
         protected Entity()
         { 
             _globalLocation = _localLocation = Vector3.Zero; 
@@ -172,6 +175,24 @@ namespace OpenTucan.Entities
             }
         }
 
+        public bool IsActive
+        {
+            get
+            {
+                return _isActive;
+            }
+        }
+        
+        public bool IsStatic
+        {
+            get
+            {
+                return _isStatic;
+            }
+        }
+        
+        public Action<bool> ChangeActiveState { get; set; }
+
         public IReadOnlyList<Behaviour> GetBehaviours()
         {
             return _behaviours;
@@ -192,12 +213,12 @@ namespace OpenTucan.Entities
             return _behaviours.FirstOrDefault(behaviour => behaviour.GetType().IsAssignableFrom(behaviourType));
         }
 
-        public void AddComponent<T>() where T : Behaviour
+        public void AddBehaviour<T>() where T : Behaviour
         {
-            AddComponent(typeof(T));
+            AddBehaviour(typeof(T));
         }
         
-        public void AddComponent(Type behaviourType)
+        public void AddBehaviour(Type behaviourType)
         {
             if (!behaviourType.BaseType.IsAssignableFrom(typeof(Behaviour)))
             {
@@ -209,6 +230,24 @@ namespace OpenTucan.Entities
             holder.SetValue(behaviour, this);
             
             _behaviours.Add(behaviour);
+        }
+        
+        public void AddBehaviour(Behaviour behaviour)
+        {
+            var holder = typeof(Behaviour).GetField(nameof(Entity), BindingFlags.Instance | BindingFlags.Public);
+            holder.SetValue(behaviour, this);
+            _behaviours.Add(behaviour);
+        }
+
+        public void SetStatic(bool staticState)
+        {
+            _isStatic = staticState;
+        }
+        
+        public void SetActive(bool activeState)
+        {
+            _isActive = activeState;
+            ChangeActiveState?.Invoke(activeState);
         }
 
         /// <summary>

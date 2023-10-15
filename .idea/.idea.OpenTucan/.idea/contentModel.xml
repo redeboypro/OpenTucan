@@ -36,8 +36,8 @@
         <e p="Entities" t="Include">
           <e p="Camera.cs" t="Include" />
           <e p="Entity.cs" t="Include" />
-          <e p="Rigidbody.cs" t="Include" />
           <e p="TransformGizmo.cs" t="Include" />
+          <e p="World.cs" t="Include" />
         </e>
         <e p="Graphics" t="Include">
           <e p="Mesh.cs" t="Include" />
@@ -68,7 +68,13 @@
         <e p="OpenTucan.csproj" t="IncludeRecursive" />
         <e p="packages.config" t="Include" />
         <e p="Physics" t="Include">
-          <e p="AABB.cs" t="Include" />
+          <e p="CollisionInfo.cs" t="Include" />
+          <e p="ConvexShape.cs" t="Include" />
+          <e p="EPA.cs" t="Include" />
+          <e p="GJK.cs" t="Include" />
+          <e p="Normal.cs" t="Include" />
+          <e p="Rigidbody.cs" t="Include" />
+          <e p="Simplex.cs" t="Include" />
         </e>
       </e>
       <e p="OpenTucan.sln" t="IncludeFlat" />

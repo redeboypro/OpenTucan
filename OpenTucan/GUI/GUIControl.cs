@@ -12,8 +12,7 @@ namespace OpenTucan.GUI
     {
         private readonly Vector3[] _vertices;
         private readonly Vector3[] _sharedVertices;
-
-        private bool _isActive;
+        
         private bool _isPressed;
 
         private Color4 _color;
@@ -21,7 +20,6 @@ namespace OpenTucan.GUI
         public GUIControl()
         {
             Color = Color4.White;
-            _isActive = true;
             _vertices = new[]
             {
                 new Vector3(-1, 1, 0), 
@@ -33,14 +31,6 @@ namespace OpenTucan.GUI
             OnTransformMatrices();
         }
 
-        public bool IsActive
-        {
-            get
-            {
-                return _isActive;
-            }
-        }
-        
         public bool IsMasked { get; set; }
         
         public Color4 Color 
@@ -71,8 +61,6 @@ namespace OpenTucan.GUI
         public Action<KeyboardKeyEventArgs> KeyUp { get; set; }
 
         public Action<FrameEventArgs> Render { get; set; }
-        
-        public Action<bool> ChangeActiveState { get; set; }
 
         public bool ContainsPoint(Vector2 point)
         {
@@ -81,12 +69,6 @@ namespace OpenTucan.GUI
             return firstTriangleContainsPoint || secondTriangleContainsPoint;
         }
 
-        public void SetActive(bool state)
-        {
-            _isActive = state;
-            ChangeActiveState?.Invoke(state);
-        }
-        
         public void OnKeyDown(KeyboardKeyEventArgs eventArgs)
         {
             KeyDown?.Invoke(eventArgs);
@@ -119,7 +101,7 @@ namespace OpenTucan.GUI
 
         public void OnMouseDown(Vector2 mousePos)
         {
-            if (!ContainsPoint(mousePos) || !_isActive) 
+            if (!ContainsPoint(mousePos) || !IsActive) 
             {
                 return;
             }
@@ -135,7 +117,7 @@ namespace OpenTucan.GUI
         
         public void OnMouseUp() 
         {
-            if (!_isActive || !_isPressed) 
+            if (!IsActive || !_isPressed) 
             {
                 return;
             }
@@ -151,7 +133,7 @@ namespace OpenTucan.GUI
         
         public void OnMouseMove(Vector2 mousePos, Vector2 mouseDelta) 
         {
-            if (!_isActive) 
+            if (!IsActive) 
             {
                 return;
             }
@@ -169,7 +151,7 @@ namespace OpenTucan.GUI
         
         public void OnRenderFrame(FrameEventArgs eventArgs, INativeWindow window) 
         {
-            if (!_isActive) 
+            if (!IsActive) 
             {
                 return;
             }

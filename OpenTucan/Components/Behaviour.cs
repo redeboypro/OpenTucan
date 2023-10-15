@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using OpenTK;
 using OpenTucan.Entities;
+using OpenTucan.Physics;
 
 namespace OpenTucan.Components
 {
@@ -35,6 +36,14 @@ namespace OpenTucan.Components
                 }
                 
                 OnDisable();
+            }
+        }
+
+        public Rigidbody Rigidbody
+        {
+            get
+            {
+                return (Rigidbody) Entity;
             }
         }
 

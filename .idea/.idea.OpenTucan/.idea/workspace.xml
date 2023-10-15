@@ -25,88 +25,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5a6a08-f3bf-466c-a5c7-d10e503aa099" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Editor/AssetManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/Editor.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/EditorController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/EditorGUI.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/EditorWindow.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/Properties/AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/bin/Debug/Editor.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/bin/Debug/Editor.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/obj/Debug/.NETFramework,Version=v4.8.1.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.AssemblyReference.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.SuggestedBindingRedirects.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Entities/TransformGizmo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/GUI/Advanced/GUIXml.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/GUI/Checkbox.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/GUI/InputField.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/GUI/ListView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/CollisionInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/Normal.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/FPSLevelEditor.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/Properties/AssemblyInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/AssimpNet.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/AssimpNet.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/FPSLevelEditor.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/FPSLevelEditor.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/OpenTK.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/OpenTK.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/OpenTK.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/OpenTucan.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/OpenTucan.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/ak47.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/ak47_view.obj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/bin/Debug/font.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/.NETFramework,Version=v4.8.1.AssemblyAttributes.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/FPSLevelEditor.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/FPSLevelEditor.csproj.CopyComplete" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/FPSLevelEditor.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/FPSLevelEditor.csproj.FileListAbsolute.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/FPSLevelEditor.csproj.SuggestedBindingRedirects.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/FPSLevelEditor.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FPSLevelEditor/obj/Debug/FPSLevelEditor.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan.sln" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Camera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/Camera.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/GUI/Font.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/GUI/Font.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/GUI/GUIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/GUI/GUIController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/GUI/Image.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/GUI/Image.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/GUI/Text.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/GUI/Text.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleShader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleShader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Shader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Shader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Input/Input.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Input/Input.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/AABB.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/AABB.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/Blocks/If.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/Blocks/While.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/Engine.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/Evaluator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/IInvokable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/Invokable.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/Lexer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/Shell.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/TucanScript.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TucanScript/obj/Debug/TucanScript.csproj.AssemblyReference.cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/AABB.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,26 +58,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://D:/IDE/projects/OpenTucan/OpenTucan/GUI/Image.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/OpenTucan/OpenTK.dll.config" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1175E77E-945B-418E-BCE4-DEA98D1883FD/c8/3605c149/FolderBrowserDialog.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OpenTucan/OpenTK.dll.config" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/OpenTucan/Bridges/EBO.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Bridges/VAO.cs" />
-        <option value="$PROJECT_DIR$/FPSLevelEditor/Program.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/Physics.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/Intersection.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/Plane.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/Font.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Shader.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Common/Ortho.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Input/Input.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Entities/Camera.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Gizmo.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/TransformGizmo.cs" />
         <option value="$PROJECT_DIR$/Editor/EdiorController.cs" />
@@ -152,7 +72,6 @@
         <option value="$PROJECT_DIR$/TucanAnimator/Program.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/AABB.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Project/Asset.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleShader.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Project/Scene.cs" />
         <option value="$PROJECT_DIR$/Editor/AssetManager.cs" />
         <option value="$PROJECT_DIR$/EntitySystem/Class1.cs" />
@@ -166,7 +85,6 @@
         <option value="$PROJECT_DIR$/OpenTucan/Physics/SAT.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/TextBlock.cs" />
         <option value="$PROJECT_DIR$/Editor/EditorGUI.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" />
         <option value="$PROJECT_DIR$/Editor/EditorWindow.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/Image.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/Text.cs" />
@@ -177,11 +95,26 @@
         <option value="$PROJECT_DIR$/OpenTucan/Components/BehaviourManager.cs" />
         <option value="$PROJECT_DIR$/EntitySystem/GameObject.cs" />
         <option value="$PROJECT_DIR$/Editor/Program.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/Advanced/GUIXml.cs" />
         <option value="$PROJECT_DIR$/Editor/bin/Debug/editor.tui" />
+        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleShader.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleInstancingShader.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/ICollider.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/MeshCollider.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/Collider.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/CollisionInfo.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/Normal.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Entities/World.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" />
       </list>
     </option>
   </component>
@@ -305,6 +238,11 @@
       <workItem from="1696864835460" duration="598000" />
       <workItem from="1696951881532" duration="19000" />
       <workItem from="1696952121745" duration="52000" />
+      <workItem from="1696999562140" duration="2981000" />
+      <workItem from="1697031747598" duration="667000" />
+      <workItem from="1697034751349" duration="552000" />
+      <workItem from="1697294097399" duration="1732000" />
+      <workItem from="1697341294842" duration="15037000" />
     </task>
     <servers />
   </component>

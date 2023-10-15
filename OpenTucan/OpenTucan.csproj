@@ -42,8 +42,8 @@
       <Compile Include="Components\Behaviour.cs" />
       <Compile Include="Entities\Camera.cs" />
       <Compile Include="Entities\Entity.cs" />
-      <Compile Include="Entities\Rigidbody.cs" />
       <Compile Include="Entities\TransformGizmo.cs" />
+      <Compile Include="Entities\World.cs" />
       <Compile Include="Graphics\Mesh.cs" />
       <Compile Include="Graphics\Samples\SampleShader.cs" />
       <Compile Include="Graphics\Shader.cs" />
@@ -58,7 +58,13 @@
       <Compile Include="GUI\ListView.cs" />
       <Compile Include="GUI\Text.cs" />
       <Compile Include="Input\Input.cs" />
-      <Compile Include="Physics\AABB.cs" />
+      <Compile Include="Physics\CollisionInfo.cs" />
+      <Compile Include="Physics\ConvexShape.cs" />
+      <Compile Include="Physics\EPA.cs" />
+      <Compile Include="Physics\GJK.cs" />
+      <Compile Include="Physics\Normal.cs" />
+      <Compile Include="Physics\Rigidbody.cs" />
+      <Compile Include="Physics\Simplex.cs" />
     </ItemGroup>
     <ItemGroup>
       <Reference Include="AssimpNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=0d51b391f59f42a6">
