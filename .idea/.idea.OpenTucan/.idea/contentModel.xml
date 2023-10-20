@@ -8,6 +8,7 @@
         <e p="AssetManager.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Editor.csproj" t="IncludeRecursive" />
+        <e p="EditorApplication.cs" t="Include" />
         <e p="EditorController.cs" t="Include" />
         <e p="EditorGUI.cs" t="Include" />
         <e p="EditorWindow.cs" t="Include" />
@@ -29,6 +30,7 @@
           <e p="ConversionHelper.cs" t="Include" />
           <e p="MathTools.cs" t="Include" />
           <e p="Ortho.cs" t="Include" />
+          <e p="ShaderConsts.cs" t="Include" />
         </e>
         <e p="Components" t="Include">
           <e p="Behaviour.cs" t="Include" />
@@ -36,14 +38,13 @@
         <e p="Entities" t="Include">
           <e p="Camera.cs" t="Include" />
           <e p="Entity.cs" t="Include" />
+          <e p="GameObject.cs" t="Include" />
           <e p="TransformGizmo.cs" t="Include" />
           <e p="World.cs" t="Include" />
         </e>
         <e p="Graphics" t="Include">
+          <e p="ExternalShader.cs" t="Include" />
           <e p="Mesh.cs" t="Include" />
-          <e p="Samples" t="Include">
-            <e p="SampleShader.cs" t="Include" />
-          </e>
           <e p="Shader.cs" t="Include" />
           <e p="Texture.cs" t="Include" />
         </e>
@@ -76,6 +77,7 @@
           <e p="Rigidbody.cs" t="Include" />
           <e p="Simplex.cs" t="Include" />
         </e>
+        <e p="TucanApplication.cs" t="Include" />
       </e>
       <e p="OpenTucan.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />

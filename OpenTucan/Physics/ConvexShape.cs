@@ -15,13 +15,18 @@ namespace OpenTucan.Physics
             _vertices = vertices;
         }
         
+        public ConvexShape(params Vector3[] vertices)
+        {
+            _vertices = vertices;
+        }
+        
         public ConvexShape(Mesh mesh)
         {
             var vertices = mesh.Vertices;
             var indices = mesh.Indices;
             _vertices = indices.Select(index => vertices[index]).ToList();
         }
-        
+
         public ConvexShape(Vector3 min, Vector3 max)
         {
             _vertices = new []
@@ -54,6 +59,35 @@ namespace OpenTucan.Physics
             }
 
             return entity.WorldSpaceRotation * (maxPoint * entity.WorldSpaceScale) + entity.WorldSpaceLocation;
+        }
+
+        public static IReadOnlyList<ConvexShape> GetConcaveCollection(Mesh mesh)
+        {
+            var faces = new List<ConvexShape>();
+            
+            var face = new int[3];
+            var vertexId = 0;
+            foreach (var index in mesh.Indices)
+            {
+                face[vertexId] = index;
+
+                vertexId++;
+                
+                if (vertexId <= 2)
+                {
+                    continue;
+                }
+
+                var a = mesh.Vertices[face[0]];
+                var b = mesh.Vertices[face[1]];
+                var c = mesh.Vertices[face[2]];
+                    
+                faces.Add(new ConvexShape(a, b, c));
+                        
+                vertexId = 0;
+            }
+
+            return faces;
         }
     }
 }

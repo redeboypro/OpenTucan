@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using OpenTK;
-using OpenTucan.Components;
 using OpenTucan.Entities;
 
 namespace OpenTucan.Physics
@@ -22,17 +20,7 @@ namespace OpenTucan.Physics
             Responses = new Dictionary<Rigidbody, CollisionInfo>();
             _triggerContacts = new Rigidbody[0];
         }
-
-        public void TossUp(float force)
-        {
-            FallingVelocity = force;
-        }
-
-        public void SetConvexShapes(IReadOnlyList<ConvexShape> convexShapes)
-        {
-            _convexShapes = convexShapes;
-        }
-
+        
         public ConvexShape this[int index]
         {
             get
@@ -48,15 +36,7 @@ namespace OpenTucan.Physics
                 return _convexShapes.Count;
             }
         }
-
-        public IDictionary<Rigidbody, CollisionInfo> Responses { get; private set; }
-
-        public float FallingVelocity { get; private set; }
-
-        public float FallingAcceleration { get; set; }
         
-        public bool IsGrounded { get; private set; }
-
         public float FlatAngle
         {
             get
@@ -72,6 +52,37 @@ namespace OpenTucan.Physics
         public bool IsKinematic { get; private set; }
 
         public bool IsTrigger { get; private set; }
+        
+        public IDictionary<Rigidbody, CollisionInfo> Responses { get; private set; }
+
+        public float FallingVelocity { get; private set; }
+
+        public float FallingAcceleration { get; set; }
+        
+        public bool IsGrounded { get; private set; }
+        
+        public Action<Rigidbody, CollisionInfo> CollisionEnter { get; set; }
+        
+        public Action<Rigidbody, CollisionInfo> CollisionExit { get; set; }
+        
+        public Action<Rigidbody> TriggerEnter { get; set; }
+        
+        public Action<Rigidbody> TriggerExit { get; set; }
+
+        public void TossUp(float force)
+        {
+            FallingVelocity = force;
+        }
+
+        public void SetConvexShapes(IReadOnlyList<ConvexShape> convexShapes)
+        {
+            _convexShapes = convexShapes;
+        }
+        
+        public void SetConvexShapes(params ConvexShape[] convexShapes)
+        {
+            _convexShapes = convexShapes;
+        }
 
         public void SetKinematic(bool kinematicState)
         {
@@ -81,34 +92,6 @@ namespace OpenTucan.Physics
         public void SetTrigger(bool triggerState)
         {
             IsTrigger = triggerState;
-        }
-
-        public Action<Rigidbody, CollisionInfo> CollisionEnter { get; set; }
-        
-        public Action<Rigidbody, CollisionInfo> CollisionExit { get; set; }
-        
-        public Action<Rigidbody> TriggerEnter { get; set; }
-        
-        public Action<Rigidbody> TriggerExit { get; set; }
-
-        public Rigidbody Clone()
-        {
-            var instance = new Rigidbody();
-            var behaviours = GetBehaviours();
-
-            foreach (var behaviour in behaviours)
-            {
-                var type = behaviour.GetType();
-                var behaviourInstance = (Behaviour) Activator.CreateInstance(type);
-                var fields = type.GetFields(BindingFlags.Instance);
-                foreach (var field in fields)
-                {
-                    field.SetValue(behaviourInstance, field.GetValue(behaviour));
-                }
-                instance.AddBehaviour(behaviourInstance);
-            }
-
-            return instance;
         }
 
         public void Accelerate(float deltaTime)

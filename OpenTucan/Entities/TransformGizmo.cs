@@ -9,7 +9,7 @@ using OpenTucan.Physics;
 
 namespace OpenTucan.Entities
 {
-    public delegate void GizmoInteractionEvent(int axis, float interpolation);
+    public delegate void GizmoInteractionEvent(int axis, Vector3 delta);
     public class TransformGizmo : Entity
     {
         public const int XAxis = 0;
@@ -66,6 +66,21 @@ namespace OpenTucan.Entities
                 ZAxisColor,
                 ZAxisColor
             });
+
+            nativeWindow.MouseDown += (sender, args) =>
+            {
+                OnMouseDown(args);
+            };
+            
+            nativeWindow.MouseUp += (sender, args) =>
+            {
+                OnMouseUp(args);
+            };
+            
+            nativeWindow.MouseMove += (sender, args) =>
+            {
+                OnMouseDrag(args);
+            };
         }
 
         public Color4 XAxisColor { get; set; }
@@ -78,7 +93,7 @@ namespace OpenTucan.Entities
 
         public void OnRenderFrame()
         {
-            GL.LineWidth(6);
+            GL.LineWidth(12);
             _shader.Start();
             _shader.SetProjectionMatrix(_camera.ProjectionMatrix);
             _shader.SetViewMatrix(_camera.ViewMatrix);
@@ -106,15 +121,15 @@ namespace OpenTucan.Entities
 
             if (pixel == XAxisColor)
             {
-                UpdateAxisData();
                 _axis = XAxis;
+                UpdateAxisData();
                 _isAxisAssigned = true;
             }
                 
             if (pixel == YAxisColor)
             {
-                UpdateAxisData();
                 _axis = YAxis;
+                UpdateAxisData();
                 _isAxisAssigned = true;
             }
 
@@ -123,8 +138,8 @@ namespace OpenTucan.Entities
                 return;
             }
 
-            UpdateAxisData();
             _axis = ZAxis;
+            UpdateAxisData();
             _isAxisAssigned = true;
         }
 
@@ -139,14 +154,14 @@ namespace OpenTucan.Entities
             Raycast(_cursorX, _cursorY, _currentPlaneNormal, out _lastPoint);
         }
 
-        public void OnMouseDown(MouseButtonEventArgs mouseButtonEventArgs)
+        private void OnMouseDown(MouseButtonEventArgs mouseButtonEventArgs)
         {
             _isMousePressed = mouseButtonEventArgs.Button == MouseButton.Left;
             _cursorX = mouseButtonEventArgs.X;
             _cursorY = mouseButtonEventArgs.Y;
         }
 
-        public void OnMouseUp(MouseButtonEventArgs mouseButtonEventArgs)
+        private void OnMouseUp(MouseButtonEventArgs mouseButtonEventArgs)
         {
             if (mouseButtonEventArgs.Button == MouseButton.Left)
             {
@@ -154,8 +169,8 @@ namespace OpenTucan.Entities
             }
             _isAxisAssigned = false;
         }
-        
-        public void OnMouseDrag(MouseMoveEventArgs mouseMoveEventArgs)
+
+        private void OnMouseDrag(MouseEventArgs mouseMoveEventArgs)
         {
             _cursorX = mouseMoveEventArgs.X;
             _cursorY = mouseMoveEventArgs.Y;
@@ -170,7 +185,7 @@ namespace OpenTucan.Entities
                 return;
             }
             
-            Interaction.Invoke(_axis, (_hitPoint - _lastPoint)[XAxis]);
+            Interaction?.Invoke(_axis, _hitPoint - _lastPoint);
             UpdateLastPoint();
         }
 
@@ -179,56 +194,38 @@ namespace OpenTucan.Entities
             switch (axis)
             {
                 case XAxis:
-                    var xyIntersect = Raycast(mousePositionX, mousePositionY, Vector3.UnitX, out var xyHitPoint);
-                    if (!xyIntersect)
-                    {
-                        Raycast(mousePositionX, mousePositionY, -Vector3.UnitX, out xyHitPoint);
-                    }
-                    Raycast(mousePositionX, mousePositionY, Vector3.UnitY, out var xzHitPoint);
-                    
-                    var xyDistance = Vector3.Distance(xyHitPoint, _camera.WorldSpaceLocation);
-                    var xzDistance = Vector3.Distance(xzHitPoint, _camera.WorldSpaceLocation);
-
-                    if (xyDistance > xzDistance)
-                    {
-                        hitPoint = xyHitPoint;
-                        return xyIntersect ? Vector3.UnitX : -Vector3.UnitX;
-                    }
-                    
-                    hitPoint = xzHitPoint;
-                    return Vector3.UnitY;
+                    return GetAxis(Front(Space.Global), Up(Space.Global), mousePositionX, mousePositionY, out hitPoint);
                 case YAxis:
-                    var normal = _camera.WorldSpaceLocation - WorldSpaceLocation;
-                    normal.Y = 0;
-                    normal.Normalize();
-                    
-                    Raycast(mousePositionX, mousePositionY, normal, out var adaptiveHitPoint);
-
-                    hitPoint = adaptiveHitPoint;
-                    return normal;
+                    return GetAxis(Right(Space.Global), Front(Space.Global), mousePositionX, mousePositionY, out hitPoint);
                 case ZAxis:
-                    var zyIntersect = Raycast(mousePositionX, mousePositionY, Vector3.UnitZ, out var zyHitPoint);
-                    if (!zyIntersect)
-                    {
-                        Raycast(mousePositionX, mousePositionY, -Vector3.UnitZ, out zyHitPoint);
-                    }
-                    Raycast(mousePositionX, mousePositionY, Vector3.UnitY, out var zxHitPoint);
-                    
-                    var zyDistance = Vector3.Distance(zyHitPoint, _camera.WorldSpaceLocation);
-                    var zxDistance = Vector3.Distance(zxHitPoint, _camera.WorldSpaceLocation);
-
-                    if (zyDistance > zxDistance)
-                    {
-                        hitPoint = zyHitPoint;
-                        return zyIntersect ? Vector3.UnitZ : -Vector3.UnitZ;
-                    }
-                    
-                    hitPoint = zxHitPoint;
-                    return Vector3.UnitY;
+                    return GetAxis(Right(Space.Global), Up(Space.Global), mousePositionX, mousePositionY, out hitPoint);
             }
             
             hitPoint = Vector3.Zero;
             return Vector3.Zero;
+        }
+
+        private Vector3 GetAxis(Vector3 plane1Normal, Vector3 plane2Normal, int mousePositionX, int mousePositionY, out Vector3 hitPoint)
+        {
+            var firstIntersect = Raycast(mousePositionX, mousePositionY, plane1Normal, out var firstHitPoint);
+            if (!firstIntersect)
+            {
+                Raycast(mousePositionX, mousePositionY, -plane1Normal, out firstHitPoint);
+            }
+            
+            var secondIntersect = Raycast(mousePositionX, mousePositionY, plane2Normal, out var secondHitPoint);
+                    
+            var firstDistance = Vector3.Distance(firstHitPoint, _camera.WorldSpaceLocation);
+            var secondDistance = Vector3.Distance(secondHitPoint, _camera.WorldSpaceLocation);
+
+            if (firstDistance > secondDistance)
+            {
+                hitPoint = firstHitPoint;
+                return firstIntersect ? plane1Normal : -plane1Normal;
+            }
+                    
+            hitPoint = secondHitPoint;
+            return secondIntersect ? plane2Normal: -plane2Normal;
         }
         
         private bool Raycast(int mousePositionX, int mousePositionY, Vector3 planeNormal, out Vector3 hitPoint)

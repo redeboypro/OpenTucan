@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
@@ -19,7 +20,12 @@ namespace OpenTucan.Graphics
             _vertexShaderId = LoadShaderFromSource(vertexShader, ShaderType.VertexShader);
             _fragmentShaderId = LoadShaderFromSource(fragmentShader, ShaderType.FragmentShader);
             _programId = GL.CreateProgram();
-            
+
+            AttachAndValidate();
+        }
+
+        private void AttachAndValidate()
+        {
             GL.AttachShader(_programId, _vertexShaderId);
             GL.AttachShader(_programId, _fragmentShaderId);
             

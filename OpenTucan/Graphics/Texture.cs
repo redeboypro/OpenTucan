@@ -38,6 +38,8 @@ namespace OpenTucan.Graphics
             Id = id;
         }
 
+        public Texture(int width, int height) : this(new Bitmap(width, height)) { }
+
         public int Id { get; }
 
         public void Bind()

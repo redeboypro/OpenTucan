@@ -4,18 +4,88 @@ using OpenTK.Input;
 
 namespace OpenTucan.Input
 {
-    public class Input
+    public static class InputManager
     {
-        private KeyboardState _keyboardState;
-        private MouseState _mouseState;
+        private static KeyboardState _keyboardState;
+        private static MouseState _mouseState;
 
-        private KeyboardState _previousKeyboardState;
-        private MouseState _previousMouseState;
+        private static KeyboardState _previousKeyboardState;
+        private static MouseState _previousMouseState;
 
-        private int _mouseDeltaX;
-        private int _mouseDeltaY;
+        private static int _mouseDeltaX;
+        private static int _mouseDeltaY;
 
-        public Input()
+        public static bool IsKeyDown(Key key)
+        {
+            return _keyboardState.IsKeyDown(key);
+        }
+
+        public static bool IsKeyUp(Key key)
+        {
+            return _keyboardState.IsKeyUp(key);
+        }
+
+        public static bool IsKeyPressed(Key key)
+        {
+            return _keyboardState != _previousKeyboardState && _keyboardState[key];
+        }
+
+        public static bool IsKeyReleased(Key key)
+        {
+            return _keyboardState != _previousKeyboardState && !_keyboardState[key];
+        }
+
+        public static bool IsMouseButtonDown(MouseButton button)
+        {
+            return _mouseState.IsButtonDown(button);
+        }
+
+        public static bool IsMouseButtonUp(MouseButton button)
+        {
+            return _mouseState.IsButtonUp(button);
+        }
+
+        public static bool IsMouseButtonPressed(MouseButton button)
+        {
+            return _mouseState != _previousMouseState && _mouseState[button];
+        }
+
+        public static bool IsMouseButtonReleased(MouseButton button)
+        {
+            return _mouseState != _previousMouseState && !_mouseState[button];
+        }
+
+        public static bool IsAnyKeyDown()
+        {
+            return _keyboardState.IsAnyKeyDown;
+        }
+
+        public static bool IsAnyMouseButtonDown()
+        {
+            return _mouseState.IsAnyButtonDown;
+        }
+
+        public static int GetMouseDX()
+        {
+            return _mouseDeltaX;
+        }
+
+        public static int GetMouseDY()
+        {
+            return _mouseDeltaY;
+        }
+        
+        public static int GetMouseX()
+        {
+            return _mouseState.X;
+        }
+
+        public static int GetMouseY()
+        {
+            return _mouseState.Y;
+        }
+        
+        public static void OnLoad()
         {
             _keyboardState = Keyboard.GetState();
             _mouseState = Mouse.GetState();
@@ -23,77 +93,7 @@ namespace OpenTucan.Input
             _previousMouseState = _mouseState;
         }
 
-        public bool IsKeyDown(Key key)
-        {
-            return _keyboardState.IsKeyDown(key);
-        }
-
-        public bool IsKeyUp(Key key)
-        {
-            return _keyboardState.IsKeyUp(key);
-        }
-
-        public bool IsKeyPressed(Key key)
-        {
-            return _keyboardState != _previousKeyboardState && _keyboardState[key];
-        }
-
-        public bool IsKeyReleased(Key key)
-        {
-            return _keyboardState != _previousKeyboardState && !_keyboardState[key];
-        }
-
-        public bool IsMouseButtonDown(MouseButton button)
-        {
-            return _mouseState.IsButtonDown(button);
-        }
-
-        public bool IsMouseButtonUp(MouseButton button)
-        {
-            return _mouseState.IsButtonUp(button);
-        }
-
-        public bool IsMouseButtonPressed(MouseButton button)
-        {
-            return _mouseState != _previousMouseState && _mouseState[button];
-        }
-
-        public bool IsMouseButtonReleased(MouseButton button)
-        {
-            return _mouseState != _previousMouseState && !_mouseState[button];
-        }
-
-        public bool IsAnyKeyDown()
-        {
-            return _keyboardState.IsAnyKeyDown;
-        }
-
-        public bool IsAnyMouseButtonDown()
-        {
-            return _mouseState.IsAnyButtonDown;
-        }
-
-        public int GetMouseDX()
-        {
-            return _mouseDeltaX;
-        }
-
-        public int GetMouseDY()
-        {
-            return _mouseDeltaY;
-        }
-        
-        public int GetMouseX()
-        {
-            return _mouseState.X;
-        }
-
-        public int GetMouseY()
-        {
-            return _mouseState.Y;
-        }
-
-        public void OnUpdateFrame()
+        public static void OnUpdateFrame()
         {
             _keyboardState = Keyboard.GetState();
             _mouseState = Mouse.GetState();

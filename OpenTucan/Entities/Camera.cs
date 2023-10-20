@@ -15,8 +15,6 @@ namespace OpenTucan.Entities
         private Matrix4 _projection;
         private Matrix4 _view;
 
-        public static Camera Main { get; private set; }
-
         public float FOV
         {
             get
@@ -76,7 +74,7 @@ namespace OpenTucan.Entities
         {
             if (Main is null)
             {
-                Main = this;
+                SetMain();
             }
             
             _rectWidth = projRectWidth;
@@ -123,6 +121,11 @@ namespace OpenTucan.Entities
             };
         }
 
+        public void SetMain()
+        {
+            Main = this;
+        }
+
         private void CalculateViewMatrix()
         {
             _view = Matrix4.LookAt(WorldSpaceLocation, WorldSpaceLocation + Front(Space.Global), Up(Space.Global));
@@ -138,5 +141,7 @@ namespace OpenTucan.Entities
         {
             CalculateViewMatrix();
         }
+        
+        public static Camera Main { get; private set; }
     }
 }

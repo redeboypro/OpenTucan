@@ -21,7 +21,6 @@ namespace OpenTucan.GUI.Advanced
         private const string GUIElementColor = "GUIColor";
         
         private const string GUITextureId = "GUITextureId";
-        private const string GUIAutoScale = "GUIAutoScale";
         private const string GUIIdentifier = "GUIIdentifier";
         private const string GUIDefaultIdentifier = "Element";
         

@@ -10,7 +10,7 @@ namespace Editor
     public class EditorWindow : GameWindow
     {
         private EditorController _controller;
-        private Color4 _backgroundColor;
+        private readonly Color4 _backgroundColor;
         
         public EditorWindow(int width, int height)
         {

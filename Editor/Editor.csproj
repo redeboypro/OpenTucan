@@ -44,6 +44,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="AssetManager.cs" />
+        <Compile Include="EditorApplication.cs" />
         <Compile Include="EditorController.cs" />
         <Compile Include="EditorGUI.cs" />
         <Compile Include="EditorWindow.cs" />

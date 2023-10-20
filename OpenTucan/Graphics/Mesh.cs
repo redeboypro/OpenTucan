@@ -6,7 +6,8 @@ using OpenTucan.Bridges;
 using OpenTucan.Common;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-using PrimitiveType = OpenTK.Graphics.OpenGL.PrimitiveType;
+ using OpenTucan.Physics;
+ using PrimitiveType = OpenTK.Graphics.OpenGL.PrimitiveType;
 
 namespace OpenTucan.Graphics
 {
@@ -32,6 +33,10 @@ namespace OpenTucan.Graphics
 
         private Vector3 _boundsMinimum;
         private Vector3 _boundsMaximum;
+
+        private IReadOnlyList<ConvexShape> _concaveCollisionCollection;
+        private ConvexShape _convexCollisionShape;
+        private ConvexShape _boundsCollisionShape;
 
         public Mesh(
             int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
@@ -66,7 +71,6 @@ namespace OpenTucan.Graphics
                 }
                 
                 VertexArrayObject.UpdateVertexBufferObject(_vertexArrayAttribLocation, _vertices);
-                
                 RecalculateBounds();
             }
         }
@@ -131,6 +135,30 @@ namespace OpenTucan.Graphics
                 }
                 
                 VertexArrayObject.UpdateElementBufferObject(_indices);
+            }
+        }
+
+        public IReadOnlyList<ConvexShape> ConcaveCollisionCollection
+        {
+            get
+            {
+                return _concaveCollisionCollection;
+            }
+        }
+        
+        public ConvexShape ConvexCollisionShape
+        {
+            get
+            {
+                return _convexCollisionShape;
+            }
+        }
+        
+        public ConvexShape BoundsCollisionShape
+        {
+            get
+            {
+                return _boundsCollisionShape;
             }
         }
 
@@ -221,8 +249,15 @@ namespace OpenTucan.Graphics
                 }
             }
         }
+        
+        public void RecalculateCollisionShapes()
+        {
+            _concaveCollisionCollection = ConvexShape.GetConcaveCollection(this);
+            _convexCollisionShape = new ConvexShape(this);
+            _boundsCollisionShape = new ConvexShape(GetBoundsMinimum(), GetBoundsMaximum());
+        }
 
-        public void PrepareForRendering(CullFaceMode cullFaceMode = CullFaceMode.Back)
+        public void Draw(CullFaceMode cullFaceMode = CullFaceMode.Back)
         {
             GL.BindVertexArray(VertexArrayObject.Id);
             GL.EnableVertexAttribArray(_vertexArrayAttribLocation);
@@ -274,6 +309,8 @@ namespace OpenTucan.Graphics
             mesh.Vertices = vertices.ToArray();
             mesh.UV = textureCoordinates.ToArray();
             mesh.Normals = normals.ToArray();
+            
+            mesh.RecalculateCollisionShapes();
 
             return mesh;
         }

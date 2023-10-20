@@ -1,4 +1,5 @@
 ﻿using System;
+using OpenTK.Graphics;
 using OpenTucan.Entities;
 
 namespace Editor
@@ -8,7 +9,7 @@ namespace Editor
         [STAThread]
         public static void Main(string[] args)
         {
-            var display = new EditorWindow(800, 800);
+            var display = new EditorApplication("Tucan Editor", 800, 800, Color4.White);
             display.Run();
         }
     }

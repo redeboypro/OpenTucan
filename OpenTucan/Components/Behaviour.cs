@@ -11,13 +11,8 @@ namespace OpenTucan.Components
 {
     public abstract class Behaviour
     {
-        public readonly Entity Entity;
+        public readonly GameObject GameObject;
         private bool _enabled;
-
-        protected Behaviour()
-        {
-            Entity = null;
-        }
 
         public bool Enabled
         {
@@ -39,11 +34,11 @@ namespace OpenTucan.Components
             }
         }
 
-        public Rigidbody Rigidbody
+        public World World
         {
             get
             {
-                return (Rigidbody) Entity;
+                return GameObject.World;
             }
         }
 

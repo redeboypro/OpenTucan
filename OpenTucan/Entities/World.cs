@@ -1,46 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using OpenTK;
 using OpenTucan.Components;
+using OpenTucan.Graphics;
 using OpenTucan.Physics;
 
 namespace OpenTucan.Entities
 {
     public class World
     {
-        private readonly List<Rigidbody> _rigidbodies;
+        private readonly List<GameObject> _gameObjects;
 
         public World()
         {
-            _rigidbodies = new List<Rigidbody>();
+            _gameObjects = new List<GameObject>();
         }
 
-        public void AddRigidbody(Rigidbody rigidbody)
+        public string GetAvailableName(string name)
         {
-            _rigidbodies.Add(rigidbody);
+            if (!FindObjectWithName(name, out _))
+            {
+                return name;
+            }
+
+            var i = 0;
+            while (FindObjectWithName($"{name} ({i})", out _))
+            {
+                i++;
+            }
+
+            return $"{name} ({i})";
+        }
+
+        public bool FindObjectWithName(string name, out GameObject toFind)
+        {
+            foreach (var obj in _gameObjects.Where(obj => obj.Name == name))
+            {
+                toFind = obj;
+                return true;
+            }
+
+            toFind = null;
+            return false;
+        }
+
+        public void Instantiate(GameObject gameObject)
+        {
+            _gameObjects.Add(gameObject);
+        }
+        
+        public GameObject Instantiate(string name)
+        {
+            var instance = new GameObject(name, this);
+            _gameObjects.Add(instance);
+            return instance;
+        }
+        
+        public GameObject Instantiate(string name, Mesh mesh, Texture texture, Shader shader)
+        {
+            var instance = Instantiate(name);
+            instance.SetMesh(mesh);
+            return instance;
         }
 
         public void Start()
         {
-            CallFromBehaviourForEach(behaviour =>
+            foreach (var obj in _gameObjects.Where(obj => obj.IsActive))
             {
-                behaviour.Start();
-            });
+                CallFromBehaviour(obj, behaviour =>
+                {
+                    behaviour.Start();
+                });
+            }
         }
         
         public void Update(FrameEventArgs eventArgs)
         {
             var deltaTime = (float) eventArgs.Time;
             
-            for (var index1 = 0; index1 < _rigidbodies.Count; index1++)
+            for (var index1 = 0; index1 < _gameObjects.Count; index1++)
             {
-                var rigidbody1 = _rigidbodies[index1];
+                var rigidbody1 = _gameObjects[index1];
 
                 if (rigidbody1.IsStatic || !rigidbody1.IsActive || rigidbody1.IsKinematic || !rigidbody1.IsTrigger)
                 {
                     continue;
                 }
                 
+                CallFromBehaviour(rigidbody1, behaviour =>
+                {
+                    behaviour.Update(eventArgs);
+                });
+
                 rigidbody1.Accelerate(deltaTime);
                 rigidbody1.LocalSpaceLocation += new Vector3
                 {
@@ -50,9 +102,9 @@ namespace OpenTucan.Entities
                 var triggers = new List<Rigidbody>();
                 var responses = new Dictionary<Rigidbody, CollisionInfo>();
                 
-                for (var index2 = 0; index2 < _rigidbodies.Count; index2++)
+                for (var index2 = 0; index2 < _gameObjects.Count; index2++)
                 {
-                    var rigidbody2 = _rigidbodies[index2];
+                    var rigidbody2 = _gameObjects[index2];
                     
                     if (index1 == index2 || !rigidbody2.IsActive || rigidbody2.IsKinematic)
                     {
@@ -65,37 +117,37 @@ namespace OpenTucan.Entities
                 rigidbody1.RefreshTriggers(triggers);
                 rigidbody1.RefreshResponses(responses);
             }
-
-            CallFromBehaviourForEach(behaviour =>
-            {
-                behaviour.Update(eventArgs);
-            });
         }
         
         public void Render(FrameEventArgs eventArgs)
         {
-            CallFromBehaviourForEach(behaviour =>
+            foreach (var obj in _gameObjects.Where(obj => obj.IsActive))
             {
-                behaviour.Render(eventArgs);
-            });
-        }
-
-        private void CallFromBehaviourForEach(Action<Behaviour> action)
-        {
-            foreach (var rigidbody in _rigidbodies)
-            {
-                if (!rigidbody.IsActive)
+                obj.Shader.Start();
+                
+                CallFromBehaviour(obj, behaviour =>
+                {
+                    behaviour.Render(eventArgs);
+                });
+                
+                if (!obj.ReadyForRendering(Camera.Main))
                 {
                     continue;
                 }
+                
+                obj.Mesh.Draw();
+                obj.Shader.Stop();
+            }
+        }
 
-                var behaviours = rigidbody.GetBehaviours();
-                foreach (var behaviour in behaviours)
+        private static void CallFromBehaviour(GameObject obj, Action<Behaviour> action)
+        {
+            var behaviours = obj.GetBehaviours();
+            foreach (var behaviour in behaviours)
+            {
+                if (behaviour.Enabled)
                 {
-                    if (behaviour.Enabled)
-                    {
-                        action?.Invoke(behaviour);
-                    }
+                    action?.Invoke(behaviour); 
                 }
             }
         }

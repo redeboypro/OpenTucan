@@ -19,7 +19,6 @@ namespace OpenTucan.Entities
 
     public abstract class Entity
     {
-        private readonly List<Behaviour> _behaviours;
         private readonly List<Entity> _children;
         private Entity _parent;
 
@@ -42,10 +41,14 @@ namespace OpenTucan.Entities
             _globalRotation = _localRotation = Quaternion.Identity; 
             _globalScale = _localScale = Vector3.One;
             _modelMatrix = Matrix4.Identity;
-            _behaviours = new List<Behaviour>();
             _children = new List<Entity>();
             TransformMatrix(Space.Local);
         }
+        
+        /// <summary>
+        /// Entity tag
+        /// </summary>
+        public string Tag { get; set; }
 
         /// <summary>
         /// The world space position of the Entity
@@ -193,52 +196,6 @@ namespace OpenTucan.Entities
         
         public Action<bool> ChangeActiveState { get; set; }
 
-        public IReadOnlyList<Behaviour> GetBehaviours()
-        {
-            return _behaviours;
-        }
-        
-        public T GetBehaviour<T>() where T : Behaviour
-        {
-            return (T) _behaviours.FirstOrDefault(behaviour => behaviour.GetType().IsAssignableFrom(typeof(T)));
-        }
-        
-        public Behaviour GetBehaviour(Type behaviourType)
-        {
-            if (!behaviourType.BaseType.IsAssignableFrom(typeof(Behaviour)))
-            {
-                throw new Exception("Input behaviour base type should be assignable from \"OpenTucan.Components.Behaviour\"");
-            }
-
-            return _behaviours.FirstOrDefault(behaviour => behaviour.GetType().IsAssignableFrom(behaviourType));
-        }
-
-        public void AddBehaviour<T>() where T : Behaviour
-        {
-            AddBehaviour(typeof(T));
-        }
-        
-        public void AddBehaviour(Type behaviourType)
-        {
-            if (!behaviourType.BaseType.IsAssignableFrom(typeof(Behaviour)))
-            {
-                throw new Exception("Input behaviour base type should be assignable from \"OpenTucan.Components.Behaviour\"");
-            }
-            
-            var behaviour = (Behaviour) Activator.CreateInstance(behaviourType);
-            var holder = typeof(Behaviour).GetField(nameof(Entity), BindingFlags.Instance | BindingFlags.Public);
-            holder.SetValue(behaviour, this);
-            
-            _behaviours.Add(behaviour);
-        }
-        
-        public void AddBehaviour(Behaviour behaviour)
-        {
-            var holder = typeof(Behaviour).GetField(nameof(Entity), BindingFlags.Instance | BindingFlags.Public);
-            holder.SetValue(behaviour, this);
-            _behaviours.Add(behaviour);
-        }
-
         public void SetStatic(bool staticState)
         {
             _isStatic = staticState;
@@ -302,7 +259,7 @@ namespace OpenTucan.Entities
         /// <summary>
         /// Assigns an entity as a _parent
         /// </summary>
-        public void SetParent(Entity assignableEntity, bool freezeComponents = true)
+        public void SetParent(Entity assignableEntity, bool freezeGlobalParameters = true)
         {
             if (_parent != assignableEntity)
             {
@@ -316,7 +273,7 @@ namespace OpenTucan.Entities
             _parent = assignableEntity;
             TransformMatrix(Space.Local);
 
-            if (!freezeComponents)
+            if (freezeGlobalParameters)
             {
                 _globalLocation = location;
                 _globalRotation = rotation;
