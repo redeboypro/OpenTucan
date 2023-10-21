@@ -43,6 +43,22 @@ namespace OpenTucan.Physics
             };
         }
 
+        public Vector3 this[int index]
+        {
+            get
+            {
+                return _vertices[index];
+            }
+        }
+
+        public int Size
+        {
+            get
+            {
+                return _vertices.Count;
+            }
+        }
+
         public Vector3 FindFurthestPoint(Entity entity, Vector3 direction)
         {
             var maxPoint = _vertices[_vertices.Count - 1];

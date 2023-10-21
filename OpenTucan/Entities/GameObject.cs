@@ -24,6 +24,7 @@ namespace OpenTucan.Entities
         public GameObject(string name, World world)
         {
             Name = world.GetAvailableName(name);
+            World = world;
             _behaviours = new List<Behaviour>();
         }
         

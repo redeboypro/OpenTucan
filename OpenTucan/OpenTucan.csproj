@@ -65,6 +65,7 @@
       <Compile Include="Physics\EPA.cs" />
       <Compile Include="Physics\GJK.cs" />
       <Compile Include="Physics\Normal.cs" />
+      <Compile Include="Physics\Ray.cs" />
       <Compile Include="Physics\Rigidbody.cs" />
       <Compile Include="Physics\Simplex.cs" />
       <Compile Include="TucanApplication.cs" />

@@ -74,6 +74,7 @@
           <e p="EPA.cs" t="Include" />
           <e p="GJK.cs" t="Include" />
           <e p="Normal.cs" t="Include" />
+          <e p="Ray.cs" t="Include" />
           <e p="Rigidbody.cs" t="Include" />
           <e p="Simplex.cs" t="Include" />
         </e>

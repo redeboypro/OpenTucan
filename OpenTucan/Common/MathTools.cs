@@ -2,6 +2,7 @@
 using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics;
+using OpenTucan.Entities;
 
 namespace OpenTucan.Common
 {
@@ -187,6 +188,22 @@ namespace OpenTucan.Common
         public static float Min(float a, float b, float c)
         {
             return Math.Min(Math.Min(a, b), c);
+        }
+
+        /// <summary>
+        /// Transforms vector relative transformation parameters
+        /// </summary>
+        public static Vector3 Transform(this Vector3 vec, Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            return rotation * (vec * scale) + position;
+        }
+        
+        /// <summary>
+        /// Transforms vector relative entity transformation
+        /// </summary>
+        public static Vector3 Transform(this Vector3 vec, Entity entity)
+        {
+            return vec.Transform(entity.WorldSpaceLocation, entity.WorldSpaceRotation, entity.WorldSpaceScale);
         }
         
         /// <summary>
