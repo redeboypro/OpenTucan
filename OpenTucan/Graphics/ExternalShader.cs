@@ -9,8 +9,8 @@ namespace OpenTucan.Graphics
         protected override void BindAttributes()
         {
             BindAttribute(0, ShaderConsts.InVertex);
-            BindAttribute(1, ShaderConsts.InNormal);
-            BindAttribute(2, ShaderConsts.InUV);
+            BindAttribute(1, ShaderConsts.InUV);
+            BindAttribute(2, ShaderConsts.InNormal);
         }
     }
 }

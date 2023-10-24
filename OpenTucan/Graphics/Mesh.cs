@@ -314,5 +314,54 @@ namespace OpenTucan.Graphics
 
             return mesh;
         }
+
+        public static Mesh Cube(
+            int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
+            int uvArrayAttribLocation = DefaultUVArrayAttribLocation,
+            int normalsArrayAttribLocation = DefaultNormalsArrayAttribLocation)
+        {
+            var cubeMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalsArrayAttribLocation)
+            {
+                Indices = new[]
+                {
+                    0, 1, 2, 3, 0, 2,
+                    1, 5, 6, 2, 1, 6,
+                    4, 5, 1, 0, 4, 1,
+                    3, 2, 6, 7, 3, 6,
+                    6, 5, 4, 6, 4, 7,
+                    4, 0, 3, 7, 4, 3
+                },
+                
+                Vertices = new[]
+                {
+                    new Vector3(-1.0f, -1.0f, -1.0f),
+                    new Vector3(-1.0f, 1.0f, -1.0f),
+                    new Vector3(1.0f, 1.0f, -1.0f),
+                    new Vector3(1.0f, -1.0f, -1.0f),
+
+                    new Vector3(-1.0f, -1.0f, 1.0f),
+                    new Vector3(-1.0f, 1.0f, 1.0f),
+                    new Vector3(1.0f, 1.0f, 1.0f),
+                    new Vector3(1.0f, -1.0f, 1.0f)
+                },
+
+                UV = new[]
+                {
+                    new Vector2(0.0f, 0.0f), 
+                    new Vector2(0.0f, 1.0f), 
+                    new Vector2(1.0f, 1.0f),
+                    new Vector2(1.0f, 0.0f),
+
+                    new Vector2(1.0f, 0.0f),
+                    new Vector2(1.0f, 1.0f),
+                    new Vector2(0.0f, 1.0f),
+                    new Vector2(0.0f, 0.0f)
+                }
+            };
+
+            cubeMesh.RecalculateNormals();
+            cubeMesh.RecalculateCollisionShapes();
+            return cubeMesh;
+        }
     }
 }

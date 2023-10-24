@@ -10,15 +10,18 @@ namespace OpenTucan.Physics
     {
         private IReadOnlyList<ConvexShape> _convexShapes;
         private IReadOnlyList<Rigidbody> _triggerContacts;
+        private IReadOnlyList<string> _ignoreCollisionTags;
         private float _flatAngle;
 
         public Rigidbody()
         {
             FlatAngle = 30f;
             FallingAcceleration = -80.0f;
+            IsKinematic = true;
+            Responses = new List<(Rigidbody, CollisionInfo)>();
             _convexShapes = new ConvexShape[0];
-            Responses = new Dictionary<Rigidbody, CollisionInfo>();
             _triggerContacts = new Rigidbody[0];
+            _ignoreCollisionTags = new string[0];
         }
         
         public ConvexShape this[int index]
@@ -53,7 +56,7 @@ namespace OpenTucan.Physics
 
         public bool IsTrigger { get; private set; }
         
-        public IDictionary<Rigidbody, CollisionInfo> Responses { get; private set; }
+        public List<(Rigidbody rigidbody, CollisionInfo collisionInfo)> Responses { get; private set; }
 
         public float FallingVelocity { get; private set; }
 
@@ -61,13 +64,18 @@ namespace OpenTucan.Physics
         
         public bool IsGrounded { get; private set; }
         
-        public Action<Rigidbody, CollisionInfo> CollisionEnter { get; set; }
+        public Action<Rigidbody, CollisionInfo, float> CollisionEnter { get; set; }
         
         public Action<Rigidbody, CollisionInfo> CollisionExit { get; set; }
         
         public Action<Rigidbody> TriggerEnter { get; set; }
         
         public Action<Rigidbody> TriggerExit { get; set; }
+
+        public bool IgnoreCollision(string tag)
+        {
+            return _ignoreCollisionTags.Contains(tag);
+        }
 
         public void TossUp(float force)
         {
@@ -98,8 +106,18 @@ namespace OpenTucan.Physics
         {
             FallingVelocity += FallingAcceleration * deltaTime;
         }
+        
+        public void SetIgnoreCollisionTags(params string[] tags)
+        {
+            _ignoreCollisionTags = tags;
+        }
+        
+        public void SetIgnoreCollisionTags(IReadOnlyList<string> tags)
+        {
+            _ignoreCollisionTags = tags;
+        }
 
-        public void ResolveCollision(Rigidbody other, List<Rigidbody> triggers, IDictionary<Rigidbody, CollisionInfo> responses)
+        public void ResolveCollision(Rigidbody other, List<Rigidbody> triggers, List<(Rigidbody, CollisionInfo)> responses)
         {
             foreach (var shape1 in _convexShapes)
             {
@@ -128,6 +146,7 @@ namespace OpenTucan.Physics
                         {
                             var collisionInfo = EPA.GetResponse(ref a, ref b, simplex);
                             LocalSpaceLocation += collisionInfo.Normal * collisionInfo.PenetrationDepth;
+                            CollisionEnter?.Invoke(other, collisionInfo, FallingVelocity);
 
                             if (PlaneIsFlat(collisionInfo.Normal))
                             {
@@ -135,11 +154,7 @@ namespace OpenTucan.Physics
                                 IsGrounded = true;
                             }
                             
-                            if (!Responses.ContainsKey(other))
-                            {
-                                CollisionEnter?.Invoke(other, collisionInfo);
-                                responses.Add(other, collisionInfo);
-                            }
+                            responses.Add((other, collisionInfo));
                         }
                     }
                 }
@@ -172,21 +187,21 @@ namespace OpenTucan.Physics
             _triggerContacts = others;
         }
         
-        public void RefreshResponses(IDictionary<Rigidbody, CollisionInfo> responses)
+        public void RefreshResponses(List<(Rigidbody rigidbody, CollisionInfo collisionInfo)> responses)
         {
             foreach (var response in Responses)
             {
-                var rigidbody = response.Key;
-                if (!responses.ContainsKey(rigidbody))
+                var rigidbody = response.rigidbody;
+                if (responses.All(localResponse => localResponse.rigidbody != rigidbody))
                 {
-                    CollisionExit?.Invoke(rigidbody, response.Value);
+                    CollisionExit?.Invoke(rigidbody, response.collisionInfo);
                 }
             }
             
             var isGrounded = false;
             foreach (var response in responses)
             {
-                var collisionInfo = response.Value;
+                var collisionInfo = response.collisionInfo;
                 if (PlaneIsFlat(collisionInfo.Normal))
                 {
                     isGrounded = true;

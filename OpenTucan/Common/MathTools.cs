@@ -91,7 +91,7 @@ namespace OpenTucan.Common
         /// </summary>
         public static Vector3 Right(this Quaternion quaternion)
         {
-            return quaternion * Vector3.UnitX;
+            return quaternion * -Vector3.UnitX;
         }
 
         /// <summary>

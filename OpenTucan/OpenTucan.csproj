@@ -60,6 +60,9 @@
       <Compile Include="GUI\ListView.cs" />
       <Compile Include="GUI\Text.cs" />
       <Compile Include="Input\Input.cs" />
+      <Compile Include="Network\Packet.cs" />
+      <Compile Include="Network\UDPClient.cs" />
+      <Compile Include="Network\UDPServer.cs" />
       <Compile Include="Physics\CollisionInfo.cs" />
       <Compile Include="Physics\ConvexShape.cs" />
       <Compile Include="Physics\EPA.cs" />
@@ -75,11 +78,18 @@
         <HintPath>..\packages\AssimpNet.4.1.0\lib\net40\AssimpNet.dll</HintPath>
         <Private>True</Private>
       </Reference>
+      <Reference Include="mscorlib" />
       <Reference Include="OpenTK, Version=3.3.3.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4">
         <HintPath>..\packages\OpenTK.3.3.3\lib\net20\OpenTK.dll</HintPath>
         <Private>True</Private>
       </Reference>
+      <Reference Include="System" />
       <Reference Include="System.Drawing" />
+      <Reference Include="System.Net" />
+      <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+        <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+        <Private>True</Private>
+      </Reference>
       <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>

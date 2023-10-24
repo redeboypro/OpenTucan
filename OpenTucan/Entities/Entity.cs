@@ -42,6 +42,7 @@ namespace OpenTucan.Entities
             _globalScale = _localScale = Vector3.One;
             _modelMatrix = Matrix4.Identity;
             _children = new List<Entity>();
+            _isActive = true;
             TransformMatrix(Space.Local);
         }
         

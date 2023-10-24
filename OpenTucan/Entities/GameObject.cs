@@ -59,6 +59,7 @@ namespace OpenTucan.Entities
                 return false;
             }
             
+            _shader.Start();
             _shader.SetUniform(ShaderConsts.ViewMatrix, camera.ViewMatrix);
             _shader.SetUniform(ShaderConsts.ProjectionMatrix, camera.ProjectionMatrix);
             _shader.SetUniform(ShaderConsts.ModelMatrix, GetModelMatrix());

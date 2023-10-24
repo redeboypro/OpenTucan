@@ -15,7 +15,11 @@ namespace OpenTucan.Graphics
         
         private readonly Bitmap _bitmap;
         
-        public Texture(Bitmap bitmap)
+        public Texture(Bitmap bitmap,
+            TextureMinFilter minFilter = TextureMinFilter.Linear,
+            TextureMagFilter magFilter = TextureMagFilter.Linear,
+            TextureWrapMode wrapS = TextureWrapMode.ClampToEdge,
+            TextureWrapMode wrapT = TextureWrapMode.ClampToEdge)
         {
             _bitmap = bitmap;
             
@@ -23,10 +27,10 @@ namespace OpenTucan.Graphics
             GL.GenTextures(1, out int id);
             
             GL.BindTexture(TextureTarget.Texture2D, id);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMinFilter.Linear);
-            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
-            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)minFilter);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)magFilter);
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapS, (int)wrapS);
+            GL.TexParameter(TextureTarget.TextureCubeMap, TextureParameterName.TextureWrapT, (int)wrapT);
 
             LockIntoSystemMemory(data =>
             {
@@ -38,7 +42,11 @@ namespace OpenTucan.Graphics
             Id = id;
         }
 
-        public Texture(int width, int height) : this(new Bitmap(width, height)) { }
+        public Texture(int width, int height,
+            TextureMinFilter minFilter = TextureMinFilter.Linear,
+            TextureMagFilter magFilter = TextureMagFilter.Linear,
+            TextureWrapMode wrapS = TextureWrapMode.ClampToEdge,
+            TextureWrapMode wrapT = TextureWrapMode.ClampToEdge) : this(new Bitmap(width, height), minFilter, magFilter, wrapS, wrapT) { }
 
         public int Id { get; }
 
@@ -93,6 +101,13 @@ namespace OpenTucan.Graphics
             e.Invoke(safeData);
             
             _bitmap.UnlockBits(safeData);
+        }
+
+        public static Texture Solid(Color color)
+        {
+            var bitmap = new Bitmap(1, 1);
+            bitmap.SetPixel(0, 0, color);
+            return new Texture(bitmap);
         }
     }
 }

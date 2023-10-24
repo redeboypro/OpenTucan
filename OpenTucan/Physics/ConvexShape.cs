@@ -22,9 +22,7 @@ namespace OpenTucan.Physics
         
         public ConvexShape(Mesh mesh)
         {
-            var vertices = mesh.Vertices;
-            var indices = mesh.Indices;
-            _vertices = indices.Select(index => vertices[index]).ToList();
+            _vertices = mesh.Vertices;
         }
 
         public ConvexShape(Vector3 min, Vector3 max)
@@ -74,7 +72,7 @@ namespace OpenTucan.Physics
                 }
             }
 
-            return entity.WorldSpaceRotation * (maxPoint * entity.WorldSpaceScale) + entity.WorldSpaceLocation;
+            return maxPoint * entity.WorldSpaceScale + entity.WorldSpaceLocation;
         }
 
         public static IReadOnlyList<ConvexShape> GetConcaveCollection(Mesh mesh)

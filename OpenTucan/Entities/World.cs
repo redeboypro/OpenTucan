@@ -61,6 +61,8 @@ namespace OpenTucan.Entities
         {
             var instance = Instantiate(name);
             instance.SetMesh(mesh);
+            instance.SetTexture(texture);
+            instance.SetShader(shader);
             return instance;
         }
 
@@ -83,7 +85,7 @@ namespace OpenTucan.Entities
             {
                 var rigidbody1 = _gameObjects[index1];
 
-                if (rigidbody1.IsStatic || !rigidbody1.IsActive || rigidbody1.IsKinematic || !rigidbody1.IsTrigger)
+                if (rigidbody1.IsStatic || !rigidbody1.IsActive || rigidbody1.IsKinematic || rigidbody1.IsTrigger)
                 {
                     continue;
                 }
@@ -100,13 +102,13 @@ namespace OpenTucan.Entities
                 };
                 
                 var triggers = new List<Rigidbody>();
-                var responses = new Dictionary<Rigidbody, CollisionInfo>();
+                var responses = new List<(Rigidbody, CollisionInfo)>();;
                 
                 for (var index2 = 0; index2 < _gameObjects.Count; index2++)
                 {
                     var rigidbody2 = _gameObjects[index2];
                     
-                    if (index1 == index2 || !rigidbody2.IsActive || rigidbody2.IsKinematic)
+                    if (index1 == index2 || !rigidbody2.IsActive || rigidbody2.IsKinematic || rigidbody1.IgnoreCollision(rigidbody2.Tag) || rigidbody2.IgnoreCollision(rigidbody1.Tag))
                     {
                         continue;
                     }
@@ -123,8 +125,6 @@ namespace OpenTucan.Entities
         {
             foreach (var obj in _gameObjects.Where(obj => obj.IsActive))
             {
-                obj.Shader.Start();
-                
                 CallFromBehaviour(obj, behaviour =>
                 {
                     behaviour.Render(eventArgs);

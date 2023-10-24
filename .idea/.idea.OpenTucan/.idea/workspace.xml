@@ -4,6 +4,7 @@
     <projectFile>FPSLevelEditor/FPSLevelEditor.csproj</projectFile>
     <projectFile>TucanAnimator/TucanAnimator.csproj</projectFile>
     <projectFile>Editor/Editor.csproj</projectFile>
+    <projectFile>TucanFPS/TucanFPS.csproj</projectFile>
   </component>
   <component name="BranchesTreeState">
     <expand>
@@ -25,9 +26,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5a6a08-f3bf-466c-a5c7-d10e503aa099" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Physics/Ray.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Network/Packet.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Network/UDPClient.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/OpenTucan/Network/UDPServer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TucanFPS/FPSApplication.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TucanFPS/Program.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TucanFPS/Properties/AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TucanFPS/TucanFPS.csproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TucanFPS/obj/Debug/.NETFramework,Version=v4.8.1.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TucanFPS/obj/Debug/TucanFPS.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Editor/EditorApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/EditorApplication.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Editor/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Editor/bin/Debug/Editor.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/bin/Debug/Editor.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Editor/bin/Debug/Editor.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/bin/Debug/Editor.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Editor/bin/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/bin/Debug/OpenTucan.dll" afterDir="false" />
@@ -35,14 +46,28 @@
       <change beforePath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Editor/obj/Debug/Editor.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Editor/obj/Debug/Editor.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan.sln" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan.sln" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/GameObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/GameObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/ExternalShader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/ExternalShader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/TucanApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/TucanApplication.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/packages.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,40 +86,26 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1175E77E-945B-418E-BCE4-DEA98D1883FD/c8/3605c149/FolderBrowserDialog.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/RiderProjects/SoftyFX/SoftyFX/Display/Display.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/RiderProjects/SoftyFX/SoftyFX/Time/Time.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/IDE/projects/OpenTucan/OpenTucan/Network/Packet.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/OpenTucan/OpenTK.dll.config" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/41914444-499F-4996-A3E6-AF79CF6C1FDB/78/bab2970b/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Editor/EditorController.cs" />
-        <option value="$PROJECT_DIR$/Editor/d.xml" />
-        <option value="$PROJECT_DIR$/Editor/bin/Debug/test.tui" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/SAT.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/TextBlock.cs" />
-        <option value="$PROJECT_DIR$/Editor/EditorGUI.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/Image.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/Text.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/ListView.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/InputField.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIController.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Components/BehaviourManager.cs" />
-        <option value="$PROJECT_DIR$/EntitySystem/GameObject.cs" />
-        <option value="$PROJECT_DIR$/Editor/bin/Debug/editor.tui" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleInstancingShader.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/ICollider.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/MeshCollider.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/Collider.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/GUI/GUIControl.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/Normal.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/CollisionInfo.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Components/ColliderComponent.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Components/MeshComponent.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Components/SerializedField.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Camera.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleShader.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Common/ShaderConsts.cs" />
@@ -103,20 +114,38 @@
         <option value="$PROJECT_DIR$/OpenTucan/Input/Input.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/ShaderStream.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Shader.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/ExternalShader.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/TucanApplication.cs" />
-        <option value="$PROJECT_DIR$/Editor/Program.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/TransformGizmo.cs" />
-        <option value="$PROJECT_DIR$/Editor/EditorApplication.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Entities/World.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Entities/GameObject.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/Ray.cs" />
+        <option value="$PROJECT_DIR$/TucanFPS/Program.cs" />
+        <option value="$PROJECT_DIR$/TucanFPS/FPSApplication.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/ICollisionShape.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/Sphere.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Entities/GameObject.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Graphics/ExternalShader.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Entities/World.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/TucanApplication.cs" />
+        <option value="$PROJECT_DIR$/Editor/EditorApplication.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" />
+        <option value="$PROJECT_DIR$/Editor/Program.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/ClientHandlePackets.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/ClientManager.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/ServerHandlePackets.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/TucanClient.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/TucanServer.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Common/UDPConsts.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/Package.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/Packet.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/UDPServer.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/UDPClient.cs" />
       </list>
     </option>
   </component>
@@ -128,8 +157,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
-    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30065006" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.3501326" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.29973474" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
@@ -181,6 +210,24 @@
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/TucanAnimator/TucanAnimator.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Console" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="TucanFPS" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/TucanFPS/TucanFPS.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
@@ -251,7 +298,12 @@
       <workItem from="1697537278720" duration="3277000" />
       <workItem from="1697630154638" duration="4572000" />
       <workItem from="1697786735756" duration="5189000" />
-      <workItem from="1697875471557" duration="4017000" />
+      <workItem from="1697875471557" duration="10834000" />
+      <workItem from="1697948331661" duration="10638000" />
+      <workItem from="1697973539442" duration="11297000" />
+      <workItem from="1697990879290" duration="80000" />
+      <workItem from="1698053375779" duration="16505000" />
+      <workItem from="1698128894224" duration="13745000" />
     </task>
     <servers />
   </component>
@@ -280,94 +332,98 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="727" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1695892552007" />
-    <state width="1877" height="225" key="GridCell.Tab.0.bottom" timestamp="1697819330159">
+    <state x="940" y="123" width="788" height="773" key="DiffContextDialog" timestamp="1698142059000">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="225" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1697819330159" />
-    <state width="1877" height="225" key="GridCell.Tab.0.center" timestamp="1697819330159">
+    <state x="940" y="123" width="788" height="773" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1698142059000" />
+    <state width="914" height="216" key="GridCell.Tab.0.bottom" timestamp="1698083197006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="225" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1697819330159" />
-    <state width="1877" height="225" key="GridCell.Tab.0.left" timestamp="1697819330159">
+    <state width="914" height="216" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1698083197006" />
+    <state width="914" height="216" key="GridCell.Tab.0.center" timestamp="1698083197006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="225" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1697819330159" />
-    <state width="1877" height="225" key="GridCell.Tab.0.right" timestamp="1697819330159">
+    <state width="914" height="216" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1698083197006" />
+    <state width="914" height="216" key="GridCell.Tab.0.left" timestamp="1698083197006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="225" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1697819330159" />
-    <state width="1877" height="375" key="GridCell.Tab.1.bottom" timestamp="1695907520612">
+    <state width="914" height="216" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1698083197006" />
+    <state width="914" height="216" key="GridCell.Tab.0.right" timestamp="1698083197006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.1.center" timestamp="1695907520612">
+    <state width="914" height="216" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1698083197006" />
+    <state width="1162" height="465" key="GridCell.Tab.1.bottom" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.1.left" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.1.center" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.1.right" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.1.left" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.2.bottom" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.1.right" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.2.center" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.2.bottom" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.2.left" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.2.center" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.2.right" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.2.left" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.3.bottom" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.2.right" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.3.center" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.3.bottom" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.3.left" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.3.center" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.3.right" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.3.left" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.4.bottom" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.3.right" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.4.center" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.4.bottom" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.4.left" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.4.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.4.center" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state width="1877" height="375" key="GridCell.Tab.4.right" timestamp="1695907520612">
+    <state width="1162" height="465" key="GridCell.Tab.4.center/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.4.left" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="375" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1695907520612" />
-    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size" timestamp="1696136482056">
+    <state width="1162" height="465" key="GridCell.Tab.4.left/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state width="1162" height="465" key="GridCell.Tab.4.right" timestamp="1697990823390">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040@0.0.1920.1040" timestamp="1696136482056" />
-    <state x="314" y="223" key="RiderGenerateDialog" timestamp="1697471774334">
+    <state width="1162" height="465" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
+    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size" timestamp="1697893916602">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="314" y="223" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1697471774334" />
+    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040@0.0.1920.1040" timestamp="1697893916602" />
+    <state x="314" y="223" key="RiderGenerateDialog" timestamp="1698063211943">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="314" y="223" key="RiderGenerateDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1698063211943" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1695886708086">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -376,6 +432,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="92" y="92" width="1736" height="856" key="VCS.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1697787976865" />
+    <state x="93" y="100" width="788" height="847" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1698136043891">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="93" y="100" width="788" height="847" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1698136043891" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1696952173109">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -384,9 +444,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1697539003634" />
-    <state x="288" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1696431567321">
+    <state x="288" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1698075080064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="288" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1696431567321" />
+    <state x="288" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1698075080064" />
   </component>
 </project>

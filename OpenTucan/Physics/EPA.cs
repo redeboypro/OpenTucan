@@ -7,14 +7,14 @@ namespace OpenTucan.Physics
 {
     public class EPA
     {
-        public static float Epsilon { get; set; } = 0.001f;
+        public static float Epsilon { get; set; } = 0.0001f;
         
         public static CollisionInfo GetResponse(ref (Rigidbody rigidbody, ConvexShape shape) a, ref (Rigidbody rigidbody, ConvexShape shape) b, Simplex simplex)
         {
             var polytope = new List<Vector3>(simplex.Begin());
             polytope.AddRange(simplex.End());
 
-            var faces = new List<int>()
+            var faces = new List<int>
             {
                 0, 1, 2,
                 0, 3, 1,
@@ -24,11 +24,17 @@ namespace OpenTucan.Physics
             
             GetFaceNormals(polytope, faces, out var normals, out var minFace);
 
-            var minNormal = Vector3.Zero;
+            var minNormal = normals[minFace].Direction;
             var minDistance = float.MaxValue;
 
-            while (Math.Abs(minDistance - float.MaxValue) < float.Epsilon)
+            var iterations = 0;
+            while (Math.Abs(minDistance - float.MaxValue) < float.Epsilon && iterations++ < a.shape.Size + b.shape.Size)
             {
+                if (minFace < 0 || minFace >= normals.Count)
+                {
+                    continue;
+                }
+                
                 var normal = normals[minFace];
                 minNormal = normal.Direction;
                 minDistance = normal.Distance;
@@ -36,79 +42,62 @@ namespace OpenTucan.Physics
                 var support = GJK.Support(ref a, ref b, minNormal);
                 var sDistance = Vector3.Dot(minNormal, support);
 
-                if (Math.Abs(sDistance - minDistance) > 0.001f)
+                if (Math.Abs(sDistance - minDistance) > Epsilon)
                 {
                     minDistance = float.MaxValue;
                     var uniqueEdges = new List<(int, int)>();
 
-                    for (var i = 0; i < normals.Count; i++)
+                    var f = 0;
+                    foreach (var currentNormal in normals)
                     {
-                        if (GJK.SameDirection(normals[i].Direction, support))
+                        if (GJK.SameDirection(currentNormal.Direction, support))
                         {
-                            var f = i * 3;
-
                             AddIfUniqueEdge(uniqueEdges, faces, f, f + 1);
                             AddIfUniqueEdge(uniqueEdges, faces, f + 1, f + 2);
                             AddIfUniqueEdge(uniqueEdges, faces, f + 2, f);
-
-                            var lastFace = faces.Count - 1;
-
-                            faces[f + 2] = faces[lastFace]; 
-                            faces.RemoveAt(lastFace);
                             
-                            faces[f + 1] = faces[lastFace]; 
-                            faces.RemoveAt(lastFace);
-                            
-                            faces[f] = faces[lastFace]; 
-                            faces.RemoveAt(lastFace);
-
-                            normals[i] = normals[lastFace];
-                            normals.RemoveAt(normals.Count - 1);
-
-                            i--;
+                            faces.RemoveAt(f);
+                            faces.RemoveAt(f);
+                            faces.RemoveAt(f);
+                        }
+                        else
+                        {
+                            f += 3;
                         }
                     }
-                    
-                    var newFaces = new List<int>();
-                    foreach (var (edgePointA, edgePointB) in uniqueEdges)
+
+                    var newFaces = new List<int>
                     {
-                        newFaces.Add(edgePointA);
-                        newFaces.Add(edgePointB);
+                        Capacity = uniqueEdges.Count * 3
+                    };
+                    
+                    foreach (var (edgeIndex1, edgeIndex2) in uniqueEdges)
+                    {
+                        newFaces.Add(edgeIndex1);
+                        newFaces.Add(edgeIndex2);
                         newFaces.Add(polytope.Count);
                     }
-                    
                     polytope.Add(support);
 
-                    GetFaceNormals(polytope, newFaces, out var newNormals, out var newMinFace);
-                    
-                    var oldMinDistance = float.MaxValue;
-                    for (var i = 0; i < normals.Count; i++)
-                    {
-                        if (normals[i].Distance < oldMinDistance)
-                        {
-                            oldMinDistance = normals[i].Distance;
-                            minFace = i;
-                        }
-                    }
-
-                    if (newNormals[newMinFace].Distance < oldMinDistance)
-                    {
-                        minFace = newMinFace + normals.Count;
-                    }
-
                     faces.AddRange(newFaces);
-                    normals.AddRange(newNormals);
+
+                    GetFaceNormals(polytope, faces, out normals, out minFace);
                 }
             }
-            
-            return new CollisionInfo(minNormal, minDistance + Epsilon);
+
+            return Math.Abs(minDistance - float.MaxValue) < float.Epsilon ?
+                new CollisionInfo(minNormal, 0) :
+                new CollisionInfo(minNormal, minDistance + Epsilon);
         }
 
         private static void GetFaceNormals(
-            IReadOnlyList<Vector3> polytope, List<int> faces, 
+            IReadOnlyList<Vector3> polytope, IReadOnlyList<int> faces, 
             out List<Normal> normals, out int minTriangle)
         {
-            normals = new List<Normal>();
+            normals = new List<Normal>
+            {
+                Capacity = faces.Count / 3
+            };
             minTriangle = 0;
             var minDistance = float.MaxValue;
             
@@ -120,8 +109,8 @@ namespace OpenTucan.Physics
                 var normal = Vector3.Cross(b - a, c - a).Normalized();
                 var distance = Vector3.Dot(normal, a);
 
-                if (distance < 0) {
-                    normal *= -1;
+                if (distance < -float.Epsilon) {
+                    normal = -normal;
                     distance *= -1;
                 }
 

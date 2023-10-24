@@ -1,5 +1,4 @@
 ﻿using OpenTK;
-using OpenTucan.Entities;
 
 namespace OpenTucan.Physics
 {
@@ -14,7 +13,8 @@ namespace OpenTucan.Physics
 
             var direction = -support;
 
-            while (true)
+            var iterations = 0;
+            while (iterations++ < a.shape.Size + b.shape.Size)
             {
                 support = Support(ref a, ref b, direction);
 
@@ -29,6 +29,8 @@ namespace OpenTucan.Physics
                     return true;
                 }
             }
+
+            return false;
         }
 
         private static bool NextSimplex(ref Simplex points, Vector3 inDirection, out Vector3 outDirection)

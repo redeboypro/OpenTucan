@@ -4,10 +4,11 @@ using OpenTK;
 
 namespace OpenTucan.Physics
 {
-    public class Simplex
+    public sealed class Simplex : IDisposable
     {
-        private Vector3[] _points;
+        private readonly Vector3[] _points;
         private int _size;
+        private bool _isDisposed;
 
         public Simplex()
         {
@@ -62,6 +63,25 @@ namespace OpenTucan.Physics
             {
                 yield return _points[i];
             }
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                if (disposing)
+                {
+                    Array.Clear(_points, 0, 4);
+                }
+
+                _isDisposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

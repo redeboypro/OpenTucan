@@ -9,7 +9,7 @@ namespace Editor
         [STAThread]
         public static void Main(string[] args)
         {
-            var display = new EditorApplication("Tucan Editor", 800, 800, Color4.White);
+            var display = new EditorApplication("Tucan Editor", 800, 800, Color4.Blue);
             display.Run();
         }
     }
