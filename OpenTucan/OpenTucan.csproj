@@ -60,9 +60,9 @@
       <Compile Include="GUI\ListView.cs" />
       <Compile Include="GUI\Text.cs" />
       <Compile Include="Input\Input.cs" />
+      <Compile Include="Network\Client.cs" />
       <Compile Include="Network\Packet.cs" />
-      <Compile Include="Network\UDPClient.cs" />
-      <Compile Include="Network\UDPServer.cs" />
+      <Compile Include="Network\Server.cs" />
       <Compile Include="Physics\CollisionInfo.cs" />
       <Compile Include="Physics\ConvexShape.cs" />
       <Compile Include="Physics\EPA.cs" />
