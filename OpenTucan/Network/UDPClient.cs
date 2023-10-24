@@ -28,16 +28,16 @@ namespace OpenTucan.Network
         public int ServerClientsLimit { get; private set; }
         public int Id { get; private set; }
         
-        private async void RunInOtherThread()
+        public void RunInOtherThread()
         {
-            await Task.Run(() =>
+            Task.Run(async () =>
             {
                 _isConnected = true;
                 while (_isConnected)
                 {
-                    var data = _client.Receive(ref _serverEndPoint);
+                    var data = await _client.ReceiveAsync();
                     var packet = new Packet();
-                    packet.WriteBytes(data);
+                    packet.WriteBytes(data.Buffer);
 
                     if (!_idIsAssigned)
                     {

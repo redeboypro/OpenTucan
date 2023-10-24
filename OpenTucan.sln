@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Editor", "Editor\Editor.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucanFPS", "TucanFPS\TucanFPS.csproj", "{8E3DF50B-4D5E-40AB-A19A-81274106F9B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucanFPSDS", "TucanFPSDS\TucanFPSDS.csproj", "{8BC615C2-B68C-4217-A405-3328727BF9CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{8E3DF50B-4D5E-40AB-A19A-81274106F9B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E3DF50B-4D5E-40AB-A19A-81274106F9B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E3DF50B-4D5E-40AB-A19A-81274106F9B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BC615C2-B68C-4217-A405-3328727BF9CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BC615C2-B68C-4217-A405-3328727BF9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BC615C2-B68C-4217-A405-3328727BF9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BC615C2-B68C-4217-A405-3328727BF9CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

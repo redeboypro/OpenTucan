@@ -24,7 +24,7 @@ namespace OpenTucan.Network
             _clientsData = new Dictionary<IPEndPoint, Packet>();
         }
         
-        private async void RunInOtherThread()
+        public async void RunInOtherThread()
         {
             await Task.Run(() =>
             {

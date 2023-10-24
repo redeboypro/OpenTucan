@@ -1,0 +1,15 @@
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\TucanFPSDS.exe
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\TucanFPSDS.pdb
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\OpenTucan.dll
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\OpenTK.dll
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\AssimpNet.dll
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\OpenTucan.pdb
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\OpenTK.pdb
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\OpenTK.xml
+D:\IDE\projects\OpenTucan\TucanFPSDS\bin\Debug\AssimpNet.xml
+D:\IDE\projects\OpenTucan\TucanFPSDS\obj\Debug\TucanFPSDS.csproj.AssemblyReference.cache
+D:\IDE\projects\OpenTucan\TucanFPSDS\obj\Debug\TucanFPSDS.csproj.SuggestedBindingRedirects.cache
+D:\IDE\projects\OpenTucan\TucanFPSDS\obj\Debug\TucanFPSDS.csproj.CoreCompileInputs.cache
+D:\IDE\projects\OpenTucan\TucanFPSDS\obj\Debug\TucanFPSDS.csproj.CopyComplete
+D:\IDE\projects\OpenTucan\TucanFPSDS\obj\Debug\TucanFPSDS.exe
+D:\IDE\projects\OpenTucan\TucanFPSDS\obj\Debug\TucanFPSDS.pdb

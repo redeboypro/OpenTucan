@@ -5,6 +5,7 @@
     <projectFile>TucanAnimator/TucanAnimator.csproj</projectFile>
     <projectFile>Editor/Editor.csproj</projectFile>
     <projectFile>TucanFPS/TucanFPS.csproj</projectFile>
+    <projectFile>TucanFPSDS/TucanFPSDS.csproj</projectFile>
   </component>
   <component name="BranchesTreeState">
     <expand>
@@ -26,48 +27,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6a5a6a08-f3bf-466c-a5c7-d10e503aa099" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Network/Packet.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Network/UDPClient.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OpenTucan/Network/UDPServer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TucanFPS/FPSApplication.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TucanFPS/Program.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TucanFPS/Properties/AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TucanFPS/TucanFPS.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TucanFPS/obj/Debug/.NETFramework,Version=v4.8.1.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TucanFPS/obj/Debug/TucanFPS.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OpenTucan/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/EditorApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/EditorApplication.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/bin/Debug/Editor.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/bin/Debug/Editor.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/bin/Debug/Editor.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/bin/Debug/Editor.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/bin/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/bin/Debug/OpenTucan.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/bin/Debug/OpenTucan.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/bin/Debug/OpenTucan.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/obj/Debug/Editor.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Editor/obj/Debug/Editor.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Editor/obj/Debug/Editor.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan.sln" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/GameObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/GameObject.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Entities/World.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/ExternalShader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/ExternalShader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Graphics/Texture.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/OpenTucan.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/ConvexShape.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/EPA.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/GJK.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/Rigidbody.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Physics/Simplex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/TucanApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/TucanApplication.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Network/UDPClient.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Network/UDPClient.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenTucan/Network/UDPServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/Network/UDPServer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/bin/Debug/OpenTucan.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.dll" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/obj/Debug/OpenTucan.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenTucan/packages.config" beforeDir="false" afterPath="$PROJECT_DIR$/OpenTucan/packages.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TucanFPS/FPSApplication.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TucanFPS/FPSApplication.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TucanFPS/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TucanFPS/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TucanFPS/obj/Debug/TucanFPS.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TucanFPS/obj/Debug/TucanFPS.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +67,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/OpenTucan/Graphics/Samples/SampleInstancingShader.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/ICollider.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/MeshCollider.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Rigidbody.cs" />
@@ -117,8 +88,6 @@
         <option value="$PROJECT_DIR$/OpenTucan/Entities/TransformGizmo.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Components/Behaviour.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Physics/Ray.cs" />
-        <option value="$PROJECT_DIR$/TucanFPS/Program.cs" />
-        <option value="$PROJECT_DIR$/TucanFPS/FPSApplication.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Entities/Entity.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Graphics/Mesh.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Common/MathTools.cs" />
@@ -144,8 +113,11 @@
         <option value="$PROJECT_DIR$/OpenTucan/Common/UDPConsts.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Network/Package.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Network/Packet.cs" />
-        <option value="$PROJECT_DIR$/OpenTucan/Network/UDPServer.cs" />
+        <option value="$PROJECT_DIR$/TucanFPS/FPSApplication.cs" />
+        <option value="$PROJECT_DIR$/TucanFPSDS/Program.cs" />
+        <option value="$PROJECT_DIR$/TucanFPS/Program.cs" />
         <option value="$PROJECT_DIR$/OpenTucan/Network/UDPClient.cs" />
+        <option value="$PROJECT_DIR$/OpenTucan/Network/UDPServer.cs" />
       </list>
     </option>
   </component>
@@ -237,6 +209,24 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="TucanFPSDS" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/TucanFPSDS/TucanFPSDS.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="Console" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -303,7 +293,7 @@
       <workItem from="1697973539442" duration="11297000" />
       <workItem from="1697990879290" duration="80000" />
       <workItem from="1698053375779" duration="16505000" />
-      <workItem from="1698128894224" duration="13745000" />
+      <workItem from="1698128894224" duration="15343000" />
     </task>
     <servers />
   </component>
@@ -416,10 +406,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1162" height="465" key="GridCell.Tab.4.right/0.0.1920.1040@0.0.1920.1040" timestamp="1697990823390" />
-    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size" timestamp="1697893916602">
+    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size" timestamp="1698142993343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040@0.0.1920.1040" timestamp="1697893916602" />
+    <state x="320" y="326" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040@0.0.1920.1040" timestamp="1698142993343" />
     <state x="314" y="223" key="RiderGenerateDialog" timestamp="1698063211943">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

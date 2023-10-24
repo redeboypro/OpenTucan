@@ -1,0 +1,15 @@
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\TucanFPS.exe
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\TucanFPS.pdb
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\AssimpNet.dll
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\OpenTK.dll
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\OpenTucan.dll
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\OpenTucan.pdb
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\AssimpNet.xml
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\OpenTK.pdb
+D:\IDE\projects\OpenTucan\TucanFPS\bin\Debug\OpenTK.xml
+D:\IDE\projects\OpenTucan\TucanFPS\obj\Debug\TucanFPS.csproj.AssemblyReference.cache
+D:\IDE\projects\OpenTucan\TucanFPS\obj\Debug\TucanFPS.csproj.SuggestedBindingRedirects.cache
+D:\IDE\projects\OpenTucan\TucanFPS\obj\Debug\TucanFPS.csproj.CoreCompileInputs.cache
+D:\IDE\projects\OpenTucan\TucanFPS\obj\Debug\TucanFPS.csproj.CopyComplete
+D:\IDE\projects\OpenTucan\TucanFPS\obj\Debug\TucanFPS.exe
+D:\IDE\projects\OpenTucan\TucanFPS\obj\Debug\TucanFPS.pdb
