@@ -7,6 +7,7 @@ using OpenTucan;
 using OpenTucan.Entities;
 using OpenTucan.Graphics;
 using OpenTucan.Input;
+using OpenTucan.Network;
 
 namespace Editor
 {
@@ -16,11 +17,15 @@ namespace Editor
         private float _pitch = 0f;
         private Mesh _cubeMesh;
         private GameObject _playerObject;
+        private GameObject _another;
+        private Client _client;
+        private bool _isInsideWindow;
         
         public EditorApplication(string title, int windowWidth, int windowHeight, Color4 backgroundColor) : base(title, windowWidth, windowHeight, backgroundColor) { }
 
         protected override void PrepareStart()
         {
+            Location = Point.Empty;
             CursorGrabbed = true;
             _camera = new Camera(Width, Height);
             _cubeMesh = Mesh.FromFile("cube.obj");
@@ -58,7 +63,11 @@ void main(void){
             _playerObject = World.Instantiate("player");
             _playerObject.SetKinematic(false);
             _playerObject.SetConvexShapes(_cubeMesh.ConvexCollisionShape);
-            
+
+            _another = World.Instantiate("another", _cubeMesh, solid, shader);
+            _another.SetKinematic(true);
+            _playerObject.FallingAcceleration = -50;
+
             _camera.SetParent(_playerObject);
             _camera.LocalSpaceLocation = Vector3.Zero;
 
@@ -68,10 +77,27 @@ void main(void){
             plane.SetConvexShapes(coneMesh.ConcaveCollisionCollection);
             plane.SetKinematic(false);
             plane.SetStatic(true);
+            
+            _client = new Client("26.110.205.171", 7777);
+            _client.ReceivePacket += packet =>
+            {
+                _another.WorldSpaceLocation = new Vector3(packet.ReadSingle(), packet.ReadSingle(), packet.ReadSingle());
+            };
         }
 
         protected override void PrepareUpdate(FrameEventArgs eventArgs)
         {
+            _client.ClearBuffer();
+            _client.WriteSingleToBuffer(_playerObject.WorldSpaceLocation.X);
+            _client.WriteSingleToBuffer(_playerObject.WorldSpaceLocation.Y);
+            _client.WriteSingleToBuffer(_playerObject.WorldSpaceLocation.Z);
+            _client.Send();
+            
+            if (!_isInsideWindow)
+            {
+                return;
+            }
+            
             var elapsedTime = (float) eventArgs.Time * 100;
             _pitch += elapsedTime * InputManager.GetMouseDY();
             _pitch = MathHelper.Clamp(_pitch, -90, 90);
@@ -98,6 +124,16 @@ void main(void){
             {
                 _playerObject.TossUp(20);
             }
+        }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            _isInsideWindow = true;
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            _isInsideWindow = false;
         }
 
         protected override void PostRender(FrameEventArgs eventArgs)

@@ -40,7 +40,6 @@
     <ItemGroup>
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Server.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\OpenTucan\OpenTucan.csproj">
