@@ -64,15 +64,16 @@ namespace OpenTucan.Physics
 
             foreach (var vertex in _vertices)
             {
-                var distance = Vector3.Dot(vertex, direction);
+                var transformedVertex = entity.WorldSpaceRotation * (vertex * entity.WorldSpaceScale);
+                var distance = Vector3.Dot(transformedVertex, direction);
                 if (distance > maxDistance) 
                 {
                     maxDistance = distance;
-                    maxPoint = vertex;
+                    maxPoint = transformedVertex;
                 }
             }
 
-            return maxPoint * entity.WorldSpaceScale + entity.WorldSpaceLocation;
+            return maxPoint + entity.WorldSpaceLocation;
         }
 
         public static IReadOnlyList<ConvexShape> GetConcaveCollection(Mesh mesh)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using OpenTK;
 
 namespace OpenTucan.Network
 {
@@ -68,6 +69,31 @@ namespace OpenTucan.Network
         public void WriteStringToBuffer(string data)
         {
             _packet.WriteString(data);
+        }
+        
+        public void WriteVector2ToBuffer(Vector2 data)
+        {
+            _packet.WriteVector2ToBuffer(data);
+        }
+        
+        public void WriteVector3ToBuffer(Vector3 data)
+        {
+            _packet.WriteVector3ToBuffer(data);
+        }
+        
+        public void WriteVector4ToBuffer(Vector4 data)
+        {
+            _packet.WriteVector4ToBuffer(data);
+        }
+        
+        public void WriteQuaternionToBuffer(Quaternion data)
+        {
+            _packet.WriteQuaternionToBuffer(data);
+        }
+        
+        public void WriteMatrixToBuffer(Matrix4 data)
+        {
+            _packet.WriteMatrixToBuffer(data);
         }
 
         public void ClearBuffer()

@@ -29,6 +29,8 @@ namespace OpenTucan
             {
                 Instance = this;
             }
+            
+            Console.WriteLine("Powered by Tucan Engine");
         }
         
         public World World

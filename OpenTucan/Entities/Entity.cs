@@ -320,7 +320,7 @@ namespace OpenTucan.Entities
         /// <summary>
         /// Gives forward direction in wish space
         /// </summary>
-        public Vector3 Front(Space space)
+        public Vector3 Front(Space space = Space.Global)
         {
             switch (space)
             {
@@ -335,7 +335,7 @@ namespace OpenTucan.Entities
         /// <summary>
         /// Gives up direction in wish space
         /// </summary>
-        public Vector3 Up(Space space)
+        public Vector3 Up(Space space = Space.Global)
         {
             switch (space)
             {
@@ -350,7 +350,7 @@ namespace OpenTucan.Entities
         /// <summary>
         /// Gives right direction in wish space
         /// </summary>
-        public Vector3 Right(Space space)
+        public Vector3 Right(Space space = Space.Global)
         {
             switch (space)
             {

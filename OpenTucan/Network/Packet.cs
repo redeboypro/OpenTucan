@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OpenTK;
 
 namespace OpenTucan.Network
 {
@@ -20,6 +21,14 @@ namespace OpenTucan.Network
             get
             {
                 return _buffer.Count;
+            }
+        }
+
+        public int UnreadLength
+        {
+            get
+            {
+                return BufferSize - _readPosition;
             }
         }
 
@@ -60,6 +69,172 @@ namespace OpenTucan.Network
             var length = ReadInt32();
             return Encoding.ASCII.GetString(ReadBytes(length), 0, length);
         }
+        
+        public Vector2 ReadVector2()
+        {
+            return new Vector2(ReadSingle(), ReadSingle());
+        }
+        
+        public Vector3 ReadVector3()
+        {
+            return new Vector3(ReadSingle(), ReadSingle(), ReadSingle());
+        }
+        
+        public Vector4 ReadVector4()
+        {
+            return new Vector4(ReadSingle(), ReadSingle(), ReadSingle(), ReadSingle());
+        }
+        
+        public Quaternion ReadQuaternion()
+        {
+            return new Quaternion(ReadSingle(), ReadSingle(), ReadSingle(), ReadSingle());
+        }
+        
+        public Matrix4 ReadMatrix()
+        {
+            var matrix = new Matrix4();
+            for (var r = 0; r < 4; r++)
+            {
+                for (var c = 0; c < 4; c++)
+                {
+                    matrix[r, c] = ReadSingle();
+                }
+            }
+
+            return matrix;
+        }
+
+        public bool TryReadBytes(int length, out byte[] data)
+        {
+            data = new byte[0];
+            if (length > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadBytes(length);
+            return true;
+        }
+        
+        public bool TryReadInt16(out short data)
+        {
+            data = 0;
+            if (2 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadInt16();
+            return true;
+        }
+        
+        public bool TryReadInt32(out int data)
+        {
+            data = 0;
+            if (4 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadInt32();
+            return true;
+        }
+        
+        public bool TryReadInt64(out long data)
+        {
+            data = 0;
+            if (8 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadInt64();
+            return true;
+        }
+        
+        public bool TryReadSingle(out float data)
+        {
+            data = 0;
+            if (4 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadSingle();
+            return true;
+        }
+        
+        public bool TryReadString(out string data)
+        {
+            data = string.Empty;
+            if (5 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadString();
+            return true;
+        }
+        
+        public bool TryReadVector2(out Vector2 data)
+        {
+            data = Vector2.Zero;
+            if (4 * 2 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadVector2();
+            return true;
+        }
+        
+        public bool TryReadVector3(out Vector3 data)
+        {
+            data = Vector3.Zero;
+            if (4 * 3 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadVector3();
+            return true;
+        }
+        
+        public bool TryReadVector4(out Vector4 data)
+        {
+            data = Vector4.Zero;
+            if (4 * 4 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadVector4();
+            return true;
+        }
+        
+        public bool TryReadQuaternion(out Quaternion data)
+        {
+            data = Quaternion.Identity;
+            if (4 * 4 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadQuaternion();
+            return true;
+        }
+        
+        public bool TryReadMatrix(out Matrix4 data)
+        {
+            data = Matrix4.Identity;
+            if (4 * 16 > UnreadLength)
+            {
+                return false;
+            }
+
+            data = ReadMatrix();
+            return true;
+        }
 
         public void WriteBytes(IEnumerable<byte> data)
         {
@@ -94,6 +269,46 @@ namespace OpenTucan.Network
         {
             _buffer.AddRange(BitConverter.GetBytes(data.Length));
             _buffer.AddRange(Encoding.ASCII.GetBytes(data));
+        }
+        
+        public void WriteVector2ToBuffer(Vector2 data)
+        {
+            WriteSingle(data.X);
+            WriteSingle(data.Y);
+        }
+        
+        public void WriteVector3ToBuffer(Vector3 data)
+        {
+            WriteSingle(data.X);
+            WriteSingle(data.Y);
+            WriteSingle(data.Z);
+        }
+        
+        public void WriteVector4ToBuffer(Vector4 data)
+        {
+            WriteSingle(data.X);
+            WriteSingle(data.Y);
+            WriteSingle(data.Z);
+            WriteSingle(data.W);
+        }
+        
+        public void WriteQuaternionToBuffer(Quaternion data)
+        {
+            WriteSingle(data.X);
+            WriteSingle(data.Y);
+            WriteSingle(data.Z);
+            WriteSingle(data.W);
+        }
+        
+        public void WriteMatrixToBuffer(Matrix4 data)
+        {
+            for (var r = 0; r < 4; r++)
+            {
+                for (var c = 0; c < 4; c++)
+                {
+                    WriteSingle(data[r, c]);
+                }
+            }
         }
         
         public void Clear()

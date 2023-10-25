@@ -11,8 +11,8 @@ namespace OpenTucan.Components
 {
     public abstract class Behaviour
     {
-        public readonly GameObject GameObject;
-        private bool _enabled;
+        public GameObject GameObject;
+        private bool _enabled = true;
 
         public bool Enabled
         {

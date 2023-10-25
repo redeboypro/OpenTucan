@@ -265,7 +265,7 @@ namespace OpenTucan.Graphics
             GL.EnableVertexAttribArray(_normalsArrayAttribLocation);
             
             GL.CullFace(cullFaceMode);
-            GL.DrawElements(PrimitiveType.Triangles, _vertices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
+            GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
 
             GL.DisableVertexAttribArray(_vertexArrayAttribLocation);
             GL.DisableVertexAttribArray(_uvArrayAttribLocation);
@@ -283,7 +283,7 @@ namespace OpenTucan.Graphics
             var assimpScene = assimpContext.ImportFile(fileName, PostProcessSteps.FlipUVs);
             var assimpMesh = assimpScene.Meshes[0];
             var assimpMeshFaces = assimpMesh.Faces;
-
+            
             var vertices = new List<Vector3>();
             var normals = new List<Vector3>();
             var textureCoordinates = new List<Vector2>();
@@ -314,6 +314,40 @@ namespace OpenTucan.Graphics
 
             return mesh;
         }
+        
+        public static Mesh Plane(
+            int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
+            int uvArrayAttribLocation = DefaultUVArrayAttribLocation,
+            int normalsArrayAttribLocation = DefaultNormalsArrayAttribLocation)
+        {
+            var planeMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalsArrayAttribLocation)
+            {
+                Indices = new []
+                {
+                    2, 0, 1, 1, 3, 2
+                },
+                
+                Vertices = new []
+                {
+                    new Vector3(0.5f, 0.0f, -0.5f),
+                    new Vector3(-0.5f, 0.0f, -0.5f),
+                    new Vector3(0.5f, 0.0f, 0.5f),
+                    new Vector3(-0.5f, 0.0f, 0.5f)
+                },
+
+                UV = new []
+                {
+                    new Vector2(1, 1),
+                    new Vector2(0, 1),
+                    new Vector2(0, 0),
+                    new Vector2(1, 0)
+                }
+            };
+
+            planeMesh.RecalculateNormals();
+            planeMesh.RecalculateCollisionShapes();
+            return planeMesh;
+        }
 
         public static Mesh Cube(
             int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
@@ -322,40 +356,38 @@ namespace OpenTucan.Graphics
         {
             var cubeMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalsArrayAttribLocation)
             {
-                Indices = new[]
+                Indices = new []
                 {
-                    0, 1, 2, 3, 0, 2,
-                    1, 5, 6, 2, 1, 6,
-                    4, 5, 1, 0, 4, 1,
-                    3, 2, 6, 7, 3, 6,
-                    6, 5, 4, 6, 4, 7,
-                    4, 0, 3, 7, 4, 3
+                    0, 1, 2, 0, 2, 3,
+                    1, 5, 6, 1, 6, 2,
+                    4, 7, 6, 4, 6, 5,
+                    0, 3, 7, 0, 7, 4,
+                    3, 2, 6, 3, 6, 7,
+                    0, 4, 5, 0, 5, 1 
                 },
                 
-                Vertices = new[]
+                Vertices = new []
                 {
-                    new Vector3(-1.0f, -1.0f, -1.0f),
-                    new Vector3(-1.0f, 1.0f, -1.0f),
-                    new Vector3(1.0f, 1.0f, -1.0f),
-                    new Vector3(1.0f, -1.0f, -1.0f),
-
-                    new Vector3(-1.0f, -1.0f, 1.0f),
-                    new Vector3(-1.0f, 1.0f, 1.0f),
-                    new Vector3(1.0f, 1.0f, 1.0f),
-                    new Vector3(1.0f, -1.0f, 1.0f)
+                    new Vector3(-0.5f, -0.5f, -0.5f),
+                    new Vector3(0.5f, -0.5f, -0.5f),
+                    new Vector3(0.5f, 0.5f, -0.5f),
+                    new Vector3(-0.5f, 0.5f, -0.5f),
+                    new Vector3(-0.5f, -0.5f, 0.5f),
+                    new Vector3(0.5f, -0.5f, 0.5f),
+                    new Vector3(0.5f, 0.5f, 0.5f),
+                    new Vector3(-0.5f, 0.5f, 0.5f)
                 },
 
-                UV = new[]
+                UV = new []
                 {
-                    new Vector2(0.0f, 0.0f), 
-                    new Vector2(0.0f, 1.0f), 
-                    new Vector2(1.0f, 1.0f),
-                    new Vector2(1.0f, 0.0f),
-
-                    new Vector2(1.0f, 0.0f),
-                    new Vector2(1.0f, 1.0f),
-                    new Vector2(0.0f, 1.0f),
-                    new Vector2(0.0f, 0.0f)
+                    new Vector2(0, 0),
+                    new Vector2(1, 0),
+                    new Vector2(1, 1),
+                    new Vector2(0, 1),
+                    new Vector2(0, 0),
+                    new Vector2(1, 0),
+                    new Vector2(1, 1),
+                    new Vector2(0, 1)
                 }
             };
 

@@ -85,7 +85,7 @@ namespace OpenTucan.Entities
             {
                 var rigidbody1 = _gameObjects[index1];
 
-                if (rigidbody1.IsStatic || !rigidbody1.IsActive || rigidbody1.IsKinematic || rigidbody1.IsTrigger)
+                if (!rigidbody1.IsActive)
                 {
                     continue;
                 }
@@ -94,6 +94,11 @@ namespace OpenTucan.Entities
                 {
                     behaviour.Update(eventArgs);
                 });
+
+                if (rigidbody1.IsStatic || rigidbody1.IsKinematic || rigidbody1.IsTrigger)
+                {
+                    continue;
+                }
 
                 rigidbody1.Accelerate(deltaTime);
                 rigidbody1.LocalSpaceLocation += new Vector3
