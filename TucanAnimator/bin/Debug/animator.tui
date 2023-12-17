@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<GUIRoot>
+    <GUIList>
+        <GUIIsMasked>True</GUIIsMasked>
+        <GUIIdentifier>BoneList</GUIIdentifier>
+        <GUIPosition>-0,75 0,75</GUIPosition>
+        <GUIScale>0,25 0,25</GUIScale>
+    </GUIList>
+    
+    <GUIImage>
+        <GUIIdentifier>CreateButton</GUIIdentifier>
+        <GUIPosition>-0,75 0,45</GUIPosition>
+        <GUIScale>0,25 0,05</GUIScale>
+        <GUIColor>0,5 0,3</GUIColor>
+        <GUIText>
+            <GUITextContent>Create</GUITextContent>
+        </GUIText>
+    </GUIImage>
+    
+    <GUIInputField>
+        <GUIIdentifier>ParentInputField</GUIIdentifier>
+        <GUIPosition>-0,75 0,35</GUIPosition>
+        <GUIScale>0,25 0,05</GUIScale>
+        <GUITextContent>Parent</GUITextContent>
+    </GUIInputField>
+
+    <GUIList>
+        <GUIIsMasked>True</GUIIsMasked>
+        <GUIPosition>0,75 0,75</GUIPosition>
+        <GUIScale>0,25 0,25</GUIScale>
+        <GUIText>
+            <GUIIdentifier>BoneName</GUIIdentifier>
+            <GUITextContent>Name</GUITextContent>
+            <GUIScale>0,5 0,1</GUIScale>
+        </GUIText>
+        <GUIInputField>
+            <GUIIdentifier>BonePositionX</GUIIdentifier>
+            <GUIScale>0,5 0,1</GUIScale>
+            <GUITextContent>X...  </GUITextContent>
+        </GUIInputField>
+        <GUIInputField>
+            <GUIIdentifier>BonePositionY</GUIIdentifier>
+            <GUIScale>0,5 0,1</GUIScale>
+            <GUITextContent>Y...  </GUITextContent>
+        </GUIInputField>
+        <GUIInputField>
+            <GUIIdentifier>BonePositionZ</GUIIdentifier>
+            <GUIScale>0,5 0,1</GUIScale>
+            <GUITextContent>Z...  </GUITextContent>
+        </GUIInputField>
+        <GUIInputField>
+            <GUIIdentifier>BoneRadius</GUIIdentifier>
+            <GUIScale>0,5 0,1</GUIScale>
+            <GUITextContent>Radius</GUITextContent>
+        </GUIInputField>
+    </GUIList>
+</GUIRoot>

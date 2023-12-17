@@ -95,6 +95,42 @@ namespace OpenTucan.Common
         }
 
         /// <summary>
+        /// Sets X component of vector
+        /// </summary>
+        public static Vector3 SetX(this Vector3 vector, float value)
+        {
+            Vector3 result;
+            result.X = value;
+            result.Y = vector.Y;
+            result.Z = vector.Z;
+            return result;
+        }
+        
+        /// <summary>
+        /// Sets Y component of vector
+        /// </summary>
+        public static Vector3 SetY(this Vector3 vector, float value)
+        {
+            Vector3 result;
+            result.X = vector.X;
+            result.Y = value;
+            result.Z = vector.Z;
+            return result;
+        }
+        
+        /// <summary>
+        /// Sets Z component of vector
+        /// </summary>
+        public static Vector3 SetZ(this Vector3 vector, float value)
+        {
+            Vector3 result;
+            result.X = vector.X;
+            result.Y = vector.Y;
+            result.Z = value;
+            return result;
+        }
+
+        /// <summary>
         /// Get forward direction of orientation
         /// </summary>
         public static Quaternion GetLookRotation(Vector3 forward, Vector3 up)

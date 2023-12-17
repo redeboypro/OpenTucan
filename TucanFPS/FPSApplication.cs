@@ -27,42 +27,13 @@ namespace TucanFPS
             _cubeMesh = Mesh.Cube();
             
             var solid = Texture.Solid(Color.White);
-            var shader = new ExternalShader(@"
-#version 150
-
-in vec3 InVertex;
-in vec2 InUV;
-in vec3 InNormal;
-
-out vec2 PassUV;
-
-uniform mat4 ModelMatrix;
-uniform mat4 ProjectionMatrix;
-uniform mat4 ViewMatrix;
-
-void main(void){
-	gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(InVertex, 1.0);
-	PassUV = InUV;
-}
-", @"
-#version 150
-
-in vec2 PassUV;
-
-out vec4 OutColor;
-
-uniform sampler2D MainTexture;
-
-void main(void){
-	OutColor = texture(MainTexture, PassUV);
-}
-");
+            var shader = new BasicShader();
             _playerObject = World.Instantiate("player");
             _playerObject.SetKinematic(false);
             _playerObject.SetConvexShapes(_cubeMesh.ConvexCollisionShape);
             _playerObject.AddBehaviour<PlayerController>();
 
-            _another = World.Instantiate("another", _cubeMesh, solid, shader);
+            _another = World.Instantiate("another", Mesh.FromFile("rig.fbx"), solid, shader);
             _another.SetKinematic(true);
             _playerObject.FallingAcceleration = -50;
 
@@ -90,6 +61,12 @@ void main(void){
             //_client.WriteVector3ToBuffer(_playerObject.WorldSpaceLocation);
             //_client.WriteQuaternionToBuffer(_playerObject.WorldSpaceRotation);
             //_client.Send();
+
+            if (InputManager.IsKeyDown(Key.G))
+            {
+                World.FindObjectWithName("Bone.002", out var bone1);
+                bone1.WorldSpaceScale += Vector3.One * (float) eventArgs.Time;
+            }
         }
 
         protected override void OnMouseEnter(EventArgs e)

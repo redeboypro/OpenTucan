@@ -41,6 +41,12 @@ namespace OpenTucan.Graphics
             GL.BindTexture(TextureTarget.Texture2D, 0);
             Id = id;
         }
+        
+        public Texture(string fileName,
+            TextureMinFilter minFilter = TextureMinFilter.Linear,
+            TextureMagFilter magFilter = TextureMagFilter.Linear,
+            TextureWrapMode wrapS = TextureWrapMode.ClampToEdge,
+            TextureWrapMode wrapT = TextureWrapMode.ClampToEdge) : this(new Bitmap(fileName), minFilter, magFilter, wrapS, wrapT) { }
 
         public Texture(int width, int height,
             TextureMinFilter minFilter = TextureMinFilter.Linear,

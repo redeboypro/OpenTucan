@@ -60,9 +60,8 @@ namespace OpenTucan.GUI.Advanced
             document.Load(fileName);
 
             var root = document.DocumentElement;
-            foreach (XmlNode node in root)
+            foreach (var deserializedChild in from XmlNode node in root select DeserializeElement(node))
             {
-                var deserializedChild = DeserializeElement(node);
                 _controller.AddElement(deserializedChild);
             }
         }
@@ -77,7 +76,7 @@ namespace OpenTucan.GUI.Advanced
             return _undefinedElementCount;
         }
         
-        public void IncreaseUndefinedElementCount()
+        private void IncreaseUndefinedElementCount()
         {
             _undefinedElementCount++;
         }
@@ -228,7 +227,7 @@ namespace OpenTucan.GUI.Advanced
                             Position.Y = deserializedPositionXYZ[1];
                             break;
                         case GUIElementRotation:
-                            Rotation = Quaternion.FromEulerAngles(0, 0, float.Parse(child.InnerText));
+                            Rotation = Quaternion.FromEulerAngles(0, 0, MathHelper.DegreesToRadians(float.Parse(child.InnerText)));
                             break;
                         case GUIElementScale:
                             var deserializedSpaceXYZ = DeserializeVector(child.InnerText);
@@ -261,6 +260,7 @@ namespace OpenTucan.GUI.Advanced
                 {
                     case 0:
                         Colors.Add(Color4.White);
+                        Colors.Add(Color4.Gray);
                         break;
                     case 1:
                         Colors.Add(Color4.Gray);

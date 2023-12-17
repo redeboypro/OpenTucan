@@ -1,0 +1,15 @@
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\TucanAnimator.exe
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\TucanAnimator.pdb
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\AssimpNet.dll
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\OpenTK.dll
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\OpenTucan.dll
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\OpenTucan.pdb
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\AssimpNet.xml
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\OpenTK.pdb
+D:\IDE\projects\OpenTucan\TucanAnimator\bin\Debug\OpenTK.xml
+D:\IDE\projects\OpenTucan\TucanAnimator\obj\Debug\TucanAnimator.csproj.AssemblyReference.cache
+D:\IDE\projects\OpenTucan\TucanAnimator\obj\Debug\TucanAnimator.csproj.SuggestedBindingRedirects.cache
+D:\IDE\projects\OpenTucan\TucanAnimator\obj\Debug\TucanAnimator.csproj.CoreCompileInputs.cache
+D:\IDE\projects\OpenTucan\TucanAnimator\obj\Debug\TucanAnimator.csproj.CopyComplete
+D:\IDE\projects\OpenTucan\TucanAnimator\obj\Debug\TucanAnimator.exe
+D:\IDE\projects\OpenTucan\TucanAnimator\obj\Debug\TucanAnimator.pdb

@@ -47,7 +47,7 @@ namespace OpenTucan.GUI
         }
         
         public Action<Color4> ChangeColor { get; set; }
-
+        
         public Action<Vector2> Press { get; set; }
         
         public Action Release { get; set; }
@@ -101,14 +101,27 @@ namespace OpenTucan.GUI
 
         public void OnMouseDown(Vector2 mousePos)
         {
-            if (!ContainsPoint(mousePos) || !IsActive) 
+            if (ContainsPoint(mousePos) || !IsActive) 
             {
-                return;
+                Press?.Invoke(mousePos);
+                _isPressed = true;
             }
-            
-            Press?.Invoke(mousePos);
 
-            _isPressed = true;
+            if (IsMasked)
+            {
+                if (_isPressed)
+                {
+                    OnMouseDownInChildren(mousePos);
+                }
+            }
+            else
+            {
+                OnMouseDownInChildren(mousePos);
+            }
+        }
+
+        private void OnMouseDownInChildren(Vector2 mousePos)
+        {
             for (var childId = 0; childId < GetChildrenAmount(); childId++)
             {
                 ((GUIControl) GetChild(childId)).OnMouseDown(mousePos);

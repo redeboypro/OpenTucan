@@ -97,7 +97,7 @@ namespace OpenTucan.Entities
             _shader.Start();
             _shader.SetProjectionMatrix(_camera.ProjectionMatrix);
             _shader.SetViewMatrix(_camera.ViewMatrix);
-            _shader.SetModelMatrix(GetModelMatrix());
+            _shader.SetModelMatrix(GetGlobalMatrix());
 
             GL.BindVertexArray(_vertexArrayObject.Id);
             GL.EnableVertexAttribArray(0);

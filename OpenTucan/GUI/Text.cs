@@ -39,7 +39,7 @@ namespace OpenTucan.GUI
                                  {
                                      X = horizontalPos
                                  }) * 
-                                 GetModelMatrix();
+                                 GetGlobalMatrix();
 
                     horizontalPos += charHalfWidth * 2;
                 

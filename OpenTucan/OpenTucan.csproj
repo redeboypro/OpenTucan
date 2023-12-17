@@ -32,11 +32,16 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+      <Compile Include="Animations\AnimationClip.cs" />
+      <Compile Include="Animations\AnimationRoot.cs" />
+      <Compile Include="Animations\Joint.cs" />
+      <Compile Include="Animations\Pose.cs" />
+      <Compile Include="Animations\WeightPoint.cs" />
       <Compile Include="Bridges\EBO.cs" />
       <Compile Include="Bridges\IBO.cs" />
       <Compile Include="Bridges\VAO.cs" />
       <Compile Include="Bridges\VBO.cs" />
-      <Compile Include="Common\ConversionHelper.cs" />
+      <Compile Include="Common\AssimpToOpenTK.cs" />
       <Compile Include="Common\MathTools.cs" />
       <Compile Include="Common\Ortho.cs" />
       <Compile Include="Common\ShaderConsts.cs" />
@@ -46,6 +51,7 @@
       <Compile Include="Entities\GameObject.cs" />
       <Compile Include="Entities\TransformGizmo.cs" />
       <Compile Include="Entities\World.cs" />
+      <Compile Include="Graphics\BasicShader.cs" />
       <Compile Include="Graphics\ExternalShader.cs" />
       <Compile Include="Graphics\Mesh.cs" />
       <Compile Include="Graphics\Shader.cs" />

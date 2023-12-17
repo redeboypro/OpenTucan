@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucanFPS", "TucanFPS\TucanF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucanFPSDS", "TucanFPSDS\TucanFPSDS.csproj", "{8BC615C2-B68C-4217-A405-3328727BF9CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TucanAnimator", "TucanAnimator\TucanAnimator.csproj", "{5CABC1EE-37DB-4B39-BED4-C0507E72692A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{8BC615C2-B68C-4217-A405-3328727BF9CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BC615C2-B68C-4217-A405-3328727BF9CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BC615C2-B68C-4217-A405-3328727BF9CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CABC1EE-37DB-4B39-BED4-C0507E72692A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CABC1EE-37DB-4B39-BED4-C0507E72692A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CABC1EE-37DB-4B39-BED4-C0507E72692A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CABC1EE-37DB-4B39-BED4-C0507E72692A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

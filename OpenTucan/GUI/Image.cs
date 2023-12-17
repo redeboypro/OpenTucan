@@ -20,7 +20,7 @@ namespace OpenTucan.GUI
                 GL.ActiveTexture(TextureUnit.Texture0);
                 texture.Bind();
 
-                shader.SetUniform("modelMatrix", GetModelMatrix());
+                shader.SetUniform("modelMatrix", GetGlobalMatrix());
                 shader.SetRadius(_cornerRadius);
                 shader.SetExtents(WorldSpaceScale.X * 2, WorldSpaceScale.Y * 2);
                 shader.SetColor(Color);

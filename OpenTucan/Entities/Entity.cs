@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using Assimp;
 using OpenTK;
 using OpenTucan.Common;
-using OpenTucan.Components;
 using Quaternion = OpenTK.Quaternion;
 
 namespace OpenTucan.Entities
@@ -30,7 +25,8 @@ namespace OpenTucan.Entities
         private Quaternion _localRotation;
         private Vector3 _localScale;
 
-        private Matrix4 _modelMatrix;
+        private Matrix4 _localMatrix;
+        private Matrix4 _globalMatrix;
 
         private bool _isStatic;
         private bool _isActive;
@@ -40,7 +36,8 @@ namespace OpenTucan.Entities
             _globalLocation = _localLocation = Vector3.Zero; 
             _globalRotation = _localRotation = Quaternion.Identity; 
             _globalScale = _localScale = Vector3.One;
-            _modelMatrix = Matrix4.Identity;
+            _localMatrix = Matrix4.Identity;
+            _globalMatrix = Matrix4.Identity;
             _children = new List<Entity>();
             _isActive = true;
             TransformMatrix(Space.Local);
@@ -266,10 +263,10 @@ namespace OpenTucan.Entities
             {
                 _parent?.RemoveChild(this);
             }
-
+            
             var location = _globalLocation;
             var rotation = _globalRotation;
-            var scale = _globalScale; 
+            var scale = _globalScale;
             
             _parent = assignableEntity;
             TransformMatrix(Space.Local);
@@ -294,11 +291,19 @@ namespace OpenTucan.Entities
         }
 
         /// <summary>
-        /// Gives current model matrix
+        /// Gives current local matrix
         /// </summary>
-        public Matrix4 GetModelMatrix()
+        public Matrix4 GetLocalMatrix()
         {
-            return _modelMatrix;
+            return _localMatrix;
+        }
+        
+        /// <summary>
+        /// Gives current global matrix
+        /// </summary>
+        public Matrix4 GetGlobalMatrix()
+        {
+            return _globalMatrix;
         }
 
         /// <summary>
@@ -313,7 +318,7 @@ namespace OpenTucan.Entities
                 case Camera camera:
                     return camera.ViewMatrix.Inverted();
                 default:
-                    return _parent.GetModelMatrix();
+                    return _parent.GetGlobalMatrix();
             }
         }
 
@@ -371,13 +376,15 @@ namespace OpenTucan.Entities
             
             if (space is Space.Local)
             {
-                _modelMatrix = Matrix4.CreateScale(_localScale)
+                _localMatrix = Matrix4.CreateScale(_localScale)
                                * Matrix4.CreateFromQuaternion(_localRotation)
-                               * Matrix4.CreateTranslation(_localLocation) * parentMatrix;
+                               * Matrix4.CreateTranslation(_localLocation);
+                
+                _globalMatrix = _localMatrix * parentMatrix;
 
-                _globalLocation = _modelMatrix.ExtractTranslation();
-                _globalRotation = _modelMatrix.ExtractRotation().Normalized();
-                _globalScale = _modelMatrix.ExtractScale();
+                _globalLocation = _globalMatrix.ExtractTranslation();
+                _globalRotation = _globalMatrix.ExtractRotation().Normalized();
+                _globalScale = _globalMatrix.ExtractScale();
                 
                 foreach (var child in _children)
                 {

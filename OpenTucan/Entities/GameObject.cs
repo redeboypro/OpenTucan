@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using OpenTucan.Animations;
 using OpenTucan.Common;
 using OpenTucan.Components;
 using OpenTucan.Graphics;
@@ -16,10 +18,13 @@ namespace OpenTucan.Entities
         public readonly World World;
         
         private readonly List<Behaviour> _behaviours;
-        
+
         private Mesh _mesh;
         private Texture _texture;
         private Shader _shader;
+        
+        private AnimationRoot _animationRoot;
+        private IReadOnlyList<Matrix4> _bonesMatrices;
 
         public GameObject(string name, World world)
         {
@@ -27,7 +32,7 @@ namespace OpenTucan.Entities
             World = world;
             _behaviours = new List<Behaviour>();
         }
-        
+
         public Mesh Mesh
         {
             get
@@ -52,6 +57,14 @@ namespace OpenTucan.Entities
             }
         }
 
+        public AnimationRoot AnimationRoot
+        {
+            get
+            {
+                return _animationRoot;
+            }
+        }
+
         public bool ReadyForRendering(Camera camera)
         {
             if (_mesh is null || camera is null || _shader is null)
@@ -60,9 +73,19 @@ namespace OpenTucan.Entities
             }
             
             _shader.Start();
+
+            var isSkinned = _mesh.IsSkinned && _animationRoot != null;
+            _shader.SetUniform(ShaderConsts.HasBones, isSkinned);
+            if (isSkinned)
+            {
+                for (var boneIndex = 0; boneIndex < _bonesMatrices.Count; boneIndex++)
+                {
+                    _shader.SetUniform(ShaderConsts.BonesMatrices + "[" + boneIndex + "]", _bonesMatrices[boneIndex]);
+                }
+            }
             _shader.SetUniform(ShaderConsts.ViewMatrix, camera.ViewMatrix);
             _shader.SetUniform(ShaderConsts.ProjectionMatrix, camera.ProjectionMatrix);
-            _shader.SetUniform(ShaderConsts.ModelMatrix, GetModelMatrix());
+            _shader.SetUniform(ShaderConsts.ModelMatrix, GetGlobalMatrix());
 
             if (_texture != null)
             {
@@ -167,7 +190,29 @@ namespace OpenTucan.Entities
         {
             _mesh = mesh;
         }
-        
+
+        public void SetAnimationRoot(AnimationRoot animationRoot)
+        {
+            _animationRoot = animationRoot;
+            var bonesMatrices = new Matrix4[_animationRoot.WeightPointCount];
+            for (var i = 0; i < bonesMatrices.Length; i++)
+            {
+                bonesMatrices[i] = Matrix4.Identity;
+            }
+
+            _bonesMatrices = bonesMatrices;
+        }
+
+        public void SetBonesMatrices(IReadOnlyList<Matrix4> bonesMatrices)
+        {
+            _bonesMatrices = bonesMatrices;
+        }
+
+        public void InterpolateAnimation(string clipName, float time)
+        {
+            _bonesMatrices = _animationRoot.Interpolate(clipName, time);
+        }
+
         public void SetTexture(Texture texture)
         {
             _texture = texture;

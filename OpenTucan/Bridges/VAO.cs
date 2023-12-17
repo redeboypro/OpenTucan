@@ -34,14 +34,14 @@ namespace OpenTucan.Bridges
             GL.BindVertexArray(0);
         }
         
-        public void CreateVertexBufferObject<T>(int attributeLocation, int dim, T[] data) where T : struct
+        public void CreateVertexBufferObject<T>(int attributeLocation, int dim, T[] data, VertexAttribPointerType pointerType = VertexAttribPointerType.Float) where T : struct
         {
             if (VertexBufferObjects.ContainsKey(attributeLocation))
             {
                 throw new Exception("VAO: Vertex buffer is already instantiated!");
             }
             GL.BindVertexArray(Id);
-            var vbo = new VBO(attributeLocation, dim);
+            var vbo = new VBO(attributeLocation, dim, pointerType);
             vbo.Create(data);
             VertexBufferObjects.Add(attributeLocation, vbo);
             GL.BindVertexArray(0);

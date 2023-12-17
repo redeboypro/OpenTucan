@@ -1,12 +1,14 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Assimp;
 using Assimp.Configs;
 using OpenTucan.Bridges;
 using OpenTucan.Common;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
- using OpenTucan.Physics;
+using OpenTucan.Animations;
+using OpenTucan.Physics;
  using PrimitiveType = OpenTK.Graphics.OpenGL.PrimitiveType;
 
 namespace OpenTucan.Graphics
@@ -15,21 +17,25 @@ namespace OpenTucan.Graphics
     {
         public const int DefaultVertexArrayAttribLocation = 0;
         public const int DefaultUVArrayAttribLocation = 1;
-        public const int DefaultNormalsArrayAttribLocation = 2;
-        
+        public const int DefaultNormalArrayAttribLocation = 2;
+        public const int DefaultBoneIndexArrayAttribLocation = 3;
+
         private readonly int _vertexArrayAttribLocation;
         private readonly int _uvArrayAttribLocation;
-        private readonly int _normalsArrayAttribLocation;
-        
+        private readonly int _normalArrayAttribLocation;
+        private readonly int _boneIndexArrayAttribLocation;
+
         private Vector3[] _vertices;
         private Vector2[] _uv;
         private Vector3[] _normals;
+        private int[] _bonesIndices;
         private int[] _indices;
 
-        private bool _verticesIsDirty;
-        private bool _uvIsDirty;
-        private bool _normalsIsDirty;
-        private bool _indicesIsDirty;
+        private bool _verticesBufferIsDirty;
+        private bool _uvBufferIsDirty;
+        private bool _normalsBufferIsDirty;
+        private bool _boneIndicesBufferIsDirty;
+        private bool _indicesBufferIsDirty;
 
         private Vector3 _boundsMinimum;
         private Vector3 _boundsMaximum;
@@ -41,16 +47,19 @@ namespace OpenTucan.Graphics
         public Mesh(
             int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
             int uvArrayAttribLocation = DefaultUVArrayAttribLocation,
-            int normalsArrayAttribLocation = DefaultNormalsArrayAttribLocation)
+            int normalArrayAttribLocation = DefaultNormalArrayAttribLocation,
+            int boneIndexArrayAttribLocation = DefaultBoneIndexArrayAttribLocation)
         {
             VertexArrayObject = new VAO();
 
             _vertexArrayAttribLocation = vertexArrayAttribLocation;
             _uvArrayAttribLocation = uvArrayAttribLocation;
-            _normalsArrayAttribLocation = normalsArrayAttribLocation;
+            _normalArrayAttribLocation = normalArrayAttribLocation;
+            _boneIndexArrayAttribLocation = boneIndexArrayAttribLocation;
         }
         
         public VAO VertexArrayObject { get; }
+        public bool IsSkinned { get; private set; }
 
         public Vector3[] Vertices
         {
@@ -62,10 +71,10 @@ namespace OpenTucan.Graphics
             {
                 _vertices = value;
 
-                if (!_verticesIsDirty)
+                if (!_verticesBufferIsDirty)
                 {
                     VertexArrayObject.CreateVertexBufferObject(_vertexArrayAttribLocation, 3, _vertices);
-                    _verticesIsDirty = true;
+                    _verticesBufferIsDirty = true;
                     RecalculateBounds();
                     return;
                 }
@@ -85,10 +94,10 @@ namespace OpenTucan.Graphics
             {
                 _uv = value;
 
-                if (!_uvIsDirty)
+                if (!_uvBufferIsDirty)
                 {
                     VertexArrayObject.CreateVertexBufferObject(_uvArrayAttribLocation, 2, _uv);
-                    _uvIsDirty = true;
+                    _uvBufferIsDirty = true;
                     return;
                 }
                 
@@ -106,14 +115,36 @@ namespace OpenTucan.Graphics
             {
                 _normals = value;
 
-                if (!_normalsIsDirty)
+                if (!_normalsBufferIsDirty)
                 {
-                    VertexArrayObject.CreateVertexBufferObject(_normalsArrayAttribLocation, 3, _normals);
-                    _normalsIsDirty = true;
+                    VertexArrayObject.CreateVertexBufferObject(_normalArrayAttribLocation, 3, _normals);
+                    _normalsBufferIsDirty = true;
                     return;
                 }
                 
-                VertexArrayObject.UpdateVertexBufferObject(_normalsArrayAttribLocation, _normals);
+                VertexArrayObject.UpdateVertexBufferObject(_normalArrayAttribLocation, _normals);
+            }
+        }
+
+        public int[] BoneIndices
+        {
+            get
+            {
+                return _bonesIndices;
+            }
+            set
+            {
+                _bonesIndices = value;
+                IsSkinned = true;
+
+                if (!_boneIndicesBufferIsDirty)
+                {
+                    VertexArrayObject.CreateVertexBufferObject(_boneIndexArrayAttribLocation, 1, _bonesIndices, VertexAttribPointerType.Int);
+                    _boneIndicesBufferIsDirty = true;
+                    return;
+                }
+                
+                VertexArrayObject.UpdateVertexBufferObject(_boneIndexArrayAttribLocation, _bonesIndices);
             }
         }
         
@@ -127,10 +158,10 @@ namespace OpenTucan.Graphics
             {
                 _indices = value;
 
-                if (!_indicesIsDirty)
+                if (!_indicesBufferIsDirty)
                 {
                     VertexArrayObject.CreateElementBufferObject(_indices);
-                    _indicesIsDirty = true;
+                    _indicesBufferIsDirty = true;
                     return;
                 }
                 
@@ -183,24 +214,26 @@ namespace OpenTucan.Graphics
                 face[vertexId] = index;
 
                 vertexId++;
-                if (vertexId > 2)
+                if (vertexId <= 2)
                 {
-                    var inx1 = face[0];
-                    var inx2 = face[1];
-                    var inx3 = face[2];
-                    
-                    var a = _vertices[inx1];
-                    var b = _vertices[inx2];
-                    var c = _vertices[inx3];
-                    
-                    var normal = Vector3.Cross(b - a, c - a).Normalized();
-
-                    resultNormals[inx1] = normal;
-                    resultNormals[inx2] = normal;
-                    resultNormals[inx3] = normal;
-                        
-                    vertexId = 0;
+                    continue;
                 }
+                
+                var inx1 = face[0];
+                var inx2 = face[1];
+                var inx3 = face[2];
+                    
+                var a = _vertices[inx1];
+                var b = _vertices[inx2];
+                var c = _vertices[inx3];
+                    
+                var normal = Vector3.Cross(b - a, c - a).Normalized();
+
+                resultNormals[inx1] = normal;
+                resultNormals[inx2] = normal;
+                resultNormals[inx3] = normal;
+                        
+                vertexId = 0;
             }
 
             Normals = resultNormals;
@@ -262,15 +295,31 @@ namespace OpenTucan.Graphics
             GL.BindVertexArray(VertexArrayObject.Id);
             GL.EnableVertexAttribArray(_vertexArrayAttribLocation);
             GL.EnableVertexAttribArray(_uvArrayAttribLocation);
-            GL.EnableVertexAttribArray(_normalsArrayAttribLocation);
-            
+            GL.EnableVertexAttribArray(_normalArrayAttribLocation);
+
+            if (IsSkinned)
+            {
+                GL.EnableVertexAttribArray(_boneIndexArrayAttribLocation);
+            }
+
             GL.CullFace(cullFaceMode);
             GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, IntPtr.Zero);
 
             GL.DisableVertexAttribArray(_vertexArrayAttribLocation);
             GL.DisableVertexAttribArray(_uvArrayAttribLocation);
-            GL.DisableVertexAttribArray(_normalsArrayAttribLocation);
+            GL.DisableVertexAttribArray(_normalArrayAttribLocation);
+
+            if (IsSkinned)
+            {
+                GL.DisableVertexAttribArray(_boneIndexArrayAttribLocation);
+            }
+
             GL.BindVertexArray(0);
+        }
+
+        public void Rig(AnimationRoot animationRoot)
+        {
+            BoneIndices = animationRoot.GetJointsIds(_vertices);
         }
 
         public static Mesh FromFile(string fileName)
@@ -283,26 +332,24 @@ namespace OpenTucan.Graphics
             var assimpScene = assimpContext.ImportFile(fileName, PostProcessSteps.FlipUVs);
             var assimpMesh = assimpScene.Meshes[0];
             var assimpMeshFaces = assimpMesh.Faces;
-            
+
             var vertices = new List<Vector3>();
             var normals = new List<Vector3>();
             var textureCoordinates = new List<Vector2>();
             var indices = new List<int>();
 
-            foreach (var face in assimpMeshFaces)
+            for (var i = 0; i < assimpMesh.VertexCount; i++)
             {
-                for (var faceInx = 0; faceInx < face.IndexCount; faceInx++) 
-                {
-                    var index = face.Indices[faceInx];
-                    var uv = assimpMesh.TextureCoordinateChannels[0][index].ToOpenTK();
-                    var origin = assimpMesh.Vertices[index].ToOpenTK();
-                    var normal = assimpMesh.Normals[index].ToOpenTK();
+                vertices.Add(assimpMesh.Vertices[i].ToOpenTK());
+                textureCoordinates.Add(assimpMesh.TextureCoordinateChannels[0][i].ToOpenTK().Xy);
+                normals.Add(assimpMesh.Normals[i].ToOpenTK());
+            }
 
-                    vertices.Add(origin);
-                    normals.Add(normal);
-                    textureCoordinates.Add(uv.Xy);
-                    indices.Add(index);
-                }
+            foreach (var face in assimpMeshFaces.Where(face => face.IndexCount == 3))
+            {
+                indices.Add(face.Indices[0]);
+                indices.Add(face.Indices[1]);
+                indices.Add(face.Indices[2]);
             }
 
             mesh.Indices = indices.ToArray();
@@ -314,13 +361,13 @@ namespace OpenTucan.Graphics
 
             return mesh;
         }
-        
+
         public static Mesh Plane(
             int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
             int uvArrayAttribLocation = DefaultUVArrayAttribLocation,
-            int normalsArrayAttribLocation = DefaultNormalsArrayAttribLocation)
+            int normalArrayAttribLocation = DefaultNormalArrayAttribLocation)
         {
-            var planeMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalsArrayAttribLocation)
+            var planeMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalArrayAttribLocation)
             {
                 Indices = new []
                 {
@@ -352,9 +399,9 @@ namespace OpenTucan.Graphics
         public static Mesh Cube(
             int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
             int uvArrayAttribLocation = DefaultUVArrayAttribLocation,
-            int normalsArrayAttribLocation = DefaultNormalsArrayAttribLocation)
+            int normalArrayAttribLocation = DefaultNormalArrayAttribLocation)
         {
-            var cubeMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalsArrayAttribLocation)
+            var cubeMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalArrayAttribLocation)
             {
                 Indices = new []
                 {
@@ -394,6 +441,69 @@ namespace OpenTucan.Graphics
             cubeMesh.RecalculateNormals();
             cubeMesh.RecalculateCollisionShapes();
             return cubeMesh;
+        }
+        
+        public static Mesh Sphere(
+            int stacks, int slices,
+            int vertexArrayAttribLocation = DefaultVertexArrayAttribLocation,
+            int uvArrayAttribLocation = DefaultUVArrayAttribLocation,
+            int normalArrayAttribLocation = DefaultNormalArrayAttribLocation)
+        {
+            var sphereMesh = new Mesh(vertexArrayAttribLocation, uvArrayAttribLocation, normalArrayAttribLocation);
+            var vertexCount = (stacks + 1) * (slices + 1);
+            
+            var vertices = new Vector3[vertexCount];
+            var uv = new Vector2[vertexCount];
+            var indices = new int[stacks * slices * 6];
+
+            var vertexIndex = 0;
+            var uvIndex = 0;
+            for (var stack = 0; stack <= stacks; stack++)
+            {
+                var stackAngle = stack / (float)stacks * MathHelper.TwoPi;
+                var stackSin = (float)Math.Sin(stackAngle);
+                var stackCos = (float)Math.Cos(stackAngle);
+
+                for (var slice = 0; slice <= slices; slice++)
+                {
+                    var sliceAngle = slice / (float)slices * MathHelper.TwoPi;
+                    var sliceSin = (float)Math.Sin(sliceAngle);
+                    var sliceCos = (float)Math.Cos(sliceAngle);
+
+                    var x = stackSin * sliceSin;
+                    var y = stackCos;
+                    var z = stackSin * sliceCos;
+
+                    vertices[vertexIndex++] = new Vector3(x, y, z);
+                    uv[uvIndex++] = new Vector2(slice / (float)slices, stack / (float)stacks);
+                }
+            }
+            
+            var index = 0;
+            for (var stack = 0; stack < stacks; stack++)
+            {
+                for (var slice = 0; slice < slices; slice++)
+                {
+                    var topLeft = stack * (slices + 1) + slice;
+                    var topRight = topLeft + 1;
+                    var bottomLeft = ((stack + 1) * (slices + 1)) + slice;
+                    var bottomRight = bottomLeft + 1;
+
+                    indices[index++] = topLeft;
+                    indices[index++] = bottomLeft;
+                    indices[index++] = topRight;
+                    indices[index++] = topRight;
+                    indices[index++] = bottomLeft;
+                    indices[index++] = bottomRight;
+                }
+            }
+
+            sphereMesh.Vertices = vertices;
+            sphereMesh.UV = uv;
+            sphereMesh.Indices = indices;
+            sphereMesh.RecalculateNormals();
+            sphereMesh.RecalculateCollisionShapes();
+            return sphereMesh;
         }
     }
 }

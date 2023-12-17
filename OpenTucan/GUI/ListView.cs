@@ -16,7 +16,7 @@ namespace OpenTucan.GUI
         public ListView(Texture texture, GUIController guiController) : base(texture, guiController)
         {
             IsMasked = true;
-            _scrollDirection = 1;
+            _scrollDirection = -1;
             _holder = new GUIControl();
             _holder.SetParent(this);
 
